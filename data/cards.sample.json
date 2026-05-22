@@ -1,0 +1,1102 @@
+[
+  {
+    "id": "jft-ssw-0001",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "在留カードを見せてください。",
+    "reading": "ざいりゅうカードをみせてください。",
+    "romaji": "Zairyuu kaado o misete kudasai.",
+    "meaning": {
+      "en": "Please show your residence card."
+    },
+    "example": {
+      "ja": "市役所で在留カードを見せてください。",
+      "reading": "しやくしょでざいりゅうカードをみせてください。",
+      "en": "Please show your residence card at the city office."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "daily_life",
+      "city_office",
+      "documents"
+    ]
+  },
+  {
+    "id": "jft-ssw-0002",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "住所を登録したいです。",
+    "reading": "じゅうしょをとうろくしたいです。",
+    "romaji": "Juusho o touroku shitai desu.",
+    "meaning": {
+      "en": "I want to register my address."
+    },
+    "example": {
+      "ja": "新しい住所を登録したいです。",
+      "reading": "あたらしいじゅうしょをとうろくしたいです。",
+      "en": "I want to register my new address."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "daily_life",
+      "city_office",
+      "housing"
+    ]
+  },
+  {
+    "id": "jft-ssw-0003",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "国民健康保険に入りたいです。",
+    "reading": "こくみんけんこうほけんにはいりたいです。",
+    "romaji": "Kokumin kenkou hoken ni hairitai desu.",
+    "meaning": {
+      "en": "I want to join national health insurance."
+    },
+    "example": {
+      "ja": "日本に来たので、国民健康保険に入りたいです。",
+      "reading": "にほんにきたので、こくみんけんこうほけんにはいりたいです。",
+      "en": "I came to Japan, so I want to join national health insurance."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "daily_life",
+      "health",
+      "city_office"
+    ]
+  },
+  {
+    "id": "jft-ssw-0004",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "ごみは何曜日に出しますか。",
+    "reading": "ごみはなんようびにだしますか。",
+    "romaji": "Gomi wa nan-youbi ni dashimasu ka.",
+    "meaning": {
+      "en": "What day should I put out the trash?"
+    },
+    "example": {
+      "ja": "この町では、ごみは何曜日に出しますか。",
+      "reading": "このまちでは、ごみはなんようびにだしますか。",
+      "en": "In this town, what day should I put out the trash?"
+    },
+    "question_type": "situation",
+    "tags": [
+      "daily_life",
+      "housing",
+      "schedule"
+    ]
+  },
+  {
+    "id": "jft-ssw-0005",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "この電車は新宿に行きますか。",
+    "reading": "このでんしゃはしんじゅくにいきますか。",
+    "romaji": "Kono densha wa Shinjuku ni ikimasu ka.",
+    "meaning": {
+      "en": "Does this train go to Shinjuku?"
+    },
+    "example": {
+      "ja": "すみません、この電車は新宿に行きますか。",
+      "reading": "すみません、このでんしゃはしんじゅくにいきますか。",
+      "en": "Excuse me, does this train go to Shinjuku?"
+    },
+    "question_type": "situation",
+    "tags": [
+      "daily_life",
+      "transportation",
+      "question"
+    ]
+  },
+  {
+    "id": "jft-ssw-0006",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "道に迷いました。",
+    "reading": "みちにまよいました。",
+    "romaji": "Michi ni mayoimashita.",
+    "meaning": {
+      "en": "I am lost."
+    },
+    "example": {
+      "ja": "すみません、道に迷いました。駅はどこですか。",
+      "reading": "すみません、みちにまよいました。えきはどこですか。",
+      "en": "Excuse me, I am lost. Where is the station?"
+    },
+    "question_type": "phrase",
+    "tags": [
+      "daily_life",
+      "transportation",
+      "help"
+    ]
+  },
+  {
+    "id": "jft-ssw-0007",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "体調が悪いです。",
+    "reading": "たいちょうがわるいです。",
+    "romaji": "Taichou ga warui desu.",
+    "meaning": {
+      "en": "I do not feel well."
+    },
+    "example": {
+      "ja": "今日は体調が悪いので、病院に行きます。",
+      "reading": "きょうはたいちょうがわるいので、びょういんにいきます。",
+      "en": "I do not feel well today, so I will go to the hospital."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "daily_life",
+      "health",
+      "reporting"
+    ]
+  },
+  {
+    "id": "jft-ssw-0008",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "薬は一日何回飲みますか。",
+    "reading": "くすりはいちにちなんかいのみますか。",
+    "romaji": "Kusuri wa ichinichi nankai nomimasu ka.",
+    "meaning": {
+      "en": "How many times a day should I take the medicine?"
+    },
+    "example": {
+      "ja": "この薬は一日何回飲みますか。",
+      "reading": "このくすりはいちにちなんかいのみますか。",
+      "en": "How many times a day should I take this medicine?"
+    },
+    "question_type": "situation",
+    "tags": [
+      "daily_life",
+      "health",
+      "question"
+    ]
+  },
+  {
+    "id": "jft-ssw-0009",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "ATMはどこですか。",
+    "reading": "エーティーエムはどこですか。",
+    "romaji": "Ee-tii-emu wa doko desu ka.",
+    "meaning": {
+      "en": "Where is the ATM?"
+    },
+    "example": {
+      "ja": "近くのATMはどこですか。",
+      "reading": "ちかくのエーティーエムはどこですか。",
+      "en": "Where is a nearby ATM?"
+    },
+    "question_type": "phrase",
+    "tags": [
+      "daily_life",
+      "money",
+      "question"
+    ]
+  },
+  {
+    "id": "jft-ssw-0010",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "領収書をください。",
+    "reading": "りょうしゅうしょをください。",
+    "romaji": "Ryoushuusho o kudasai.",
+    "meaning": {
+      "en": "Please give me a receipt."
+    },
+    "example": {
+      "ja": "会社に出すので、領収書をください。",
+      "reading": "かいしゃにだすので、りょうしゅうしょをください。",
+      "en": "I need to give it to my company, so please give me a receipt."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "daily_life",
+      "money",
+      "polite_request"
+    ]
+  },
+  {
+    "id": "jft-ssw-0011",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "作業を始めてください。",
+    "reading": "さぎょうをはじめてください。",
+    "romaji": "Sagyou o hajimete kudasai.",
+    "meaning": {
+      "en": "Please start the task."
+    },
+    "example": {
+      "ja": "準備ができたら、作業を始めてください。",
+      "reading": "じゅんびができたら、さぎょうをはじめてください。",
+      "en": "When you are ready, please start the task."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "workplace",
+      "instruction",
+      "task"
+    ]
+  },
+  {
+    "id": "jft-ssw-0012",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "ここにサインしてください。",
+    "reading": "ここにサインしてください。",
+    "romaji": "Koko ni sain shite kudasai.",
+    "meaning": {
+      "en": "Please sign here."
+    },
+    "example": {
+      "ja": "確認したら、ここにサインしてください。",
+      "reading": "かくにんしたら、ここにサインしてください。",
+      "en": "After you check it, please sign here."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "workplace",
+      "documents",
+      "instruction"
+    ]
+  },
+  {
+    "id": "jft-ssw-0013",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "この箱を運んでください。",
+    "reading": "このはこをはこんでください。",
+    "romaji": "Kono hako o hakonde kudasai.",
+    "meaning": {
+      "en": "Please carry this box."
+    },
+    "example": {
+      "ja": "この箱を入口まで運んでください。",
+      "reading": "このはこをいりぐちまではこんでください。",
+      "en": "Please carry this box to the entrance."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "workplace",
+      "instruction",
+      "factory"
+    ]
+  },
+  {
+    "id": "jft-ssw-0014",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "先に手を洗ってください。",
+    "reading": "さきにてをあらってください。",
+    "romaji": "Saki ni te o aratte kudasai.",
+    "meaning": {
+      "en": "Please wash your hands first."
+    },
+    "example": {
+      "ja": "作業の前に、先に手を洗ってください。",
+      "reading": "さぎょうのまえに、さきにてをあらってください。",
+      "en": "Before the task, please wash your hands first."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "workplace",
+      "hygiene",
+      "instruction"
+    ]
+  },
+  {
+    "id": "jft-ssw-0015",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "休憩の前に報告してください。",
+    "reading": "きゅうけいのまえにほうこくしてください。",
+    "romaji": "Kyuukei no mae ni houkoku shite kudasai.",
+    "meaning": {
+      "en": "Please report before your break."
+    },
+    "example": {
+      "ja": "終わっていなくても、休憩の前に報告してください。",
+      "reading": "おわっていなくても、きゅうけいのまえにほうこくしてください。",
+      "en": "Even if it is not finished, please report before your break."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "workplace",
+      "reporting",
+      "schedule"
+    ]
+  },
+  {
+    "id": "jft-ssw-0016",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "マニュアルを確認してください。",
+    "reading": "マニュアルをかくにんしてください。",
+    "romaji": "Manyuaru o kakunin shite kudasai.",
+    "meaning": {
+      "en": "Please check the manual."
+    },
+    "example": {
+      "ja": "新しい作業なので、マニュアルを確認してください。",
+      "reading": "あたらしいさぎょうなので、マニュアルをかくにんしてください。",
+      "en": "This is a new task, so please check the manual."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "workplace",
+      "instruction",
+      "manual"
+    ]
+  },
+  {
+    "id": "jft-ssw-0017",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "わからない時は聞いてください。",
+    "reading": "わからないときはきいてください。",
+    "romaji": "Wakaranai toki wa kiite kudasai.",
+    "meaning": {
+      "en": "Please ask when you do not understand."
+    },
+    "example": {
+      "ja": "一人で決めないで、わからない時は聞いてください。",
+      "reading": "ひとりできめないで、わからないときはきいてください。",
+      "en": "Do not decide alone; please ask when you do not understand."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "workplace",
+      "instruction",
+      "communication"
+    ]
+  },
+  {
+    "id": "jft-ssw-0018",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "この道具を使ってください。",
+    "reading": "このどうぐをつかってください。",
+    "romaji": "Kono dougu o tsukatte kudasai.",
+    "meaning": {
+      "en": "Please use this tool."
+    },
+    "example": {
+      "ja": "細かい作業には、この道具を使ってください。",
+      "reading": "こまかいさぎょうには、このどうぐをつかってください。",
+      "en": "For detailed work, please use this tool."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "workplace",
+      "tools",
+      "instruction"
+    ]
+  },
+  {
+    "id": "jft-ssw-0019",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "終わったら片付けてください。",
+    "reading": "おわったらかたづけてください。",
+    "romaji": "Owattara katazukete kudasai.",
+    "meaning": {
+      "en": "Please clean up when you finish."
+    },
+    "example": {
+      "ja": "作業が終わったら、机の上を片付けてください。",
+      "reading": "さぎょうがおわったら、つくえのうえをかたづけてください。",
+      "en": "When the task is finished, please clean up the desk."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "workplace",
+      "instruction",
+      "cleanup"
+    ]
+  },
+  {
+    "id": "jft-ssw-0020",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "名前を呼ばれたら返事してください。",
+    "reading": "なまえをよばれたらへんじしてください。",
+    "romaji": "Namae o yobaretara henji shite kudasai.",
+    "meaning": {
+      "en": "Please answer when your name is called."
+    },
+    "example": {
+      "ja": "朝礼で名前を呼ばれたら返事してください。",
+      "reading": "ちょうれいでなまえをよばれたらへんじしてください。",
+      "en": "Please answer when your name is called at the morning meeting."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "workplace",
+      "instruction",
+      "communication"
+    ]
+  },
+  {
+    "id": "jft-ssw-0021",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "ヘルメットを着けてください。",
+    "reading": "ヘルメットをつけてください。",
+    "romaji": "Herumetto o tsukete kudasai.",
+    "meaning": {
+      "en": "Please wear a helmet."
+    },
+    "example": {
+      "ja": "工場に入る前に、ヘルメットを着けてください。",
+      "reading": "こうじょうにはいるまえに、ヘルメットをつけてください。",
+      "en": "Before entering the factory, please wear a helmet."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "safety",
+      "factory",
+      "instruction"
+    ]
+  },
+  {
+    "id": "jft-ssw-0022",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "足元に注意してください。",
+    "reading": "あしもとにちゅういしてください。",
+    "romaji": "Ashimoto ni chuui shite kudasai.",
+    "meaning": {
+      "en": "Please watch your step."
+    },
+    "example": {
+      "ja": "床がぬれているので、足元に注意してください。",
+      "reading": "ゆかがぬれているので、あしもとにちゅういしてください。",
+      "en": "The floor is wet, so please watch your step."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "safety",
+      "warning",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0023",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "機械に手を入れないでください。",
+    "reading": "きかいにてをいれないでください。",
+    "romaji": "Kikai ni te o irenaide kudasai.",
+    "meaning": {
+      "en": "Please do not put your hand into the machine."
+    },
+    "example": {
+      "ja": "動いている機械に手を入れないでください。",
+      "reading": "うごいているきかいにてをいれないでください。",
+      "en": "Please do not put your hand into a moving machine."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "safety",
+      "machine",
+      "warning"
+    ]
+  },
+  {
+    "id": "jft-ssw-0024",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "火傷に気をつけてください。",
+    "reading": "やけどにきをつけてください。",
+    "romaji": "Yakedo ni ki o tsukete kudasai.",
+    "meaning": {
+      "en": "Please be careful not to get burned."
+    },
+    "example": {
+      "ja": "この鍋は熱いので、火傷に気をつけてください。",
+      "reading": "このなべはあついので、やけどにきをつけてください。",
+      "en": "This pot is hot, so please be careful not to get burned."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "safety",
+      "kitchen",
+      "warning"
+    ]
+  },
+  {
+    "id": "jft-ssw-0025",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "非常口はあちらです。",
+    "reading": "ひじょうぐちはあちらです。",
+    "romaji": "Hijouguchi wa achira desu.",
+    "meaning": {
+      "en": "The emergency exit is over there."
+    },
+    "example": {
+      "ja": "火事の時、非常口はあちらです。",
+      "reading": "かじのとき、ひじょうぐちはあちらです。",
+      "en": "In case of fire, the emergency exit is over there."
+    },
+    "question_type": "vocab",
+    "tags": [
+      "safety",
+      "emergency",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0026",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "危ないので近づかないでください。",
+    "reading": "あぶないのでちかづかないでください。",
+    "romaji": "Abunai node chikazukanaide kudasai.",
+    "meaning": {
+      "en": "It is dangerous, so please do not go near it."
+    },
+    "example": {
+      "ja": "そこは危ないので近づかないでください。",
+      "reading": "そこはあぶないのでちかづかないでください。",
+      "en": "That place is dangerous, so please do not go near it."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "safety",
+      "warning",
+      "factory"
+    ]
+  },
+  {
+    "id": "jft-ssw-0027",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "手袋を外さないでください。",
+    "reading": "てぶくろをはずさないでください。",
+    "romaji": "Tebukuro o hazusanaide kudasai.",
+    "meaning": {
+      "en": "Please do not take off your gloves."
+    },
+    "example": {
+      "ja": "作業中は手袋を外さないでください。",
+      "reading": "さぎょうちゅうはてぶくろをはずさないでください。",
+      "en": "Please do not take off your gloves during work."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "safety",
+      "protective_gear",
+      "instruction"
+    ]
+  },
+  {
+    "id": "jft-ssw-0028",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "異常があればすぐ止めてください。",
+    "reading": "いじょうがあればすぐとめてください。",
+    "romaji": "Ijoo ga areba sugu tomete kudasai.",
+    "meaning": {
+      "en": "If there is anything abnormal, stop it immediately."
+    },
+    "example": {
+      "ja": "音がおかしいなど、異常があればすぐ止めてください。",
+      "reading": "おとがおかしいなど、いじょうがあればすぐとめてください。",
+      "en": "If there is anything abnormal, such as a strange sound, stop it immediately."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "safety",
+      "machine",
+      "reporting"
+    ]
+  },
+  {
+    "id": "jft-ssw-0029",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "機械が止まりました。",
+    "reading": "きかいがとまりました。",
+    "romaji": "Kikai ga tomarimashita.",
+    "meaning": {
+      "en": "The machine stopped."
+    },
+    "example": {
+      "ja": "すみません、機械が急に止まりました。",
+      "reading": "すみません、きかいがきゅうにとまりました。",
+      "en": "Excuse me, the machine suddenly stopped."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "reporting",
+      "machine",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0030",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "材料が足りません。",
+    "reading": "ざいりょうがたりません。",
+    "romaji": "Zairyou ga tarimasen.",
+    "meaning": {
+      "en": "There is not enough material."
+    },
+    "example": {
+      "ja": "この作業の材料が足りません。",
+      "reading": "このさぎょうのざいりょうがたりません。",
+      "en": "There is not enough material for this task."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "reporting",
+      "factory",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0031",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "けがをしました。",
+    "reading": "けがをしました。",
+    "romaji": "Kega o shimashita.",
+    "meaning": {
+      "en": "I got injured."
+    },
+    "example": {
+      "ja": "手を切って、けがをしました。",
+      "reading": "てをきって、けがをしました。",
+      "en": "I cut my hand and got injured."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "reporting",
+      "health",
+      "safety"
+    ]
+  },
+  {
+    "id": "jft-ssw-0032",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "遅れそうです。",
+    "reading": "おくれそうです。",
+    "romaji": "Okuresou desu.",
+    "meaning": {
+      "en": "I may be late."
+    },
+    "example": {
+      "ja": "電車が止まっているので、少し遅れそうです。",
+      "reading": "でんしゃがとまっているので、すこしおくれそうです。",
+      "en": "The train has stopped, so I may be a little late."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "reporting",
+      "schedule",
+      "transportation"
+    ]
+  },
+  {
+    "id": "jft-ssw-0033",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "体温が高いです。",
+    "reading": "たいおんがたかいです。",
+    "romaji": "Taion ga takai desu.",
+    "meaning": {
+      "en": "My temperature is high."
+    },
+    "example": {
+      "ja": "朝、体温が高いです。会社に連絡します。",
+      "reading": "あさ、たいおんがたかいです。かいしゃにれんらくします。",
+      "en": "My temperature is high this morning. I will contact the company."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "reporting",
+      "health",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0034",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "お客様が困っています。",
+    "reading": "おきゃくさまがこまっています。",
+    "romaji": "Okyakusama ga komatte imasu.",
+    "meaning": {
+      "en": "The customer needs help."
+    },
+    "example": {
+      "ja": "入口でお客様が困っています。",
+      "reading": "いりぐちでおきゃくさまがこまっています。",
+      "en": "A customer needs help at the entrance."
+    },
+    "question_type": "workplace",
+    "tags": [
+      "reporting",
+      "customer_service",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0035",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "もう一度確認します。",
+    "reading": "もういちどかくにんします。",
+    "romaji": "Mou ichido kakunin shimasu.",
+    "meaning": {
+      "en": "I will check one more time."
+    },
+    "example": {
+      "ja": "数が合わないので、もう一度確認します。",
+      "reading": "かずがあわないので、もういちどかくにんします。",
+      "en": "The number does not match, so I will check one more time."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "reporting",
+      "checking",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0036",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "少しゆっくり話していただけますか。",
+    "reading": "すこしゆっくりはなしていただけますか。",
+    "romaji": "Sukoshi yukkuri hanashite itadakemasu ka.",
+    "meaning": {
+      "en": "Could you speak a little more slowly?"
+    },
+    "example": {
+      "ja": "すみません、少しゆっくり話していただけますか。",
+      "reading": "すみません、すこしゆっくりはなしていただけますか。",
+      "en": "Excuse me, could you speak a little more slowly?"
+    },
+    "question_type": "phrase",
+    "tags": [
+      "polite_request",
+      "communication",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0037",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "もう一度教えてください。",
+    "reading": "もういちどおしえてください。",
+    "romaji": "Mou ichido oshiete kudasai.",
+    "meaning": {
+      "en": "Please tell me one more time."
+    },
+    "example": {
+      "ja": "すみません、やり方をもう一度教えてください。",
+      "reading": "すみません、やりかたをもういちどおしえてください。",
+      "en": "Excuse me, please tell me the method one more time."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "polite_request",
+      "communication",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0038",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "メモしてもいいですか。",
+    "reading": "メモしてもいいですか。",
+    "romaji": "Memo shite mo ii desu ka.",
+    "meaning": {
+      "en": "May I take notes?"
+    },
+    "example": {
+      "ja": "大事なことなので、メモしてもいいですか。",
+      "reading": "だいじなことなので、メモしてもいいですか。",
+      "en": "This is important, so may I take notes?"
+    },
+    "question_type": "phrase",
+    "tags": [
+      "polite_request",
+      "training",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0039",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "手伝っていただけますか。",
+    "reading": "てつだっていただけますか。",
+    "romaji": "Tetsudatte itadakemasu ka.",
+    "meaning": {
+      "en": "Could you help me?"
+    },
+    "example": {
+      "ja": "一人では難しいので、手伝っていただけますか。",
+      "reading": "ひとりではむずかしいので、てつだっていただけますか。",
+      "en": "It is difficult alone, so could you help me?"
+    },
+    "question_type": "phrase",
+    "tags": [
+      "polite_request",
+      "workplace",
+      "help"
+    ]
+  },
+  {
+    "id": "jft-ssw-0040",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "明日休みをいただきたいです。",
+    "reading": "あしたやすみをいただきたいです。",
+    "romaji": "Ashita yasumi o itadakitai desu.",
+    "meaning": {
+      "en": "I would like to take a day off tomorrow."
+    },
+    "example": {
+      "ja": "病院に行くので、明日休みをいただきたいです。",
+      "reading": "びょういんにいくので、あしたやすみをいただきたいです。",
+      "en": "I am going to the hospital, so I would like to take a day off tomorrow."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "polite_request",
+      "schedule",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0041",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "何時に集合しますか。",
+    "reading": "なんじにしゅうごうしますか。",
+    "romaji": "Nanji ni shuugou shimasu ka.",
+    "meaning": {
+      "en": "What time do we meet?"
+    },
+    "example": {
+      "ja": "明日の朝、何時に集合しますか。",
+      "reading": "あしたのあさ、なんじにしゅうごうしますか。",
+      "en": "What time do we meet tomorrow morning?"
+    },
+    "question_type": "situation",
+    "tags": [
+      "time",
+      "schedule",
+      "question"
+    ]
+  },
+  {
+    "id": "jft-ssw-0042",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "シフトは何時からですか。",
+    "reading": "シフトはなんじからですか。",
+    "romaji": "Shifuto wa nanji kara desu ka.",
+    "meaning": {
+      "en": "What time does the shift start?"
+    },
+    "example": {
+      "ja": "来週の月曜日、シフトは何時からですか。",
+      "reading": "らいしゅうのげつようび、シフトはなんじからですか。",
+      "en": "Next Monday, what time does the shift start?"
+    },
+    "question_type": "situation",
+    "tags": [
+      "time",
+      "schedule",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0043",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "休憩は何分ですか。",
+    "reading": "きゅうけいはなんぷんですか。",
+    "romaji": "Kyuukei wa nanpun desu ka.",
+    "meaning": {
+      "en": "How many minutes is the break?"
+    },
+    "example": {
+      "ja": "昼の休憩は何分ですか。",
+      "reading": "ひるのきゅうけいはなんぷんですか。",
+      "en": "How many minutes is the lunch break?"
+    },
+    "question_type": "situation",
+    "tags": [
+      "time",
+      "break",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0044",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "今日の作業は五時までです。",
+    "reading": "きょうのさぎょうはごじまでです。",
+    "romaji": "Kyou no sagyou wa goji made desu.",
+    "meaning": {
+      "en": "Today's task is until five o'clock."
+    },
+    "example": {
+      "ja": "今日の作業は五時までです。終わったら報告してください。",
+      "reading": "きょうのさぎょうはごじまでです。おわったらほうこくしてください。",
+      "en": "Today's task is until five o'clock. Please report when you finish."
+    },
+    "question_type": "listening",
+    "tags": [
+      "time",
+      "schedule",
+      "workplace"
+    ]
+  },
+  {
+    "id": "jft-ssw-0045",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "来週の予定を確認したいです。",
+    "reading": "らいしゅうのよていをかくにんしたいです。",
+    "romaji": "Raishuu no yotei o kakunin shitai desu.",
+    "meaning": {
+      "en": "I want to check next week's schedule."
+    },
+    "example": {
+      "ja": "休みの日を知りたいので、来週の予定を確認したいです。",
+      "reading": "やすみのひをしりたいので、らいしゅうのよていをかくにんしたいです。",
+      "en": "I want to know my days off, so I want to check next week's schedule."
+    },
+    "question_type": "phrase",
+    "tags": [
+      "time",
+      "schedule",
+      "polite_request"
+    ]
+  },
+  {
+    "id": "jft-ssw-0046",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "休憩は十時十五分からです。",
+    "reading": "きゅうけいはじゅうじじゅうごふんからです。",
+    "romaji": "Kyuukei wa juuji juugofun kara desu.",
+    "meaning": {
+      "en": "The break starts at 10:15."
+    },
+    "example": {
+      "ja": "放送を聞いてください。休憩は十時十五分からです。",
+      "reading": "ほうそうをきいてください。きゅうけいはじゅうじじゅうごふんからです。",
+      "en": "Please listen to the announcement. The break starts at 10:15."
+    },
+    "question_type": "listening",
+    "tags": [
+      "listening",
+      "time",
+      "break"
+    ]
+  },
+  {
+    "id": "jft-ssw-0047",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "山田さんは事務所に来てください。",
+    "reading": "やまださんはじむしょにきてください。",
+    "romaji": "Yamada-san wa jimusho ni kite kudasai.",
+    "meaning": {
+      "en": "Mr./Ms. Yamada, please come to the office."
+    },
+    "example": {
+      "ja": "放送で、山田さんは事務所に来てくださいと言いました。",
+      "reading": "ほうそうで、やまださんはじむしょにきてくださいといいました。",
+      "en": "The announcement said, Mr./Ms. Yamada, please come to the office."
+    },
+    "question_type": "listening",
+    "tags": [
+      "listening",
+      "workplace",
+      "announcement"
+    ]
+  },
+  {
+    "id": "jft-ssw-0048",
+    "deck": "jft_ssw_starter",
+    "stage": 1,
+    "target": "受付で名前を言います。",
+    "reading": "うけつけでなまえをいいます。",
+    "romaji": "Uketsuke de namae o iimasu.",
+    "meaning": {
+      "en": "Say your name at reception."
+    },
+    "example": {
+      "ja": "初めて会社に来た時、受付で名前を言います。",
+      "reading": "はじめてかいしゃにきたとき、うけつけでなまえをいいます。",
+      "en": "When you come to the company for the first time, say your name at reception."
+    },
+    "question_type": "situation",
+    "tags": [
+      "situation",
+      "workplace",
+      "reception"
+    ]
+  },
+  {
+    "id": "jft-ssw-0049",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "初めての職場で自己紹介します。",
+    "reading": "はじめてのしょくばでじこしょうかいします。",
+    "romaji": "Hajimete no shokuba de jikoshoukai shimasu.",
+    "meaning": {
+      "en": "Introduce yourself at a new workplace."
+    },
+    "example": {
+      "ja": "初めての職場で、名前と出身を自己紹介します。",
+      "reading": "はじめてのしょくばで、なまえとしゅっしんをじこしょうかいします。",
+      "en": "At a new workplace, introduce your name and where you are from."
+    },
+    "question_type": "situation",
+    "tags": [
+      "situation",
+      "workplace",
+      "self_introduction"
+    ]
+  },
+  {
+    "id": "jft-ssw-0050",
+    "deck": "jft_ssw_starter",
+    "stage": 2,
+    "target": "急に気分が悪くなりました。",
+    "reading": "きゅうにきぶんがわるくなりました。",
+    "romaji": "Kyuu ni kibun ga waruku narimashita.",
+    "meaning": {
+      "en": "I suddenly started feeling sick."
+    },
+    "example": {
+      "ja": "作業中に急に気分が悪くなりました。上司に報告します。",
+      "reading": "さぎょうちゅうにきゅうにきぶんがわるくなりました。じょうしにほうこくします。",
+      "en": "I suddenly started feeling sick during work. I will report it to my supervisor."
+    },
+    "question_type": "situation",
+    "tags": [
+      "situation",
+      "health",
+      "reporting"
+    ]
+  }
+]
