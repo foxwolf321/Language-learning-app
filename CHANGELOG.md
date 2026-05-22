@@ -9,6 +9,7 @@
 - Added decision log in `DECISIONS.md`.
 - Added task list in `TODO.md`.
 - Added Issue #1 market validation files: `data/market_candidates.csv`, `data/competitor_research_template.csv`, and `docs/VALIDATION_PLAN.md`.
+- Added Issue #2 free starter sample dataset: `data/cards.sample.json` with 50 original JFT/SSW practical Japanese cards.
 
 ### Strategic direction
 - Lead product: JFT-Basic + SSW practical Japanese.
