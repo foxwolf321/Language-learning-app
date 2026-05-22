@@ -2,10 +2,10 @@
 
 ## Completed
 - [x] Issue #1: Create `data/market_candidates.csv`, `data/competitor_research_template.csv`, and `docs/VALIDATION_PLAN.md`.
+- [x] Issue #2: Create `data/cards.sample.json` with first 50 original JFT/SSW cards.
 
 ## Immediate
-- [ ] Create `data/cards.sample.json` with first 50 JFT/SSW cards.
-- [ ] Define final `content_schema.json` fields.
+- [ ] Decide whether `data/content_schema.json` needs a collection wrapper for card arrays, or keep it as a per-card schema.
 - [ ] Create first PWA skeleton.
 - [ ] Add JSON export/import for progress.
 - [ ] Add simple progress ring and card status: new / review / mastered.
