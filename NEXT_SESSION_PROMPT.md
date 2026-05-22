@@ -17,18 +17,22 @@ Before doing anything, read:
 - CHANGELOG.md
 - CODEX_TASKS.md
 - CODEX_INTEGRATION_PLAN.md
+- data/content_schema.json
+- data/cards.sample.json
 - docs/MONETIZATION_STRATEGY.md
 - docs/VALIDATION_PLAN.md
 
 Current status:
-- Issue #1 is implemented on the market validation branch.
-- Do not treat `data/market_candidates.csv` scores as real market statistics.
-- Do not start a large app build until validation evidence is recorded.
+- Issue #1 is merged: market validation files exist.
+- Issue #2 is implemented on the sample-card branch: `data/cards.sample.json` contains 50 original JFT/SSW practical Japanese starter cards.
+- `data/content_schema.json` currently defines a single card object. `data/cards.sample.json` is an array of cards; each card follows the schema fields.
+- Do not copy copyrighted textbook or exam-prep content.
+- Do not claim official endorsement or guarantee exam success.
 
-Immediate next task, only after Issue #1 is reviewed or merged:
-1. Implement Issue #2: create `data/cards.sample.json` with 50 original sample cards for JFT/SSW practical Japanese.
-2. Check or adjust `data/content_schema.json` only if needed for those cards.
-3. Keep the app/design simple: PWA first, Anki export later.
-4. Do not copy copyrighted textbook or exam-prep content.
-5. Keep all card IDs stable.
+Immediate next task, only after Issue #2 is reviewed or merged:
+1. Implement Issue #3: create a minimal PWA skeleton that loads `data/cards.sample.json`.
+2. Keep the app simple: card front/back, Show answer, Again, Good, Easy, Next, and simple progress summary.
+3. Save progress to localStorage and allow JSON export/import if included in the issue scope.
+4. Do not implement Google Drive yet.
+5. Do not build a giant app before validation evidence is recorded.
 ```
