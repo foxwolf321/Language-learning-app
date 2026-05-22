@@ -59,22 +59,50 @@ Topics:
 - BJT / business Japanese
 - EJU Japanese reading/listening if there is enough demand
 - JLPT only as an SEO funnel, not main product
+- Japanese for IT engineers in Japan
+- Japanese interview prep for foreign workers
+
+## Latest completed work
+2026-05-23: Codex implemented Issue #1 on branch `codex/issue-1-market-validation`.
+
+Added:
+- `data/market_candidates.csv`
+- `data/competitor_research_template.csv`
+- `docs/VALIDATION_PLAN.md`
+
+Also updated:
+- `CHANGELOG.md`
+- `TODO.md`
+- `NEXT_SESSION_PROMPT.md`
+- `HANDOFF.md`
+
+Issue #1 creates the market validation kit only. Issue #2 sample-card creation has not been started.
+
+## Validation principle
+Before building a full app, validate demand with landing pages, free sample cards, paid-intent checks, competitor research, B2B outreach, and community interviews.
+
+Do not treat internal scores as market statistics. Record real observed evidence separately from assumptions.
 
 ## Content policy
 - Do not copy proprietary book lists, examples, mock questions, or paid exam prep material.
 - Use official public exam structures only as reference.
 - Create original sentences and original audio scripts.
 - Keep card IDs stable.
+- Do not claim official endorsement or guarantee exam success.
 
 ## Repository principle
 The repo must prevent AI amnesia.
 
 AI/Codex should never rely only on chat memory. It must read:
+- `MISSION_CONTROL.md`
 - `AGENTS.md`
+- `WORKFLOW.md`
 - `HANDOFF.md`
 - `DECISIONS.md`
 - `TODO.md`
 - `CHANGELOG.md`
+- `CODEX_TASKS.md`
+- `CODEX_INTEGRATION_PLAN.md`
 - `NEXT_SESSION_PROMPT.md`
 
 ## Storage and sync principle
@@ -89,15 +117,17 @@ Example:
 - `jft-ssw-japanese-local-v1`
 
 ## Immediate next work
-1. Build content schema.
-2. Create first 50 sample cards.
-3. Decide languages for explanations: English first, then Bengali/Nepali/Indonesian/Burmese/Vietnamese.
-4. Create PWA skeleton.
-5. Create Anki export pipeline.
-6. Create landing page and SEO copy.
+1. Review or merge Issue #1 branch.
+2. Fill `data/competitor_research_template.csv` with real competitor observations.
+3. After Issue #1 is accepted, implement Issue #2: create first 50 original JFT/SSW sample cards.
+4. Decide languages for explanations: English first, then Bengali/Nepali/Indonesian/Burmese/Vietnamese.
+5. Create PWA skeleton after sample cards and schema are stable.
+6. Create Anki export pipeline later.
+7. Create landing page and SEO copy for validation.
 
 ## Current repo status
 Initial repo created by user under:
 `foxwolf321/Language-learning-app`
 
-`AGENTS.md` created by assistant after GitHub permission was fixed.
+The active implementation branch for Issue #1 is:
+`codex/issue-1-market-validation`

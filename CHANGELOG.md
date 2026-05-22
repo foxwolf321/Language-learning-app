@@ -8,6 +8,7 @@
 - Added strategy handoff in `HANDOFF.md`.
 - Added decision log in `DECISIONS.md`.
 - Added task list in `TODO.md`.
+- Added Issue #1 market validation files: `data/market_candidates.csv`, `data/competitor_research_template.csv`, and `docs/VALIDATION_PLAN.md`.
 
 ### Strategic direction
 - Lead product: JFT-Basic + SSW practical Japanese.
