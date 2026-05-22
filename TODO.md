@@ -1,5 +1,8 @@
 # TODO.md
 
+## Completed
+- [x] Issue #1: Create `data/market_candidates.csv`, `data/competitor_research_template.csv`, and `docs/VALIDATION_PLAN.md`.
+
 ## Immediate
 - [ ] Create `data/cards.sample.json` with first 50 JFT/SSW cards.
 - [ ] Define final `content_schema.json` fields.
@@ -9,13 +12,14 @@
 - [ ] Add landing page copy for JFT-Basic / SSW Japanese.
 
 ## Market validation
-- [ ] Search current Google Play / App Store competitors for JFT-Basic, Tokutei Ginou, SSW Japanese, Nursing Care Japanese.
+- [ ] Fill `data/competitor_research_template.csv` with current competitors for JFT-Basic, Tokutei Ginou, SSW Japanese, Nursing Care Japanese, and Manufacturing / safety Japanese.
 - [ ] Check target country communities: Bangladesh, Nepal, Indonesia, Myanmar, Vietnam, Malaysia.
 - [ ] Draft 3 landing pages:
   - JFT-Basic Japanese
   - SSW Nursing Care Japanese
   - Japanese for working in Japan
 - [ ] Prepare small ad test copy.
+- [ ] Record real demand signals before building a full app.
 
 ## Content
 - [ ] Core JFT/SSW 500-card plan.
