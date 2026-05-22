@@ -63,12 +63,17 @@ Topics:
 - Japanese interview prep for foreign workers
 
 ## Latest completed work
-2026-05-23: Codex implemented Issue #1 on branch `codex/issue-1-market-validation`.
+2026-05-23: Issue #1 was merged into `main`.
 
 Added:
 - `data/market_candidates.csv`
 - `data/competitor_research_template.csv`
 - `docs/VALIDATION_PLAN.md`
+
+2026-05-23: Codex implemented Issue #2 on branch `codex/issue-2-sample-cards`.
+
+Added:
+- `data/cards.sample.json`
 
 Also updated:
 - `CHANGELOG.md`
@@ -76,7 +81,24 @@ Also updated:
 - `NEXT_SESSION_PROMPT.md`
 - `HANDOFF.md`
 
-Issue #1 creates the market validation kit only. Issue #2 sample-card creation has not been started.
+Issue #2 creates the first 50 original JFT/SSW practical Japanese starter cards. Issue #3 PWA implementation has not been started.
+
+## Sample card notes
+`data/content_schema.json` currently defines a single card object. `data/cards.sample.json` is an array of 50 card objects. Each card follows the schema fields:
+- stable `id`
+- `deck`
+- `stage`
+- `target`
+- `reading`
+- `romaji`
+- `meaning.en`
+- `example.ja`
+- `example.reading`
+- `example.en`
+- `question_type`
+- `tags`
+
+The sample covers daily life in Japan, workplace instructions, safety phrases, reporting problems, polite requests, time/schedule, and simple listening/situation prompts.
 
 ## Validation principle
 Before building a full app, validate demand with landing pages, free sample cards, paid-intent checks, competitor research, B2B outreach, and community interviews.
@@ -117,17 +139,17 @@ Example:
 - `jft-ssw-japanese-local-v1`
 
 ## Immediate next work
-1. Review or merge Issue #1 branch.
-2. Fill `data/competitor_research_template.csv` with real competitor observations.
-3. After Issue #1 is accepted, implement Issue #2: create first 50 original JFT/SSW sample cards.
-4. Decide languages for explanations: English first, then Bengali/Nepali/Indonesian/Burmese/Vietnamese.
-5. Create PWA skeleton after sample cards and schema are stable.
-6. Create Anki export pipeline later.
-7. Create landing page and SEO copy for validation.
+1. Review or merge Issue #2 branch.
+2. Decide whether `data/content_schema.json` should remain a per-card schema or gain a collection wrapper for arrays.
+3. Implement Issue #3: create the first PWA skeleton that loads `data/cards.sample.json`.
+4. Fill `data/competitor_research_template.csv` with real competitor observations.
+5. Create landing page and SEO copy for validation.
+6. Decide languages for explanations: English first, then Bengali/Nepali/Indonesian/Burmese/Vietnamese.
+7. Create Anki export pipeline later.
 
 ## Current repo status
 Initial repo created by user under:
 `foxwolf321/Language-learning-app`
 
-The active implementation branch for Issue #1 is:
-`codex/issue-1-market-validation`
+The active implementation branch for Issue #2 is:
+`codex/issue-2-sample-cards`
