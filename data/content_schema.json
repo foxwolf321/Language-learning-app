@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Language Learning Card Schema",
+  "type": "object",
+  "required": ["id", "deck", "stage", "target", "reading", "meaning", "example", "tags"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable unique card ID, never change after publication. Example: jft-core-0001"
+    },
+    "deck": {
+      "type": "string",
+      "description": "Deck or product module. Example: jft_core, nursing_care, manufacturing_safety"
+    },
+    "stage": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "target": {
+      "type": "string",
+      "description": "Main Japanese word, phrase, or sentence."
+    },
+    "reading": {
+      "type": "string",
+      "description": "Kana reading or pronunciation support."
+    },
+    "romaji": {
+      "type": "string"
+    },
+    "meaning": {
+      "type": "object",
+      "description": "Localized explanations.",
+      "properties": {
+        "en": { "type": "string" },
+        "bn": { "type": "string" },
+        "ne": { "type": "string" },
+        "id": { "type": "string" },
+        "my": { "type": "string" },
+        "vi": { "type": "string" },
+        "ms": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "example": {
+      "type": "object",
+      "required": ["ja"],
+      "properties": {
+        "ja": { "type": "string" },
+        "reading": { "type": "string" },
+        "en": { "type": "string" },
+        "bn": { "type": "string" },
+        "ne": { "type": "string" },
+        "id": { "type": "string" },
+        "my": { "type": "string" },
+        "vi": { "type": "string" },
+        "ms": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "question_type": {
+      "type": "string",
+      "enum": ["vocab", "phrase", "listening", "situation", "kanji", "workplace", "mock"]
+    },
+    "audio": {
+      "type": "object",
+      "properties": {
+        "target": { "type": "string" },
+        "example": { "type": "string" }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "notes": {
+      "type": "string"
+    },
+    "source_note": {
+      "type": "string",
+      "description": "Use only for public/official structural references. Do not copy copyrighted content."
+    }
+  },
+  "additionalProperties": false
+}
