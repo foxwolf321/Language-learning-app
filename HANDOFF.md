@@ -70,10 +70,17 @@ Added:
 - `data/competitor_research_template.csv`
 - `docs/VALIDATION_PLAN.md`
 
-2026-05-23: Codex implemented Issue #2 on branch `codex/issue-2-sample-cards`.
+2026-05-23: Issue #2 was merged into `main`.
 
 Added:
 - `data/cards.sample.json`
+
+2026-05-23: Codex implemented Issue #3 on branch `codex/issue-3-pwa-skeleton`.
+
+Added:
+- `index.html`
+- `manifest.webmanifest`
+- `sw.js`
 
 Also updated:
 - `CHANGELOG.md`
@@ -81,7 +88,24 @@ Also updated:
 - `NEXT_SESSION_PROMPT.md`
 - `HANDOFF.md`
 
-Issue #2 creates the first 50 original JFT/SSW practical Japanese starter cards. Issue #3 PWA implementation has not been started.
+Issue #3 creates a minimal validation-focused PWA. Issue #4 landing copy has not been started.
+
+## PWA notes
+The PWA:
+- loads `data/cards.sample.json`
+- shows card front/back
+- includes Show answer, Again, Good, Easy, and Next controls
+- tracks New / Review / Mastered
+- saves progress to localStorage key `jft-ssw-japanese-local-v1`
+- supports JSON progress export/import
+- registers `sw.js` when service workers are available
+
+Not included:
+- Google Drive sync
+- login/accounts
+- payment/subscription flows
+- app-store-specific features
+- large content expansion
 
 ## Sample card notes
 `data/content_schema.json` currently defines a single card object. `data/cards.sample.json` is an array of 50 card objects. Each card follows the schema fields:
@@ -119,6 +143,7 @@ AI/Codex should never rely only on chat memory. It must read:
 - `MISSION_CONTROL.md`
 - `AGENTS.md`
 - `WORKFLOW.md`
+- `REVENUE_ROADMAP.md`
 - `HANDOFF.md`
 - `DECISIONS.md`
 - `TODO.md`
@@ -139,17 +164,16 @@ Example:
 - `jft-ssw-japanese-local-v1`
 
 ## Immediate next work
-1. Review or merge Issue #2 branch.
-2. Decide whether `data/content_schema.json` should remain a per-card schema or gain a collection wrapper for arrays.
-3. Implement Issue #3: create the first PWA skeleton that loads `data/cards.sample.json`.
-4. Fill `data/competitor_research_template.csv` with real competitor observations.
-5. Create landing page and SEO copy for validation.
-6. Decide languages for explanations: English first, then Bengali/Nepali/Indonesian/Burmese/Vietnamese.
-7. Create Anki export pipeline later.
+1. Review or merge Issue #3 branch.
+2. Implement Issue #4: create landing page and ad copy for validation.
+3. Fill `data/competitor_research_template.csv` with real competitor observations.
+4. Decide whether `data/content_schema.json` should remain a per-card schema or gain a collection wrapper for arrays.
+5. Decide languages for explanations: English first, then Bengali/Nepali/Indonesian/Burmese/Vietnamese.
+6. Create Anki export pipeline later.
 
 ## Current repo status
 Initial repo created by user under:
 `foxwolf321/Language-learning-app`
 
-The active implementation branch for Issue #2 is:
-`codex/issue-2-sample-cards`
+The active implementation branch for Issue #3 is:
+`codex/issue-3-pwa-skeleton`

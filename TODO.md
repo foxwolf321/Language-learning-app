@@ -3,13 +3,12 @@
 ## Completed
 - [x] Issue #1: Create `data/market_candidates.csv`, `data/competitor_research_template.csv`, and `docs/VALIDATION_PLAN.md`.
 - [x] Issue #2: Create `data/cards.sample.json` with first 50 original JFT/SSW cards.
+- [x] Issue #3: Create minimal PWA skeleton with card display, progress tracking, localStorage save, and JSON export/import.
 
 ## Immediate
-- [ ] Decide whether `data/content_schema.json` needs a collection wrapper for card arrays, or keep it as a per-card schema.
-- [ ] Create first PWA skeleton.
-- [ ] Add JSON export/import for progress.
-- [ ] Add simple progress ring and card status: new / review / mastered.
+- [ ] Review or merge the Issue #3 PWA branch.
 - [ ] Add landing page copy for JFT-Basic / SSW Japanese.
+- [ ] Decide whether `data/content_schema.json` needs a collection wrapper for card arrays, or keep it as a per-card schema.
 
 ## Market validation
 - [ ] Fill `data/competitor_research_template.csv` with current competitors for JFT-Basic, Tokutei Ginou, SSW Japanese, Nursing Care Japanese, and Manufacturing / safety Japanese.
@@ -29,7 +28,9 @@
 - [ ] Translation policy: English first; Bengali/Nepali/Indonesian/Burmese/Vietnamese later.
 
 ## Technical
-- [ ] PWA: `index.html`, `manifest.webmanifest`, `sw.js`.
+- [x] PWA: `index.html`, `manifest.webmanifest`, `sw.js`.
+- [x] Add JSON export/import for progress.
+- [x] Add simple progress status: new / review / mastered.
 - [ ] Optional Anki export pipeline.
 - [ ] Optional Google Drive save using appDataFolder.
 - [ ] GitHub Pages deployment.

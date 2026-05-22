@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17423a">
+  <title>JFT/SSW Starter Cards</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f8f7;
+      --surface: #ffffff;
+      --surface-strong: #eef5f1;
+      --ink: #16201d;
+      --muted: #60706b;
+      --line: #d9e3df;
+      --primary: #17423a;
+      --primary-2: #216656;
+      --accent: #c2572a;
+      --review: #996b15;
+      --mastered: #1e6f4c;
+      --new: #315f99;
+      --danger: #9b2f2f;
+      --shadow: 0 18px 42px rgba(18, 39, 34, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button,
+    .file-button {
+      min-height: 44px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 0.72rem 0.92rem;
+      background: var(--surface);
+      color: var(--ink);
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+    }
+
+    button:focus-visible,
+    .file-button:focus-within {
+      outline: 3px solid rgba(33, 102, 86, 0.22);
+      outline-offset: 2px;
+    }
+
+    button:hover,
+    .file-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--primary-2);
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.48;
+      transform: none;
+    }
+
+    .shell {
+      width: min(980px, 100%);
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    .app-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.6rem 0 1rem;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.2rem;
+      color: var(--primary-2);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.55rem, 4vw, 2.45rem);
+      letter-spacing: 0;
+      line-height: 1.08;
+    }
+
+    .count-pill,
+    .card-pill,
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      border-radius: 8px;
+      padding: 0.35rem 0.6rem;
+      background: var(--surface-strong);
+      color: var(--primary);
+      font-size: 0.86rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.55rem;
+      margin: 0 0 0.85rem;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.72rem;
+      background: var(--surface);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .stat.new strong {
+      color: var(--new);
+    }
+
+    .stat.review strong {
+      color: var(--review);
+    }
+
+    .stat.mastered strong {
+      color: var(--mastered);
+    }
+
+    .utility-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .utility-bar button,
+    .file-button {
+      flex: 1 1 145px;
+      border-color: var(--line);
+      text-align: center;
+    }
+
+    .file-button input {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+    }
+
+    .card-panel {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .card-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.82rem;
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .card-strip .card-pill,
+    .card-strip .status-pill {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+    }
+
+    .card-body {
+      padding: 1rem;
+    }
+
+    .face-label {
+      margin: 0 0 0.45rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .target {
+      margin: 0;
+      font-size: clamp(1.6rem, 7vw, 3rem);
+      line-height: 1.18;
+      letter-spacing: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .reading {
+      margin: 0.7rem 0 0;
+      color: var(--primary-2);
+      font-size: 1.02rem;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .romaji,
+    .meaning,
+    .example-en {
+      margin: 0.4rem 0 0;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+
+    .back {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .example-ja {
+      margin: 0.55rem 0 0;
+      font-size: 1.18rem;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      border-radius: 8px;
+      padding: 0.25rem 0.48rem;
+      background: #edf3f8;
+      color: #294d71;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.55rem;
+      margin-top: 0.85rem;
+    }
+
+    .actions .primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .actions .again {
+      border-color: rgba(155, 47, 47, 0.34);
+      color: var(--danger);
+    }
+
+    .actions .good {
+      border-color: rgba(153, 107, 21, 0.34);
+      color: var(--review);
+    }
+
+    .actions .easy {
+      border-color: rgba(30, 111, 76, 0.34);
+      color: var(--mastered);
+    }
+
+    .status-line {
+      min-height: 1.5rem;
+      margin: 0.75rem 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (min-width: 680px) {
+      .shell {
+        padding: 1.4rem;
+      }
+
+      .card-body {
+        padding: 1.35rem;
+      }
+
+      .actions {
+        grid-template-columns: 1.4fr repeat(4, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Japan Work Japanese</p>
+        <h1>JFT/SSW Starter Cards</h1>
+      </div>
+      <span class="count-pill" id="cardCount">Loading</span>
+    </header>
+
+    <section class="summary" aria-label="Progress summary">
+      <div class="stat new">
+        <strong id="newCount">0</strong>
+        <span>New</span>
+      </div>
+      <div class="stat review">
+        <strong id="reviewCount">0</strong>
+        <span>Review</span>
+      </div>
+      <div class="stat mastered">
+        <strong id="masteredCount">0</strong>
+        <span>Mastered</span>
+      </div>
+    </section>
+
+    <div class="utility-bar" aria-label="Progress tools">
+      <button type="button" id="exportBtn" disabled>Export progress</button>
+      <label class="file-button" for="importInput">
+        Import progress
+        <input id="importInput" type="file" accept="application/json">
+      </label>
+    </div>
+
+    <section class="card-panel" aria-live="polite">
+      <div class="card-strip">
+        <span class="card-pill" id="cardPosition">Card 0/0</span>
+        <span class="status-pill" id="cardStatus">New</span>
+      </div>
+      <article class="card-body">
+        <div class="front" id="frontFace">
+          <p class="face-label">Front</p>
+          <h2 class="target" id="targetText">Loading cards...</h2>
+          <p class="reading" id="readingText"></p>
+          <p class="romaji" id="romajiText"></p>
+          <div class="tags" id="tagList"></div>
+        </div>
+        <div class="back" id="backFace" hidden>
+          <p class="face-label">Back</p>
+          <p class="meaning" id="meaningText"></p>
+          <p class="example-ja" id="exampleJa"></p>
+          <p class="reading" id="exampleReading"></p>
+          <p class="example-en" id="exampleEn"></p>
+        </div>
+      </article>
+    </section>
+
+    <nav class="actions" aria-label="Card actions">
+      <button type="button" class="primary" id="showAnswerBtn" disabled>Show answer</button>
+      <button type="button" class="again" id="againBtn" disabled>Again</button>
+      <button type="button" class="good" id="goodBtn" disabled>Good</button>
+      <button type="button" class="easy" id="easyBtn" disabled>Easy</button>
+      <button type="button" id="nextBtn" disabled>Next</button>
+    </nav>
+
+    <p class="status-line" id="statusLine" role="status"></p>
+  </main>
+
+  <script>
+    const CARD_URL = 'data/cards.sample.json';
+    const STORAGE_KEY = 'jft-ssw-japanese-local-v1';
+    const EXPORT_VERSION = 1;
+    const VALID_STATUSES = new Set(['new', 'review', 'mastered']);
+
+    const els = {
+      cardCount: document.getElementById('cardCount'),
+      newCount: document.getElementById('newCount'),
+      reviewCount: document.getElementById('reviewCount'),
+      masteredCount: document.getElementById('masteredCount'),
+      exportBtn: document.getElementById('exportBtn'),
+      importInput: document.getElementById('importInput'),
+      cardPosition: document.getElementById('cardPosition'),
+      cardStatus: document.getElementById('cardStatus'),
+      targetText: document.getElementById('targetText'),
+      readingText: document.getElementById('readingText'),
+      romajiText: document.getElementById('romajiText'),
+      tagList: document.getElementById('tagList'),
+      backFace: document.getElementById('backFace'),
+      meaningText: document.getElementById('meaningText'),
+      exampleJa: document.getElementById('exampleJa'),
+      exampleReading: document.getElementById('exampleReading'),
+      exampleEn: document.getElementById('exampleEn'),
+      showAnswerBtn: document.getElementById('showAnswerBtn'),
+      againBtn: document.getElementById('againBtn'),
+      goodBtn: document.getElementById('goodBtn'),
+      easyBtn: document.getElementById('easyBtn'),
+      nextBtn: document.getElementById('nextBtn'),
+      statusLine: document.getElementById('statusLine')
+    };
+
+    let cards = [];
+    let state = {
+      currentIndex: 0,
+      progress: {}
+    };
+
+    function getSavedState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        return normalizeState(saved);
+      } catch (error) {
+        return normalizeState({});
+      }
+    }
+
+    function normalizeState(value) {
+      const next = {
+        currentIndex: Number.isInteger(value.currentIndex) ? value.currentIndex : 0,
+        progress: {}
+      };
+
+      if (value.progress && typeof value.progress === 'object') {
+        Object.entries(value.progress).forEach(([id, item]) => {
+          const rawStatus = typeof item === 'string' ? item : item && item.status;
+          if (VALID_STATUSES.has(rawStatus)) {
+            next.progress[id] = {
+              status: rawStatus,
+              updatedAt: item && item.updatedAt ? item.updatedAt : null
+            };
+          }
+        });
+      }
+
+      return next;
+    }
+
+    function saveState() {
+      const payload = {
+        version: EXPORT_VERSION,
+        currentIndex: state.currentIndex,
+        progress: state.progress,
+        updatedAt: new Date().toISOString()
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    }
+
+    function setStatusLine(text) {
+      els.statusLine.textContent = text;
+    }
+
+    function currentCard() {
+      return cards[state.currentIndex] || null;
+    }
+
+    function cardProgress(cardId) {
+      return state.progress[cardId]?.status || 'new';
+    }
+
+    function setControlsEnabled(enabled) {
+      [els.showAnswerBtn, els.againBtn, els.goodBtn, els.easyBtn, els.nextBtn, els.exportBtn].forEach((button) => {
+        button.disabled = !enabled;
+      });
+    }
+
+    function render(showBack = false) {
+      const card = currentCard();
+      const total = cards.length;
+      els.cardCount.textContent = total ? `${total} cards` : 'No cards';
+      els.cardPosition.textContent = total ? `Card ${state.currentIndex + 1}/${total}` : 'Card 0/0';
+
+      renderSummary();
+
+      if (!card) {
+        els.targetText.textContent = 'No cards available';
+        els.readingText.textContent = '';
+        els.romajiText.textContent = '';
+        els.tagList.replaceChildren();
+        els.backFace.hidden = true;
+        els.cardStatus.textContent = 'New';
+        setControlsEnabled(false);
+        return;
+      }
+
+      els.targetText.textContent = card.target;
+      els.readingText.textContent = card.reading || '';
+      els.romajiText.textContent = card.romaji || '';
+      els.meaningText.textContent = card.meaning?.en || '';
+      els.exampleJa.textContent = card.example?.ja || '';
+      els.exampleReading.textContent = card.example?.reading || '';
+      els.exampleEn.textContent = card.example?.en || '';
+      els.backFace.hidden = !showBack;
+      els.cardStatus.textContent = formatStatus(cardProgress(card.id));
+      els.showAnswerBtn.disabled = showBack;
+
+      const tags = (card.tags || []).map((tag) => {
+        const item = document.createElement('span');
+        item.className = 'tag';
+        item.textContent = tag.replaceAll('_', ' ');
+        return item;
+      });
+      els.tagList.replaceChildren(...tags);
+
+      setControlsEnabled(true);
+      els.showAnswerBtn.disabled = showBack;
+    }
+
+    function renderSummary() {
+      const counts = { new: 0, review: 0, mastered: 0 };
+      cards.forEach((card) => {
+        counts[cardProgress(card.id)] += 1;
+      });
+      els.newCount.textContent = counts.new;
+      els.reviewCount.textContent = counts.review;
+      els.masteredCount.textContent = counts.mastered;
+    }
+
+    function formatStatus(status) {
+      return status.charAt(0).toUpperCase() + status.slice(1);
+    }
+
+    function rateCurrent(status) {
+      const card = currentCard();
+      if (!card) return;
+      state.progress[card.id] = {
+        status,
+        updatedAt: new Date().toISOString()
+      };
+      moveNext();
+      setStatusLine(`${card.id} marked ${formatStatus(status)}.`);
+    }
+
+    function moveNext() {
+      if (!cards.length) return;
+      state.currentIndex = (state.currentIndex + 1) % cards.length;
+      saveState();
+      render(false);
+    }
+
+    function exportProgress() {
+      const payload = {
+        app: 'jft-ssw-starter-cards',
+        version: EXPORT_VERSION,
+        exportedAt: new Date().toISOString(),
+        currentIndex: state.currentIndex,
+        progress: state.progress
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'jft-ssw-japanese-progress-v1.json';
+      link.click();
+      URL.revokeObjectURL(url);
+      setStatusLine('Progress exported.');
+    }
+
+    function importProgress(file) {
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const imported = normalizeState(JSON.parse(String(reader.result)));
+          state.progress = imported.progress;
+          state.currentIndex = clampIndex(imported.currentIndex);
+          saveState();
+          render(false);
+          setStatusLine('Progress imported.');
+        } catch (error) {
+          setStatusLine('Import failed.');
+        } finally {
+          els.importInput.value = '';
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function clampIndex(index) {
+      if (!cards.length) return 0;
+      if (!Number.isInteger(index) || index < 0) return 0;
+      return Math.min(index, cards.length - 1);
+    }
+
+    async function loadCards() {
+      try {
+        const response = await fetch(CARD_URL, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        if (!Array.isArray(data)) throw new Error('Cards file must be an array.');
+        cards = data.filter((card) => card && card.id && card.target);
+        state = getSavedState();
+        state.currentIndex = clampIndex(state.currentIndex);
+        render(false);
+        setStatusLine('Ready.');
+      } catch (error) {
+        cards = [];
+        render(false);
+        setStatusLine('Could not load cards.sample.json.');
+      }
+    }
+
+    els.showAnswerBtn.addEventListener('click', () => render(true));
+    els.againBtn.addEventListener('click', () => rateCurrent('review'));
+    els.goodBtn.addEventListener('click', () => rateCurrent('review'));
+    els.easyBtn.addEventListener('click', () => rateCurrent('mastered'));
+    els.nextBtn.addEventListener('click', () => {
+      moveNext();
+      setStatusLine('Next card.');
+    });
+    els.exportBtn.addEventListener('click', exportProgress);
+    els.importInput.addEventListener('change', (event) => importProgress(event.target.files[0]));
+
+    if ('serviceWorker' in navigator && window.isSecureContext) {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+
+    loadCards();
+  </script>
+</body>
+</html>

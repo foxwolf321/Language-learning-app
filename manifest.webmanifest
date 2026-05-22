@@ -1,0 +1,13 @@
+{
+  "name": "JFT/SSW Starter Cards",
+  "short_name": "JFT SSW Cards",
+  "description": "A small validation PWA for JFT/SSW practical Japanese starter cards.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f8f7",
+  "theme_color": "#17423a",
+  "orientation": "portrait-primary",
+  "categories": ["education", "productivity"],
+  "lang": "en"
+}

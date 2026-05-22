@@ -10,6 +10,7 @@
 - Added task list in `TODO.md`.
 - Added Issue #1 market validation files: `data/market_candidates.csv`, `data/competitor_research_template.csv`, and `docs/VALIDATION_PLAN.md`.
 - Added Issue #2 free starter sample dataset: `data/cards.sample.json` with 50 original JFT/SSW practical Japanese cards.
+- Added Issue #3 minimal PWA skeleton: `index.html`, `manifest.webmanifest`, and `sw.js`.
 
 ### Strategic direction
 - Lead product: JFT-Basic + SSW practical Japanese.
