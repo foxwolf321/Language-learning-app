@@ -18,13 +18,27 @@ Do not say:
 - "This is only practical Japanese."
 - "We do not care about JFT-Basic or SSW tests."
 
-Instead say:
+Instead say prominently:
 
 - "Built for JFT-Basic / SSW preparation."
 - "Exam-aligned practical Japanese."
 - "Original cards based on the skills and situations needed for the exam and for work/life in Japan."
-- "Unofficial and not affiliated with exam bodies."
-- "No pass guarantee."
+
+Do **not** overemphasize legal disclaimers in marketing copy. A normal study aid or reference book does not put disclaimers at the center of the sales message. Keep necessary cautionary language in small footer text, FAQ, terms, or internal policy.
+
+Recommended treatment:
+
+- Main copy: focus on exam preparation, practical work/life Japanese, and learner benefit.
+- Footer/FAQ/terms: short note if needed that the product is an independent learning aid.
+- Internal policy: preserve the rule that content is original and not copied from official questions or textbooks.
+
+Avoid prominent negative phrases such as:
+
+- "No pass guarantee" as a main CTA-area message.
+- "Not affiliated with official exam bodies" as a headline-level message.
+- "Not copied from official questions" as a selling point.
+
+These ideas are operational guardrails, not the value proposition.
 
 ## Why original content is still necessary
 
@@ -136,4 +150,6 @@ If the app copies official/test material, future monetization is risky.
 
 The correct path is:
 
-> exam-aligned promise + original content + practical work-life usefulness + clear unofficial disclaimer.
+> exam-aligned promise + original content + practical work-life usefulness.
+
+Legal/cautionary language should protect the product quietly, not weaken the sales message.
