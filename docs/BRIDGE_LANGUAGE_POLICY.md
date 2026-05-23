@@ -6,6 +6,34 @@ Do not assume native-language translations will always be perfect.
 
 A strong product design may show the learner's selected support language first, while keeping English as a secondary fallback/reference where it does not clutter the learning experience.
 
+## Important clarification
+"First stage" does **not** mean native-language support is forbidden.
+
+It means:
+- The current working PWA is English-support only because it was the fastest technical validation sample.
+- The next market-validation version may include one selected native language if that improves validation.
+- We should not build full multilingual support for every country before demand is tested.
+
+Recommended staging:
+
+### Stage 1A — technical sample
+- English support only is acceptable.
+- Purpose: verify PWA, card flow, local save, export/import.
+- This is what exists now.
+
+### Stage 1B — market validation sample
+- Add one selected native-language text layer if a target country is chosen.
+- Keep English fallback/reference.
+- No support-language audio yet.
+- Purpose: test whether local-language support improves trust, comprehension, and conversion.
+
+### Stage 2 — paid-pack candidate
+- Add Japanese target phrase audio and possibly Japanese example audio.
+- Expand only the language/country segment that shows evidence of demand.
+
+### Stage 3 — localized premium
+- Add more native-language text and only later native-language audio, if justified.
+
 ## Why this matters
 For JFT/SSW practical Japanese, learners may come from countries where English bridge support is uneven. Native-language support can reduce friction and improve conversion.
 
@@ -50,7 +78,9 @@ Recommended display order:
 2. selected support language
 3. English fallback as small/reference text or toggle
 
-For early MVP, it is acceptable to show English only, but the data model should not lock the product into English-only design.
+For early technical MVP, it is acceptable to show English only, but the data model should not lock the product into English-only design.
+
+For early market validation, one native language plus English fallback may be better than English-only if the target country has weak or uneven English bridge ability.
 
 ## Data model implication
 Future cards should support fields such as:
@@ -104,14 +134,14 @@ Text support in native language plus English fallback is much cheaper than multi
 
 ## MVP recommendation
 For the current free PWA:
-- keep English support for speed
+- keep English support for speed only
 - clearly label English as support, not the learning target
 - prepare the data/UI direction for selected support language + English fallback
 - do not add multilingual audio yet
 
 For the next validation step:
-- test one native-language segment with text only
-- keep English fallback visible or collapsible
+- choose one target country/language hypothesis
+- test native-language text plus English fallback, or English-only if the target segment is likely English-capable
 - collect feedback about whether learners prefer native-language-only, English-only, or both
 
 ## Monetization relevance
