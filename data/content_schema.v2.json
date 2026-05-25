@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://foxwolf321.github.io/Language-learning-app/data/content_schema.v2.json",
+  "title": "JFT/SSW Card Schema v2",
+  "description": "Production-oriented card schema for JFT-Basic / SSW / Work-in-Japan practical Japanese cards. Supports Indonesian-first content, English fallback, five card modes, future paid packs, audio metadata, review status, and scheduler-ready metadata.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "deck",
+    "pack",
+    "stage",
+    "tier",
+    "mode",
+    "question_type",
+    "target",
+    "reading",
+    "meaning",
+    "example",
+    "exam_alignment",
+    "jft_section",
+    "skill_category",
+    "scenario",
+    "tags",
+    "priority_weight",
+    "paid_pack_potential",
+    "review_status",
+    "audio",
+    "source_note"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 2,
+      "description": "Card data schema version."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*-[0-9]{4}$|^id-stage1b-[0-9]{4}$",
+      "description": "Stable unique card ID. Never change after release."
+    },
+    "deck": {
+      "type": "string",
+      "description": "Stable deck ID, e.g. jft_ssw_work_japan."
+    },
+    "pack": {
+      "type": "string",
+      "description": "Stable pack ID, e.g. stage1b_id_validation."
+    },
+    "stage": {
+      "type": "string",
+      "description": "Learning/content stage, e.g. stage1b.",
+      "examples": ["stage1b"]
+    },
+    "tier": {
+      "type": "string",
+      "enum": ["free_validation", "paid_starter", "full_core", "field_specific", "preview"],
+      "description": "Commercial tier metadata. Does not implement payment or access control."
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["recognition", "production", "kanji_sign_reading", "listening_ready", "information_search_mini"],
+      "description": "First-class card rendering mode."
+    },
+    "question_type": {
+      "type": "string",
+      "enum": ["vocab", "phrase", "situation", "kanji", "sign", "listening", "notice", "information_search", "workplace", "mock"],
+      "description": "Task shape within a mode."
+    },
+    "target": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Main Japanese word, phrase, sentence, sign, notice, or information-search text."
+    },
+    "reading": {
+      "type": "string",
+      "description": "Kana reading or pronunciation support. Keep kana as the pronunciation source of truth."
+    },
+    "romaji": {
+      "type": "string",
+      "description": "Optional simplified romaji. Learner-facing but fadeable in the UI."
+    },
+    "meaning": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["id", "en"],
+      "properties": {
+        "id": { "type": "string", "description": "Indonesian learner-facing meaning/support text. Here id is the Indonesian language code." },
+        "en": { "type": "string", "description": "English fallback/reference meaning." },
+        "bn": { "type": "string" },
+        "ne": { "type": "string" },
+        "my": { "type": "string" },
+        "vi": { "type": "string" },
+        "ms": { "type": "string" }
+      }
+    },
+    "prompt": {
+      "type": "object",
+      "description": "Mode-specific learner prompt. Especially useful for production and information-search cards.",
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string", "description": "Indonesian learner-facing prompt." },
+        "en": { "type": "string", "description": "English fallback/reference prompt." },
+        "ja": { "type": "string", "description": "Japanese prompt text when needed." }
+      }
+    },
+    "expected_answer": {
+      "type": "object",
+      "description": "Expected answer for production or information-search cards.",
+      "additionalProperties": true,
+      "properties": {
+        "ja": { "type": "string" },
+        "reading": { "type": "string" },
+        "id": { "type": "string" },
+        "en": { "type": "string" }
+      }
+    },
+    "example": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["ja"],
+      "properties": {
+        "ja": { "type": "string", "description": "Original Japanese example sentence or expected-answer example." },
+        "reading": { "type": "string" },
+        "id": { "type": "string", "description": "Indonesian example/support text." },
+        "en": { "type": "string", "description": "English fallback example/support text." },
+        "bn": { "type": "string" },
+        "ne": { "type": "string" },
+        "my": { "type": "string" },
+        "vi": { "type": "string" },
+        "ms": { "type": "string" }
+      }
+    },
+    "usage_note": {
+      "type": "object",
+      "description": "Short learner-facing or reviewer-facing usage note.",
+      "additionalProperties": true,
+      "properties": {
+        "id": { "type": "string" },
+        "en": { "type": "string" },
+        "ja": { "type": "string" }
+      }
+    },
+    "exam_alignment": {
+      "type": "string",
+      "description": "Short internal statement of JFT/SSW alignment. May be surfaced lightly in About/Browse views."
+    },
+    "jft_section": {
+      "type": "string",
+      "enum": ["script_vocabulary", "conversation_expression", "listening_comprehension", "reading_comprehension", "ssw_workplace_overlay"],
+      "description": "JFT-Basic or SSW overlay section metadata."
+    },
+    "skill_category": {
+      "type": "string",
+      "description": "Skill grouping, e.g. word_meaning, reporting_problem, information_search, safety_instruction."
+    },
+    "scenario": {
+      "type": "string",
+      "description": "Life/work scenario or domain, e.g. city_office_documents, shift_schedule, workplace_safety."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "description": "Filtering/scheduling/product tags. Tags must not be decorative only."
+    },
+    "priority_weight": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Initial exam/work-life priority weight. Later adjusted with evidence and learner data."
+    },
+    "paid_pack_potential": {
+      "type": "string",
+      "enum": ["free_validation", "paid_starter_core", "full_core", "field_specific_seed", "later_expansion"],
+      "description": "Content strategy classification. Does not implement payment."
+    },
+    "review_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["japanese", "indonesian", "english", "audio", "overall"],
+      "properties": {
+        "japanese": { "type": "string", "enum": ["draft_needs_native_check", "reviewed", "approved", "needs_revision"] },
+        "indonesian": { "type": "string", "enum": ["machine_draft_needs_human_review", "human_reviewed", "approved", "needs_revision"] },
+        "english": { "type": "string", "enum": ["draft_needs_review", "reviewed", "approved", "needs_revision"] },
+        "audio": { "type": "string", "enum": ["not_added", "planned", "recorded_needs_review", "reviewed", "released"] },
+        "overall": { "type": "string", "enum": ["draft", "review", "ready_for_json", "production_ready", "needs_revision"] }
+      }
+    },
+    "audio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "example", "voice", "status", "needs_recording", "review_status"],
+      "properties": {
+        "target": { "type": ["string", "null"], "description": "Audio path or asset ID for target Japanese. Null until added." },
+        "example": { "type": ["string", "null"], "description": "Audio path or asset ID for example Japanese. Null until added." },
+        "voice": { "type": ["string", "null"], "description": "Human speaker or approved generated voice label." },
+        "status": { "type": "string", "enum": ["not_added", "planned", "recorded", "reviewed", "released"] },
+        "needs_recording": { "type": "boolean" },
+        "review_status": { "type": "string", "enum": ["not_applicable", "needs_recording", "needs_review", "approved", "needs_revision"] }
+      }
+    },
+    "source_note": {
+      "type": "string",
+      "description": "Originality/source discipline note. Use public sources only for structure/domain guidance, never copied learner-facing text."
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "mode": { "const": "production" } } },
+      "then": { "required": ["prompt", "expected_answer"] }
+    },
+    {
+      "if": { "properties": { "mode": { "const": "information_search_mini" } } },
+      "then": { "required": ["prompt", "expected_answer"] }
+    }
+  ]
+}

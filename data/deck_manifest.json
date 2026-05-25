@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "product_id": "jft_ssw_work_japan",
+  "product_title": "JFT-Basic / SSW Work-in-Japan Japanese",
+  "positioning": "Practical Japanese cards for JFT-Basic / SSW / Work-in-Japan preparation, initially for Indonesian learners with English fallback.",
+  "target_language": "ja",
+  "default_support_language": "id",
+  "default_fallback_language": "en",
+  "source_policy": "Original learner-facing content only. Public JFT-Basic, Irodori/JF Can-do, and SSW materials may guide structure, domains, task types, and level expectations, but must not be copied or near-cloned.",
+  "decks": [
+    {
+      "deck_id": "jft_ssw_work_japan",
+      "title": "JFT-Basic / SSW Work-in-Japan Japanese",
+      "description": "Exam-aligned and work-life practical Japanese cards for learners preparing to live and work in Japan.",
+      "target_language": "ja",
+      "support_language": "id",
+      "fallback_language": "en",
+      "status": "planning",
+      "packs": [
+        {
+          "pack_id": "stage1b_id_validation",
+          "title": "Indonesian Stage 1B Validation Sample",
+          "description": "Free validation sample covering five card modes across JFT-Basic / SSW work-life domains.",
+          "stage": "stage1b",
+          "tier": "free_validation",
+          "target_segment": "Indonesian learners preparing for JFT-Basic / SSW / Work-in-Japan practical Japanese.",
+          "support_language": "id",
+          "fallback_language": "en",
+          "expected_card_count": 60,
+          "card_file": "data/cards.stage1b.id.sample.json",
+          "schema_file": "data/content_schema.v2.json",
+          "release_status": "planned",
+          "content_status": "draft_reviewed_for_direction",
+          "review_status": "needs_human_review_before_production",
+          "access": {
+            "tier": "free_validation",
+            "is_preview": true,
+            "requires_payment": false,
+            "requires_login": false
+          },
+          "included_modes": [
+            "recognition",
+            "production",
+            "kanji_sign_reading",
+            "listening_ready",
+            "information_search_mini"
+          ],
+          "included_jft_sections": [
+            "script_vocabulary",
+            "conversation_expression",
+            "listening_comprehension",
+            "reading_comprehension",
+            "ssw_workplace_overlay"
+          ],
+          "next_step": "Convert reviewed Stage 1B draft cards into data/cards.stage1b.id.sample.json after schema v2 is accepted."
+        },
+        {
+          "pack_id": "paid_starter_id_core",
+          "title": "Indonesian Paid Starter Core",
+          "description": "Future 400-600 card paid starter pack after validation evidence.",
+          "stage": "starter",
+          "tier": "paid_starter",
+          "target_segment": "Indonesian JFT-Basic / SSW learners who need a broader practical starter product.",
+          "support_language": "id",
+          "fallback_language": "en",
+          "expected_card_count": "400-600",
+          "card_file": null,
+          "schema_file": "data/content_schema.v2.json",
+          "release_status": "future_planned",
+          "content_status": "not_started",
+          "review_status": "not_started",
+          "access": {
+            "tier": "paid_starter",
+            "is_preview": false,
+            "requires_payment": true,
+            "requires_login": "undecided"
+          },
+          "included_modes": [
+            "recognition",
+            "production",
+            "kanji_sign_reading",
+            "listening_ready",
+            "information_search_mini"
+          ],
+          "included_jft_sections": [
+            "script_vocabulary",
+            "conversation_expression",
+            "listening_comprehension",
+            "reading_comprehension",
+            "ssw_workplace_overlay"
+          ],
+          "next_step": "Do not implement until the Stage 1B validation sample gives enough evidence."
+        },
+        {
+          "pack_id": "full_core_id",
+          "title": "Indonesian Full Core",
+          "description": "Future 1,000-1,500 exposure core across JFT-Basic and practical work-life domains.",
+          "stage": "full_core",
+          "tier": "full_core",
+          "target_segment": "Indonesian learners needing a fuller JFT/SSW preparation product.",
+          "support_language": "id",
+          "fallback_language": "en",
+          "expected_card_count": "1000-1500",
+          "card_file": null,
+          "schema_file": "data/content_schema.v2.json",
+          "release_status": "future_planned",
+          "content_status": "not_started",
+          "review_status": "not_started",
+          "access": {
+            "tier": "full_core",
+            "is_preview": false,
+            "requires_payment": true,
+            "requires_login": "undecided"
+          },
+          "included_modes": [],
+          "included_jft_sections": [],
+          "next_step": "Scope after paid starter validation."
+        },
+        {
+          "pack_id": "field_specific_packs_placeholder",
+          "title": "Future Field-Specific SSW Packs",
+          "description": "Placeholder for later care worker, manufacturing/safety, food service, cleaning, accommodation, agriculture, and other field-specific packs.",
+          "stage": "field_specific",
+          "tier": "field_specific",
+          "target_segment": "Learners who need job-field-specific Japanese after the general starter is validated.",
+          "support_language": "id",
+          "fallback_language": "en",
+          "expected_card_count": null,
+          "card_file": null,
+          "schema_file": "data/content_schema.v2.json",
+          "release_status": "future_placeholder",
+          "content_status": "not_started",
+          "review_status": "not_started",
+          "access": {
+            "tier": "field_specific",
+            "is_preview": false,
+            "requires_payment": true,
+            "requires_login": "undecided"
+          },
+          "included_modes": [],
+          "included_jft_sections": [],
+          "next_step": "Do not build before paid starter demand is validated."
+        }
+      ]
+    }
+  ]
+}
