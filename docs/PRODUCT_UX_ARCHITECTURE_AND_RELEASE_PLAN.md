@@ -62,8 +62,8 @@ The product should be structured around a clear paid path, but the first release
 | Tier | Purpose | Belongs here | Do not build yet |
 |---|---|---|---|
 | Free Stage 1B validation sample | Validate positioning, card UX, Indonesian support, and learner trust. | Around 60 reviewed Indonesian Stage 1B cards across the five modes, basic progress, export/import, and clear exam/work-life positioning. | Payment, login, full audio, all languages, advanced scheduler, hundreds of cards. |
-| Paid 300-500 card starter | First real monetization offer after validation. | Broader JFT/SSW starter coverage, better sequencing, more review-ready content, clearer exam/work-life tags, possibly limited audio if demand is proven. | Full core scope, every field-specific scenario, expensive audio for all cards before conversion evidence. |
-| Later full core | Deeper preparation product. | A fuller 800-1200 exposure core across JFT-Basic domains, practical life in Japan, work instructions, notices, and review modes. | Field-specific depth that belongs in separate paid packs. |
+| Paid 400-600 card starter | First real monetization offer after validation. | Broader JFT/SSW starter coverage, better sequencing, more review-ready content, clearer exam/work-life tags, possibly limited audio if demand is proven. | Full core scope, every field-specific scenario, expensive audio for all cards before conversion evidence. |
+| Later full core | Deeper preparation product. | A fuller 1,000-1,500 exposure core across JFT-Basic domains, practical life in Japan, work instructions, notices, and review modes. | Field-specific depth that belongs in separate paid packs. |
 | Field-specific paid packs | Higher willingness-to-pay add-ons for work contexts. | Care worker, food service, manufacturing, building cleaning, accommodation, agriculture, or other SSW-relevant practical language packs. | Building all fields before a starter pack proves demand. |
 
 The free sample should feel credible enough that learners can imagine paying for the starter. It should not give the impression that the entire product is a random phrase list.
@@ -376,7 +376,7 @@ Future paid-readiness needs:
 |---|---|
 | Locked packs | Pack metadata should include tier and release status. |
 | Preview cards | Cards or packs should be able to mark preview availability. |
-| Paid starter | 300-500 card starter should be a pack, not a separate app. |
+| Paid starter | 400-600 card starter should be a pack, not a separate app. |
 | Full core | Later full core should share the same deck and schema family. |
 | Field-specific packs | Field packs should use pack IDs, scenario metadata, and tier metadata. |
 
@@ -393,7 +393,7 @@ GitHub Pages is suitable for the free validation release because the content can
 | Phase 4: PWA vertical slice for all five card modes | Render all modes correctly in the app. | `index.html`, CSS/JS files if split, service worker only if needed. | Do not add payment/login/audio/Google Drive. | Each mode has a usable mobile front/back flow. |
 | Phase 5: UI/UX validation release | Polish first free release and test learner experience. | PWA UI files, release checklist, minimal copy. | Do not build the paid product prematurely. | Learners can complete sessions and provide useful feedback. |
 | Phase 6: basic scheduler improvement | Improve due logic while keeping it understandable. | PWA logic and progress migration code. | Do not overbuild advanced exam scoring. | New/Learning/Review/Mastered behaves consistently. |
-| Phase 7: paid starter planning | Define the first paid offer and content scope. | Revenue docs, paid starter matrix, pack plan. | Do not implement payment before offer validation. | 300-500 card starter scope is credible and priced/testable. |
+| Phase 7: paid starter planning | Define the first paid offer and content scope. | Revenue docs, paid starter matrix, pack plan. | Do not implement payment before offer validation. | 400-600 card starter scope is credible and priced/testable. |
 | Phase 8: audio rollout | Add audio only after text/card UX has evidence. | Audio metadata, selected assets, audio QA docs. | Do not record every card before demand is proven. | Audio improves learning without breaking card IDs. |
 | Phase 9: advanced exam-priority scheduler | Use metadata and user results to prioritize exam/work-life weak spots. | Scheduler logic, analytics model, progress migration. | Do not claim guaranteed exam outcomes. | Scheduler uses JFT section, mode, scenario, and performance signals. |
 
