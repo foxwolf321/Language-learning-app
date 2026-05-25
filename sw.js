@@ -1,9 +1,10 @@
-const CACHE_NAME = 'jft-ssw-starter-v1';
+const CACHE_NAME = 'jft-ssw-stage1b-v2';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './data/cards.sample.json'
+  './data/deck_manifest.json',
+  './data/cards.stage1b.id.sample.json'
 ];
 
 self.addEventListener('install', (event) => {
