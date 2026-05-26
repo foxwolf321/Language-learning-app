@@ -11,7 +11,7 @@
       color-scheme: light;
       --bg: #edf5f1;
       --bg2: #f8efe1;
-      --surface: rgba(255, 255, 255, 0.94);
+      --surface: rgba(255, 255, 255, 0.95);
       --surface-solid: #ffffff;
       --ink: #14211d;
       --muted: #63736d;
@@ -25,6 +25,7 @@
       --easy: #24724f;
       --shadow: 0 20px 55px rgba(19, 50, 42, 0.16);
       --radius: 22px;
+      --theme-dim: 0.38;
     }
 
     * { box-sizing: border-box; }
@@ -36,8 +37,9 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.5;
       background:
-        radial-gradient(circle at 14% 14%, rgba(255, 255, 255, 0.72), transparent 28%),
-        radial-gradient(circle at 82% 18%, rgba(255, 205, 160, 0.34), transparent 32%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.60), rgba(255, 255, 255, 0.10) 38%, rgba(255, 255, 255, 0.20)),
+        radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.72), transparent 28%),
+        radial-gradient(circle at 84% 18%, rgba(255, 205, 160, 0.26), transparent 32%),
         linear-gradient(140deg, var(--bg), var(--bg2));
       background-attachment: fixed;
     }
@@ -47,42 +49,39 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: 0.30;
+      opacity: var(--theme-dim);
       background-image: var(--theme-art);
       background-size: cover;
-      background-position: center;
+      background-position: center bottom;
+      filter: saturate(0.92);
       z-index: -1;
     }
 
-    body.theme-daily {
-      --bg: #eaf4ef;
-      --bg2: #fff1dd;
-      --theme-art:
-        linear-gradient(160deg, rgba(255,255,255,0.75), rgba(255,255,255,0.25)),
-        radial-gradient(ellipse at 22% 78%, rgba(80, 125, 112, 0.34) 0 12%, transparent 13%),
-        linear-gradient(115deg, transparent 0 58%, rgba(64, 103, 94, 0.18) 58% 61%, transparent 61%),
-        linear-gradient(0deg, rgba(74, 116, 106, 0.18) 0 18%, transparent 18%),
-        repeating-linear-gradient(90deg, transparent 0 72px, rgba(50, 88, 80, 0.10) 73px 75px, transparent 76px 130px);
+    body.answer-shown {
+      --theme-dim: 0.18;
     }
 
-    body.theme-work {
-      --bg: #eef3ef;
-      --bg2: #e8eadf;
+    /* Optional generated/licensed-safe assets can live at assets/backgrounds/bridge.png and assets/backgrounds/neon-city.png; gradient layers keep these themes usable without final image assets. */
+    body.theme-bridge {
+      --bg: #e8f4f0;
+      --bg2: #fff0db;
       --theme-art:
-        linear-gradient(160deg, rgba(255,255,255,0.72), rgba(255,255,255,0.30)),
-        repeating-linear-gradient(0deg, transparent 0 52px, rgba(44, 76, 68, 0.10) 53px 55px),
-        repeating-linear-gradient(90deg, transparent 0 92px, rgba(179, 122, 57, 0.12) 93px 96px),
-        radial-gradient(circle at 82% 28%, rgba(230, 179, 72, 0.20), transparent 22%);
+        linear-gradient(180deg, rgba(255,255,255,0.82) 0 18%, rgba(255,255,255,0.34) 45%, rgba(255,255,255,0.18)),
+        url("assets/backgrounds/bridge.png"),
+        radial-gradient(ellipse at 50% 78%, rgba(171, 63, 48, 0.28) 0 11%, transparent 11.6%),
+        radial-gradient(ellipse at 50% 85%, rgba(68, 124, 130, 0.26) 0 33%, transparent 34%),
+        linear-gradient(0deg, rgba(51, 113, 107, 0.20) 0 28%, transparent 29%);
     }
 
-    body.theme-soft {
-      --bg: #f4eee7;
-      --bg2: #eef5f0;
+    body.theme-neon {
+      --bg: #e8eef4;
+      --bg2: #f4e6ef;
       --theme-art:
-        linear-gradient(160deg, rgba(255,255,255,0.76), rgba(255,255,255,0.34)),
-        radial-gradient(circle at 78% 22%, rgba(199, 96, 84, 0.14), transparent 21%),
-        repeating-linear-gradient(45deg, transparent 0 40px, rgba(128, 88, 72, 0.07) 41px 43px),
-        linear-gradient(0deg, rgba(102, 79, 70, 0.12) 0 16%, transparent 17%);
+        linear-gradient(180deg, rgba(255,255,255,0.80), rgba(255,255,255,0.48) 34%, rgba(255,255,255,0.24)),
+        url("assets/backgrounds/neon-city.png"),
+        radial-gradient(circle at 28% 78%, rgba(55, 103, 169, 0.30), transparent 25%),
+        radial-gradient(circle at 72% 72%, rgba(198, 80, 139, 0.24), transparent 26%),
+        linear-gradient(0deg, rgba(33, 41, 80, 0.26) 0 24%, transparent 28%);
     }
 
     body.theme-clean {
@@ -114,14 +113,20 @@
 
     .shell { width: min(1040px, 100%); margin: 0 auto; padding: max(0.82rem, env(safe-area-inset-top)) 1rem 1rem; }
 
-    .app-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding: 0.35rem 0 .72rem; }
+    .app-header { display: grid; gap: .35rem; padding: 0.35rem 0 .5rem; text-align: center; }
     .eyebrow { margin: 0 0 0.22rem; color: var(--primary-2); font-size: 0.74rem; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
     h1 { margin: 0; font-size: clamp(1.34rem, 4.8vw, 2.3rem); line-height: 1.08; }
     .subtitle { margin: 0.3rem 0 0; max-width: 42rem; color: var(--muted); font-weight: 650; }
 
-    .pill { display: inline-flex; align-items: center; gap: .35rem; min-height: 32px; border-radius: 999px; padding: .34rem .62rem; background: rgba(255,255,255,.74); border: 1px solid var(--line); color: var(--primary); font-size: .82rem; font-weight: 900; white-space: nowrap; }
+    .pill { display: inline-flex; align-items: center; justify-content: center; gap: .35rem; min-height: 32px; border-radius: 999px; padding: .34rem .62rem; background: rgba(255,255,255,.78); border: 1px solid var(--line); color: var(--primary); font-size: .82rem; font-weight: 900; white-space: nowrap; }
 
-    .tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: .45rem; margin: .25rem 0 .72rem; }
+    .top-controls { display: grid; grid-template-columns: minmax(76px, 1fr) minmax(116px, 1.15fr) minmax(76px, 1fr); align-items: center; gap: .5rem; margin: .15rem 0 .58rem; }
+    .top-pill { width: 100%; min-height: 38px; padding: .42rem .58rem; border-radius: 999px; background: rgba(255,255,255,.80); box-shadow: 0 8px 24px rgba(31, 72, 61, .09); }
+    .top-button { border-radius: 999px; background: rgba(255,255,255,.84); }
+    .progress-button { min-height: 42px; font-size: .94rem; color: #fff; background: linear-gradient(135deg, var(--primary), var(--primary-2)); border-color: transparent; box-shadow: 0 12px 28px rgba(33, 78, 67, .22); }
+    .top-button.active { outline: 3px solid rgba(47, 111, 95, .18); outline-offset: 1px; }
+
+    .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: .45rem; margin: .25rem 0 .72rem; }
     .tab { min-height: 42px; padding: .55rem .4rem; font-size: .86rem; background: rgba(255,255,255,.76); }
     .tab.active { background: var(--primary); color: #fff; }
 
@@ -144,21 +149,22 @@
     .card-strip .pill { background: rgba(255,255,255,.15); color: #fff; border-color: rgba(255,255,255,.18); }
     .card-body { padding: 1rem; }
 
+    .task-label { display: inline-flex; align-items: center; min-height: 28px; margin: 0 0 .55rem; padding: .22rem .58rem; border-radius: 999px; background: rgba(33, 78, 67, .08); color: var(--primary); font-size: .78rem; font-weight: 950; }
     .target { margin: 0; font-size: clamp(1.8rem, 8vw, 3.35rem); line-height: 1.13; letter-spacing: .01em; overflow-wrap: anywhere; }
     .target.sign { font-size: clamp(2.25rem, 12vw, 4.4rem); text-align: center; padding: .58rem 0; }
     .prompt-main { margin: 0; font-size: clamp(1.22rem, 5.5vw, 2.05rem); line-height: 1.28; font-weight: 900; overflow-wrap: anywhere; }
     .prompt-sub, .meaning-secondary, .note { color: var(--muted); }
     .reading { margin: .6rem 0 0; color: var(--primary-2); font-size: 1.03rem; font-weight: 850; overflow-wrap: anywhere; }
-    .romaji { margin: .24rem 0 0; color: var(--muted); font-size: .94rem; overflow-wrap: anywhere; }
+    .romaji { margin: .24rem 0 0; color: var(--muted); font-size: .94rem; font-weight: 650; overflow-wrap: anywhere; }
     .meaning-id { margin: 0; font-size: clamp(1.18rem, 4.8vw, 1.7rem); font-weight: 900; color: var(--primary); overflow-wrap: anywhere; }
-    .meaning-secondary { margin: .28rem 0 0; font-size: .98rem; overflow-wrap: anywhere; }
+    .meaning-secondary { margin: .32rem 0 0; font-size: clamp(1.02rem, 3.8vw, 1.22rem); font-weight: 650; overflow-wrap: anywhere; }
     .example-ja { margin: .68rem 0 0; font-size: 1.1rem; font-weight: 850; overflow-wrap: anywhere; }
     .note { margin: .65rem 0 0; }
     .answer-divider { margin-top: .95rem; padding-top: .88rem; border-top: 2px solid var(--line-strong); }
     .front-reference { padding-bottom: .15rem; }
     .front-reference .target { font-size: clamp(1.15rem, 5vw, 1.7rem); }
-    .front-reference .reading { margin-top: .28rem; font-size: .92rem; }
-    .front-reference .romaji { font-size: .82rem; }
+    .front-reference .reading { margin-top: .28rem; font-size: .96rem; }
+    .front-reference .romaji { font-size: .86rem; }
 
     .audio-chip { min-height: 32px; margin-top: .55rem; padding: .25rem .55rem; border-radius: 999px; font-size: .78rem; color: var(--muted); background: rgba(255,255,255,.62); }
 
@@ -166,6 +172,9 @@
     .question-box { margin-top: .65rem; border-left: 4px solid var(--accent); padding: .58rem .7rem; background: rgba(255, 246, 235, .82); border-radius: 14px; }
     .question-box strong { display: block; margin-bottom: .22rem; }
     .answer-box { border-left: 4px solid var(--easy); padding: .62rem .75rem; background: rgba(236, 247, 241, .92); border-radius: 14px; }
+    .empty-state { padding: 1.2rem 1rem; text-align: center; }
+    .empty-state h2 { margin: 0; font-size: clamp(1.25rem, 5vw, 1.8rem); }
+    .empty-state p { margin: .45rem auto 0; max-width: 28rem; color: var(--muted); font-weight: 750; }
 
     .tags { display: flex; flex-wrap: wrap; gap: .36rem; margin-top: .72rem; }
     .tag { border-radius: 999px; padding: .23rem .5rem; background: #edf3f8; color: #294d71; font-size: .74rem; font-weight: 900; }
@@ -202,32 +211,38 @@
 
     @media (max-width: 520px) {
       .shell { padding-inline: .82rem; }
-      .app-header { flex-direction: column; gap: .55rem; }
+      .app-header { gap: .3rem; }
       .subtitle { display: none; }
       .tabs { grid-template-columns: repeat(3, 1fr); gap: .36rem; }
       .tab { font-size: .78rem; min-height: 40px; }
+      .top-controls { gap: .35rem; }
+      .top-pill, .top-button { padding-inline: .38rem; font-size: .78rem; }
+      .progress-button { font-size: .88rem; }
       .settings-panel { margin-bottom: .62rem; }
       .card-body { padding: .9rem; }
     }
   </style>
 </head>
-<body class="theme-daily">
+<body class="theme-bridge">
   <main class="shell">
     <header class="app-header">
       <div>
         <p class="eyebrow">JFT-Basic / SSW / Work-in-Japan</p>
         <h1>Stage 1B Practical Japanese</h1>
-        <p class="subtitle">Indonesian-first validation cards with English fallback. Text-only audio-ready cards for now.</p>
+        <p class="subtitle">Practical Japanese for Indonesian learners, with English fallback.</p>
       </div>
-      <span class="pill" id="cardCount">Loading</span>
     </header>
+
+    <section class="top-controls" aria-label="App summary and sections">
+      <span class="pill top-pill" id="cardCount">Loading</span>
+      <button class="top-button progress-button" data-view="progress" id="progressNavBtn" type="button">Progress</button>
+      <button class="top-button top-pill" data-view="about" id="aboutNavBtn" type="button">About</button>
+    </section>
 
     <nav class="tabs" aria-label="Primary sections">
       <button class="tab active" data-view="learn" type="button">Learn</button>
       <button class="tab" data-view="review" type="button">Review</button>
       <button class="tab" data-view="browse" type="button">Browse</button>
-      <button class="tab" data-view="progress" type="button">Progress</button>
-      <button class="tab" data-view="about" type="button">About</button>
     </nav>
 
     <details class="settings-panel panel" id="studyToolbar">
@@ -246,10 +261,9 @@
         </div>
         <div class="toolbar-row">
           <select id="themeSelect" aria-label="Theme selector">
-            <option value="daily">Daily Japan</option>
-            <option value="work">Work & Safety</option>
-            <option value="soft">Soft Japan</option>
-            <option value="clean">Clean Focus</option>
+            <option value="bridge">Bridge</option>
+            <option value="neon">Neon City</option>
+            <option value="clean">Clean</option>
           </select>
           <button type="button" id="romajiToggle">Romaji: On</button>
           <button type="button" id="englishToggle">English: On</button>
@@ -304,10 +318,10 @@
     </section>
 
     <section id="aboutView" class="panel about" hidden>
-      <h2>About / Exam alignment</h2>
-      <p>This Stage 1B sample validates a practical Japanese card experience for Indonesian learners preparing for JFT-Basic / SSW / Work-in-Japan situations.</p>
-      <p>The content is original draft material. Public JFT, Irodori/JF Can-do, and SSW materials are used only as structural/domain references, not copied learner-facing text.</p>
-      <p>No audio, payment, login, Google Drive sync, or paid locking is included in this vertical slice.</p>
+      <h2>About this app</h2>
+      <p>This app helps Indonesian learners build practical Japanese for JFT-Basic, SSW, and everyday work-life situations in Japan.</p>
+      <p>Cards focus on useful meanings, readings, short phrases, signs, listening-ready sentences, and small information-search tasks.</p>
+      <p>All learner-facing examples are original. Public exam and Can-do information is used only to guide level, domain, and task design; official questions and textbook text are not copied.</p>
     </section>
   </main>
 
@@ -323,6 +337,13 @@
       listening_ready: 'Listening-ready',
       information_search_mini: 'Information search'
     };
+    const TASK_LABELS = {
+      recognition: 'Task: Meaning',
+      production: 'Task: Say in Japanese',
+      kanji_sign_reading: 'Task: Reading',
+      listening_ready: 'Task: Listening',
+      information_search_mini: 'Task: Find information'
+    };
     const SECTION_LABELS = {
       script_vocabulary: 'Script & Vocabulary',
       conversation_expression: 'Conversation & Expression',
@@ -330,11 +351,14 @@
       reading_comprehension: 'Reading',
       ssw_workplace_overlay: 'SSW Workplace'
     };
-    const THEME_LABELS = { daily: 'Daily Japan', work: 'Work & Safety', soft: 'Soft Japan', clean: 'Clean Focus' };
+    const THEME_LABELS = { bridge: 'Bridge', neon: 'Neon City', clean: 'Clean' };
+    const THEME_ALIASES = { daily: 'bridge', work: 'bridge', soft: 'bridge' };
 
     const els = {
       cardCount: document.getElementById('cardCount'),
       tabs: [...document.querySelectorAll('.tab')],
+      progressNavBtn: document.getElementById('progressNavBtn'),
+      aboutNavBtn: document.getElementById('aboutNavBtn'),
       studyToolbar: document.getElementById('studyToolbar'),
       settingsSummary: document.getElementById('settingsSummary'),
       learnView: document.getElementById('learnView'),
@@ -371,7 +395,7 @@
     let view = 'learn';
     let showBack = false;
     let appState = { currentId: null, progress: {} };
-    let ui = { theme: 'daily', showRomaji: true, showEnglish: true, mode: 'all', section: 'all' };
+    let ui = { theme: 'bridge', showRomaji: true, showEnglish: true, mode: 'all', section: 'all' };
 
     function escapeHtml(value) {
       return String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
@@ -385,17 +409,19 @@
 
     function loadUi() {
       try { ui = { ...ui, ...JSON.parse(localStorage.getItem(UI_KEY) || '{}') }; } catch {}
+      ui.theme = THEME_ALIASES[ui.theme] || ui.theme || 'bridge';
       applyUi();
     }
     function saveUi() { localStorage.setItem(UI_KEY, JSON.stringify(ui)); }
     function applyUi() {
-      document.body.className = `theme-${ui.theme || 'daily'}`;
-      els.themeSelect.value = ui.theme || 'daily';
+      ui.theme = THEME_ALIASES[ui.theme] || ui.theme || 'bridge';
+      document.body.className = `theme-${ui.theme}${showBack && (view === 'learn' || view === 'review') ? ' answer-shown' : ''}`;
+      els.themeSelect.value = ui.theme;
       els.romajiToggle.textContent = `Romaji: ${ui.showRomaji ? 'On' : 'Off'}`;
       els.englishToggle.textContent = `English: ${ui.showEnglish ? 'On' : 'Off'}`;
       els.modeFilter.value = ui.mode || 'all';
       els.sectionFilter.value = ui.section || 'all';
-      els.settingsSummary.textContent = `${ui.mode === 'all' ? 'All modes' : MODE_LABELS[ui.mode] || ui.mode} · ${ui.section === 'all' ? 'All sections' : SECTION_LABELS[ui.section] || ui.section} · ${THEME_LABELS[ui.theme] || 'Daily Japan'}`;
+      els.settingsSummary.textContent = `${ui.mode === 'all' ? 'All modes' : MODE_LABELS[ui.mode] || ui.mode} · ${ui.section === 'all' ? 'All sections' : SECTION_LABELS[ui.section] || ui.section} · ${THEME_LABELS[ui.theme] || 'Bridge'}`;
     }
     function closeSettingsAndReturnToCard() {
       if (view === 'learn' || view === 'review') {
@@ -422,9 +448,21 @@
     function filteredCards() {
       return cards.filter(card => (ui.mode === 'all' || card.mode === ui.mode) && (ui.section === 'all' || card.jft_section === ui.section));
     }
-    function currentCard() { return cards.find(card => card.id === appState.currentId) || filteredCards()[0] || cards[0] || null; }
-    function selectFirstAvailable() {
+    function reviewCards() {
       const list = filteredCards();
+      const due = list.filter(card => ['learning', 'review'].includes(stateFor(card.id)));
+      if (due.length) return due;
+      return list.filter(card => stateFor(card.id) === 'mastered');
+    }
+    function activeStudyCards() {
+      return view === 'review' ? reviewCards() : filteredCards();
+    }
+    function currentCard() {
+      const list = activeStudyCards();
+      return list.find(card => card.id === appState.currentId) || list[0] || null;
+    }
+    function selectFirstAvailable() {
+      const list = activeStudyCards();
       if (!list.length) { appState.currentId = null; return; }
       if (!list.some(card => card.id === appState.currentId)) appState.currentId = list[0].id;
     }
@@ -447,6 +485,8 @@
     }
     function renderNavigation() {
       els.tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.view === view));
+      els.progressNavBtn.classList.toggle('active', view === 'progress');
+      els.aboutNavBtn.classList.toggle('active', view === 'about');
       els.learnView.hidden = !(view === 'learn' || view === 'review');
       els.studyToolbar.hidden = !(view === 'learn' || view === 'review' || view === 'browse');
       els.browseView.hidden = view !== 'browse';
@@ -464,11 +504,14 @@
 
     function renderCard(backVisible) {
       const card = currentCard();
-      const list = filteredCards();
+      const list = activeStudyCards();
       if (!card) {
-        els.cardPosition.textContent = 'Card 0/0';
-        els.cardStatus.textContent = 'No cards';
-        els.frontFace.innerHTML = '<h2 class="target">No cards match this filter.</h2>';
+        const isReview = view === 'review';
+        els.cardPosition.textContent = isReview ? 'Review' : 'Card 0/0';
+        els.cardStatus.textContent = isReview ? 'Empty' : 'No cards';
+        els.frontFace.innerHTML = isReview
+          ? '<div class="empty-state"><h2>No review cards yet.</h2><p>Study in Learn first. Cards you mark Again, Good, or Easy will appear here for review.</p></div>'
+          : '<div class="empty-state"><h2>No cards match this filter.</h2><p>Try changing the mode or section filter.</p></div>';
         els.backFace.hidden = true;
         setStudyButtons(false, false);
         return;
@@ -495,45 +538,54 @@
       const visible = [MODE_LABELS[card.mode] || card.mode, SECTION_LABELS[card.jft_section] || card.jft_section, humanize(card.scenario)].filter(Boolean).slice(0, 3);
       return `<div class="tags">${visible.map(x => `<span class="tag">${escapeHtml(x)}</span>`).join('')}</div>`;
     }
+    function taskLabel(card) {
+      return `<div class="task-label">${escapeHtml(TASK_LABELS[card.mode] || 'Task')}</div>`;
+    }
     function romaji(card) { return ui.showRomaji && card.romaji ? `<p class="romaji">${escapeHtml(card.romaji)}</p>` : ''; }
     function english(value, cls = 'meaning-secondary') { return ui.showEnglish && value ? `<p class="${cls}">${escapeHtml(value)}</p>` : ''; }
     function reading(card) { return card.reading ? `<p class="reading">${escapeHtml(card.reading)}</p>` : ''; }
 
     function renderFrontReference(card) {
       if (card.mode === 'production') {
-        return `<div class="front-reference"><p class="prompt-main">${escapeHtml(promptText(card, 'id') || meaning(card, 'id'))}</p>${english(promptText(card, 'en'))}</div>`;
+        return `<div class="front-reference">${taskLabel(card)}<p class="prompt-main">${escapeHtml(promptText(card, 'id') || meaning(card, 'id'))}</p>${english(promptText(card, 'en'))}</div>`;
       }
       if (card.mode === 'information_search_mini') {
-        return `<div class="front-reference"><div class="notice-box">${escapeHtml(card.target)}</div></div>`;
+        return `<div class="front-reference">${taskLabel(card)}<div class="notice-box">${escapeHtml(card.target)}</div></div>`;
       }
-      return `<div class="front-reference"><h2 class="target${card.mode === 'kanji_sign_reading' ? ' sign' : ''}">${escapeHtml(card.target)}</h2>${reading(card)}${romaji(card)}${audioChip(card)}</div>`;
+      if (card.mode === 'kanji_sign_reading' || card.mode === 'listening_ready') {
+        return `<div class="front-reference">${taskLabel(card)}<h2 class="target${card.mode === 'kanji_sign_reading' ? ' sign' : ''}">${escapeHtml(card.target)}</h2>${audioChip(card)}</div>`;
+      }
+      return `<div class="front-reference">${taskLabel(card)}<h2 class="target">${escapeHtml(card.target)}</h2>${reading(card)}${romaji(card)}${audioChip(card)}</div>`;
     }
     function renderFront(card) {
       if (card.mode === 'production') {
-        return `<p class="prompt-main">${escapeHtml(promptText(card, 'id') || meaning(card, 'id'))}</p>${english(promptText(card, 'en'))}${badges(card)}`;
+        return `${taskLabel(card)}<p class="prompt-main">${escapeHtml(promptText(card, 'id') || meaning(card, 'id'))}</p>${english(promptText(card, 'en'))}${badges(card)}`;
       }
       if (card.mode === 'kanji_sign_reading') {
-        return `<h2 class="target sign">${escapeHtml(card.target)}</h2>${badges(card)}`;
+        return `${taskLabel(card)}<h2 class="target sign">${escapeHtml(card.target)}</h2>${badges(card)}`;
       }
       if (card.mode === 'listening_ready') {
-        return `<h2 class="target">${escapeHtml(card.target)}</h2>${audioChip(card)}${badges(card)}`;
+        return `${taskLabel(card)}<h2 class="target">${escapeHtml(card.target)}</h2>${audioChip(card)}${badges(card)}`;
       }
       if (card.mode === 'information_search_mini') {
-        return `<div class="notice-box">${escapeHtml(card.target)}</div><div class="question-box"><strong>Question</strong><p class="prompt-main" style="font-size:1.08rem">${escapeHtml(promptText(card, 'id'))}</p>${english(promptText(card, 'en'))}</div>${badges(card)}`;
+        return `${taskLabel(card)}<div class="notice-box">${escapeHtml(card.target)}</div><div class="question-box"><strong>Question</strong><p class="prompt-main" style="font-size:1.08rem">${escapeHtml(promptText(card, 'id'))}</p>${english(promptText(card, 'en'))}</div>${badges(card)}`;
       }
-      return `<h2 class="target">${escapeHtml(card.target)}</h2>${reading(card)}${romaji(card)}${audioChip(card)}${badges(card)}`;
+      return `${taskLabel(card)}<h2 class="target">${escapeHtml(card.target)}</h2>${reading(card)}${romaji(card)}${audioChip(card)}${badges(card)}`;
     }
     function renderBack(card) {
       const jaAnswer = answer(card, 'ja') || card.target;
       const idAnswer = answer(card, 'id') || meaning(card, 'id');
       const enAnswer = answer(card, 'en') || meaning(card, 'en');
       if (card.mode === 'information_search_mini') {
-        return `<div class="answer-box"><p class="meaning-id">${escapeHtml(jaAnswer || enAnswer)}</p>${english(enAnswer)}</div>${reading(card)}${romaji(card)}${supportBlock(card)}`;
+        return `<div class="answer-box"><p class="meaning-id">${escapeHtml(jaAnswer || enAnswer)}</p>${english(enAnswer)}</div>${usageNote(card)}`;
       }
       if (card.mode === 'production') {
         return `<h2 class="target">${escapeHtml(jaAnswer)}</h2>${reading(card)}${romaji(card)}${audioChip(card)}<p class="meaning-id">${escapeHtml(idAnswer)}</p>${english(enAnswer)}${supportBlock(card)}`;
       }
-      return `<p class="meaning-id">${escapeHtml(meaning(card, 'id'))}</p>${english(meaning(card, 'en'))}${reading(card)}${romaji(card)}${supportBlock(card)}`;
+      if (card.mode === 'kanji_sign_reading' || card.mode === 'listening_ready') {
+        return `${reading(card)}${romaji(card)}<p class="meaning-id">${escapeHtml(meaning(card, 'id'))}</p>${english(meaning(card, 'en'))}${supportBlock(card)}`;
+      }
+      return `<p class="meaning-id">${escapeHtml(meaning(card, 'id'))}</p>${english(meaning(card, 'en'))}${supportBlock(card)}`;
     }
     function supportBlock(card) {
       const exJa = example(card, 'ja');
@@ -541,6 +593,10 @@
       const exEn = example(card, 'en');
       const note = field(card.usage_note && (card.usage_note.id || card.usage_note.en || card.usage_note.ja));
       return `${exJa ? `<p class="example-ja">${escapeHtml(exJa)}</p>` : ''}${exId ? `<p class="meaning-secondary">${escapeHtml(exId)}</p>` : ''}${english(exEn)}${note ? `<p class="note">${escapeHtml(note)}</p>` : ''}`;
+    }
+    function usageNote(card) {
+      const note = field(card.usage_note && (card.usage_note.id || card.usage_note.en || card.usage_note.ja));
+      return note ? `<p class="note">${escapeHtml(note)}</p>` : '';
     }
 
     function renderBrowse() {
@@ -563,7 +619,7 @@
       setStatusLine(`${card.id} marked ${kind}.`);
     }
     function moveNext() {
-      const list = filteredCards();
+      const list = activeStudyCards();
       if (!list.length) return;
       const index = Math.max(0, list.findIndex(card => card.id === appState.currentId));
       appState.currentId = list[(index + 1) % list.length].id;
@@ -628,16 +684,25 @@
       }
     }
 
-    els.tabs.forEach(tab => tab.addEventListener('click', () => { view = tab.dataset.view; render(); if (view === 'learn' || view === 'review') requestAnimationFrame(() => els.learnView.scrollIntoView({ behavior: 'smooth', block: 'start' })); }));
+    function setView(nextView, shouldScroll = true) {
+      view = nextView;
+      showBack = false;
+      render();
+      if (shouldScroll && (view === 'learn' || view === 'review')) requestAnimationFrame(() => els.learnView.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    }
+
+    els.tabs.forEach(tab => tab.addEventListener('click', () => setView(tab.dataset.view)));
+    els.progressNavBtn.addEventListener('click', () => setView('progress', false));
+    els.aboutNavBtn.addEventListener('click', () => setView('about', false));
     els.showAnswerBtn.addEventListener('click', () => { showBack = true; render(); requestAnimationFrame(() => els.learnView.scrollIntoView({ behavior: 'smooth', block: 'start' })); });
     els.againBtn.addEventListener('click', () => gradeCurrent('again'));
     els.goodBtn.addEventListener('click', () => gradeCurrent('good'));
     els.easyBtn.addEventListener('click', () => gradeCurrent('easy'));
     els.modeFilter.addEventListener('change', event => { ui.mode = event.target.value; showBack = false; saveUi(); render(); closeSettingsAndReturnToCard(); });
     els.sectionFilter.addEventListener('change', event => { ui.section = event.target.value; showBack = false; saveUi(); render(); closeSettingsAndReturnToCard(); });
-    els.themeSelect.addEventListener('change', event => { ui.theme = event.target.value; saveUi(); render(); closeSettingsAndReturnToCard(); });
-    els.romajiToggle.addEventListener('click', () => { ui.showRomaji = !ui.showRomaji; saveUi(); render(); closeSettingsAndReturnToCard(); });
-    els.englishToggle.addEventListener('click', () => { ui.showEnglish = !ui.showEnglish; saveUi(); render(); closeSettingsAndReturnToCard(); });
+    els.themeSelect.addEventListener('change', event => { ui.theme = event.target.value; saveUi(); render(); });
+    els.romajiToggle.addEventListener('click', () => { ui.showRomaji = !ui.showRomaji; saveUi(); render(); });
+    els.englishToggle.addEventListener('click', () => { ui.showEnglish = !ui.showEnglish; saveUi(); render(); });
     els.searchInput.addEventListener('input', renderBrowse);
     els.browseList.addEventListener('click', event => { const row = event.target.closest('[data-card-id]'); if (!row) return; appState.currentId = row.dataset.cardId; view = 'learn'; showBack = false; saveProgress(); render(); requestAnimationFrame(() => els.learnView.scrollIntoView({ behavior: 'smooth', block: 'start' })); });
     els.exportBtn.addEventListener('click', exportProgress);

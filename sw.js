@@ -1,7 +1,8 @@
-const CACHE_NAME = 'jft-ssw-stage1b-v4';
+const CACHE_NAME = 'jft-ssw-stage1b-v5';
 const APP_SHELL = [
   './',
   './index.html',
+  './app-latest.html',
   './manifest.webmanifest',
   './data/deck_manifest.json',
   './data/cards.stage1b.id.sample.json'
@@ -57,10 +58,11 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
   const isNavigation = request.mode === 'navigate';
-  const isHtml = url.pathname.endsWith('/') || url.pathname.endsWith('/index.html');
+  const isHtml = url.pathname.endsWith('/') || url.pathname.endsWith('.html');
 
   if (isNavigation || isHtml) {
-    event.respondWith(networkFirst(request, './index.html'));
+    const fallbackUrl = url.pathname.endsWith('/app-latest.html') ? './app-latest.html' : './index.html';
+    event.respondWith(networkFirst(request, fallbackUrl));
     return;
   }
 
