@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jft-ssw-stage1b-v2';
+const CACHE_NAME = 'jft-ssw-stage1b-v3';
 const APP_SHELL = [
   './',
   './index.html',
