@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ts-fsrs Browser PoC｜Scheduler Adapter Test</title>
+  <style>
+    :root { color-scheme: light; --bg:#f5f7f6; --ink:#16211d; --muted:#60706a; --line:#d7e1dd; --primary:#24594c; --surface:#ffffff; --warn:#8a5a00; --bad:#9b2d2d; --good:#216d4d; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--ink); line-height:1.55; }
+    main { max-width:980px; margin:0 auto; padding:1rem; }
+    h1 { margin:.3rem 0 .2rem; font-size:clamp(1.45rem,4vw,2.1rem); }
+    h2 { margin:1.2rem 0 .45rem; font-size:1.1rem; }
+    p { margin:.45rem 0; }
+    .card { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:1rem; margin:.75rem 0; box-shadow:0 12px 32px rgba(20,40,34,.08); }
+    .note { color:var(--muted); font-size:.94rem; }
+    .warn { color:var(--warn); font-weight:800; }
+    .ok { color:var(--good); font-weight:800; }
+    .bad { color:var(--bad); font-weight:800; }
+    .row { display:flex; flex-wrap:wrap; gap:.55rem; align-items:center; }
+    button { min-height:42px; padding:.62rem .85rem; border-radius:999px; border:1px solid var(--line); background:#fff; color:var(--ink); font-weight:800; cursor:pointer; }
+    button.primary { background:var(--primary); color:#fff; }
+    button:disabled { opacity:.55; cursor:not-allowed; }
+    pre { margin:.6rem 0 0; padding:.85rem; overflow:auto; border-radius:14px; background:#101816; color:#eaf4ef; font-size:.82rem; line-height:1.45; }
+    code { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:.6rem; }
+    .mini { border:1px solid var(--line); border-radius:14px; padding:.72rem; background:#fbfdfc; }
+    .mini strong { display:block; margin-bottom:.25rem; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>ts-fsrs Browser PoC</h1>
+  <p class="note">Purpose: verify whether <code>ts-fsrs</code> can run in a browser through a small Scheduler Adapter boundary. This is not production app code.</p>
+
+  <section class="card">
+    <h2>Test status</h2>
+    <p id="status" class="warn">Loading module...</p>
+    <div class="row">
+      <button id="init" class="primary" disabled>1. Initialize FSRS card</button>
+      <button id="preview" disabled>2. Preview four ratings</button>
+      <button id="gradeGood" disabled>3. Apply Good</button>
+      <button id="saveReload" disabled>4. Save + reload JSON</button>
+      <button id="reset">Reset local test data</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Preview outcomes</h2>
+    <div id="previewGrid" class="grid"></div>
+  </section>
+
+  <section class="card">
+    <h2>Project-shaped progress</h2>
+    <p class="note">The UI must not depend on FSRS internals. FSRS-specific data stays inside <code>scheduler_state.fsrs_card</code>.</p>
+    <pre id="projectProgress">{}</pre>
+  </section>
+
+  <section class="card">
+    <h2>Raw adapter log</h2>
+    <pre id="rawLog">[]</pre>
+  </section>
+</main>
+
+<script type="module">
+  import { createEmptyCard, fsrs, Rating } from 'https://cdn.jsdelivr.net/npm/ts-fsrs@5.4.0/+esm';
+
+  const STORAGE_KEY = 'jft-ts-fsrs-browser-poc-progress-v1';
+  const now = () => new Date();
+
+  const ratingLabels = [
+    ['again', Rating.Again],
+    ['hard', Rating.Hard],
+    ['good', Rating.Good],
+    ['easy', Rating.Easy],
+  ];
+
+  const els = {
+    status: document.getElementById('status'),
+    init: document.getElementById('init'),
+    preview: document.getElementById('preview'),
+    gradeGood: document.getElementById('gradeGood'),
+    saveReload: document.getElementById('saveReload'),
+    reset: document.getElementById('reset'),
+    previewGrid: document.getElementById('previewGrid'),
+    projectProgress: document.getElementById('projectProgress'),
+    rawLog: document.getElementById('rawLog'),
+  };
+
+  const scheduler = fsrs({
+    request_retention: 0.9,
+    maximum_interval: 36500,
+    enable_fuzz: false,
+    enable_short_term: true,
+    learning_steps: ['1m', '10m'],
+    relearning_steps: ['10m'],
+  });
+
+  let progress = loadProgress() ?? createEmptyProjectProgress();
+  let rawLog = [];
+
+  function createEmptyProjectProgress() {
+    return {
+      schema_version: 1,
+      engine_family: 'jft_retention',
+      engine_adapter_version: 'poc-0.1.0',
+      scheduler_backend: 'ts-fsrs',
+      scheduler_profile: 'ts-fsrs-5.4.0-request-retention-0.90-poc',
+      deck_id: 'jft_ssw_work_japan',
+      cards: {},
+      review_log: [],
+    };
+  }
+
+  function createProjectCardState() {
+    const fsrsCard = createEmptyCard();
+    return {
+      card_id: 'poc-stage1b-work-001-recognition',
+      note_id: 'poc-stage1b-work-001',
+      mode: 'recognition',
+      status: 'new',
+      last_reviewed_at: null,
+      due_at: toIsoOrNull(fsrsCard.due),
+      reviews: 0,
+      lapses: 0,
+      correct_streak: 0,
+      last_grade: null,
+      scheduler_backend: 'ts-fsrs',
+      scheduler_state: {
+        fsrs_card: serializeFsrsCard(fsrsCard),
+      },
+    };
+  }
+
+  function serializeFsrsCard(card) {
+    return JSON.parse(JSON.stringify(card));
+  }
+
+  function hydrateFsrsCard(card) {
+    if (!card) return createEmptyCard();
+    return {
+      ...card,
+      due: card.due ? new Date(card.due) : card.due,
+      last_review: card.last_review ? new Date(card.last_review) : card.last_review,
+    };
+  }
+
+  function toIsoOrNull(value) {
+    if (!value) return null;
+    const d = value instanceof Date ? value : new Date(value);
+    return Number.isNaN(d.getTime()) ? null : d.toISOString();
+  }
+
+  function setStatus(message, cls = 'ok') {
+    els.status.textContent = message;
+    els.status.className = cls;
+  }
+
+  function log(entry) {
+    rawLog.push({ at: new Date().toISOString(), ...entry });
+    els.rawLog.textContent = JSON.stringify(rawLog, null, 2);
+  }
+
+  function loadProgress() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (error) {
+      console.warn(error);
+      return null;
+    }
+  }
+
+  function saveProgress() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  }
+
+  function getPocCardState() {
+    return progress.cards['poc-stage1b-work-001-recognition'] ?? null;
+  }
+
+  function render() {
+    els.projectProgress.textContent = JSON.stringify(progress, null, 2);
+    const cardState = getPocCardState();
+    els.preview.disabled = !cardState;
+    els.gradeGood.disabled = !cardState;
+    els.saveReload.disabled = !cardState;
+  }
+
+  function previewOutcomes() {
+    const cardState = getPocCardState();
+    if (!cardState) return;
+    const fsrsCard = hydrateFsrsCard(cardState.scheduler_state.fsrs_card);
+    const preview = scheduler.repeat(fsrsCard, now());
+    els.previewGrid.innerHTML = '';
+    for (const [label, rating] of ratingLabels) {
+      const outcome = preview[rating];
+      const item = document.createElement('div');
+      item.className = 'mini';
+      item.innerHTML = `<strong>${label}</strong><code>due:</code> ${toIsoOrNull(outcome.card.due) ?? 'null'}<br><code>state:</code> ${String(outcome.card.state)}`;
+      els.previewGrid.appendChild(item);
+    }
+    log({ action: 'preview', ratings: ratingLabels.map(([label]) => label) });
+    setStatus('Preview succeeded. Four rating outcomes were generated.', 'ok');
+  }
+
+  function applyGrade(cardState, projectGrade, fsrsRating) {
+    const fsrsCard = hydrateFsrsCard(cardState.scheduler_state.fsrs_card);
+    const previousDue = cardState.due_at;
+    const previousStatus = cardState.status;
+    const reviewedAt = now();
+    const result = scheduler.next(fsrsCard, reviewedAt, fsrsRating);
+
+    const nextCardState = {
+      ...cardState,
+      status: mapFsrsStateToProjectStatus(result.card.state),
+      last_reviewed_at: reviewedAt.toISOString(),
+      due_at: toIsoOrNull(result.card.due),
+      reviews: cardState.reviews + 1,
+      lapses: projectGrade === 'again' ? cardState.lapses + 1 : cardState.lapses,
+      correct_streak: projectGrade === 'again' ? 0 : cardState.correct_streak + 1,
+      last_grade: projectGrade,
+      scheduler_state: {
+        fsrs_card: serializeFsrsCard(result.card),
+      },
+    };
+
+    const reviewEvent = {
+      event_id: crypto.randomUUID ? crypto.randomUUID() : `event-${Date.now()}`,
+      session_id: 'poc-session',
+      reviewed_at: reviewedAt.toISOString(),
+      card_id: cardState.card_id,
+      note_id: cardState.note_id,
+      mode: cardState.mode,
+      grade: projectGrade,
+      response_ms: null,
+      audio_played_before_answer: false,
+      audio_replay_count: 0,
+      previous_due_at: previousDue,
+      new_due_at: nextCardState.due_at,
+      previous_status: previousStatus,
+      new_status: nextCardState.status,
+      scheduler_backend: 'ts-fsrs',
+      scheduler_profile: progress.scheduler_profile,
+      backend_log: serializeFsrsCard(result.log),
+    };
+
+    progress.cards[cardState.card_id] = nextCardState;
+    progress.review_log.push(reviewEvent);
+    saveProgress();
+    log({ action: 'grade', grade: projectGrade, previousDue, newDue: nextCardState.due_at });
+    render();
+    setStatus(`Applied ${projectGrade}. Project-shaped progress and review_log were updated.`, 'ok');
+  }
+
+  function mapFsrsStateToProjectStatus(fsrsState) {
+    const text = String(fsrsState).toLowerCase();
+    if (text.includes('new') || fsrsState === 0) return 'new';
+    if (text.includes('learning') || fsrsState === 1) return 'learning';
+    if (text.includes('review') || fsrsState === 2) return 'review';
+    if (text.includes('relearning') || fsrsState === 3) return 'relearning';
+    return 'review';
+  }
+
+  els.init.addEventListener('click', () => {
+    progress = createEmptyProjectProgress();
+    const cardState = createProjectCardState();
+    progress.cards[cardState.card_id] = cardState;
+    saveProgress();
+    els.previewGrid.innerHTML = '';
+    rawLog = [];
+    log({ action: 'init', card_id: cardState.card_id });
+    render();
+    setStatus('Initialized one project card with isolated fsrs_card scheduler_state.', 'ok');
+  });
+
+  els.preview.addEventListener('click', previewOutcomes);
+
+  els.gradeGood.addEventListener('click', () => {
+    const cardState = getPocCardState();
+    if (cardState) applyGrade(cardState, 'good', Rating.Good);
+  });
+
+  els.saveReload.addEventListener('click', () => {
+    saveProgress();
+    const reloaded = loadProgress();
+    progress = reloaded ?? createEmptyProjectProgress();
+    render();
+    log({ action: 'save_reload', ok: !!reloaded });
+    setStatus('Saved to localStorage and reloaded JSON into project progress shape.', 'ok');
+  });
+
+  els.reset.addEventListener('click', () => {
+    localStorage.removeItem(STORAGE_KEY);
+    progress = createEmptyProjectProgress();
+    rawLog = [];
+    els.previewGrid.innerHTML = '';
+    render();
+    els.rawLog.textContent = '[]';
+    setStatus('Reset complete. Initialize again to test.', 'warn');
+  });
+
+  els.init.disabled = false;
+  setStatus('Module loaded. Ready for browser PoC.', 'ok');
+  render();
+</script>
+</body>
+</html>
