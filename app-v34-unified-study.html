@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#31594f">
+<title>JFT/SSW Unified Study Prototype</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{color-scheme:light;--bg:#eaf4ef;--bg2:#fff1dd;--surface:rgba(255,255,255,.94);--solid:#fff;--ink:#14211d;--muted:#63736d;--line:rgba(30,64,55,.16);--line2:rgba(30,64,55,.34);--primary:#214e43;--primary2:#2f6f5f;--accent:#c36a35;--danger:#a64242;--good:#a06e1d;--easy:#24724f;--shadow:0 20px 55px rgba(19,50,42,.16);--radius:22px;--op:.42;--art:linear-gradient(180deg,rgba(247,252,255,.86) 0 30%,rgba(255,255,255,.48) 54%,rgba(255,255,255,.18)),radial-gradient(ellipse at 42% 80%,rgba(203,64,42,.38) 0 5%,rgba(202,66,43,.28) 6% 9%,transparent 10%),linear-gradient(0deg,rgba(77,132,133,.23) 0 20%,transparent 21%)}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;line-height:1.5;background:radial-gradient(circle at 14% 14%,rgba(255,255,255,.72),transparent 28%),radial-gradient(circle at 82% 18%,rgba(255,205,160,.34),transparent 32%),linear-gradient(140deg,var(--bg),var(--bg2));background-attachment:fixed}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:var(--op);background-image:var(--art);background-size:cover;background-position:center bottom;z-index:-1}body.theme-bridge{--bg:#eaf4ef;--bg2:#fff1dd;--op:.42;--art:linear-gradient(180deg,rgba(247,252,255,.86) 0 30%,rgba(255,255,255,.48) 54%,rgba(255,255,255,.18)),radial-gradient(ellipse at 42% 80%,rgba(203,64,42,.38) 0 5%,rgba(202,66,43,.28) 6% 9%,transparent 10%),radial-gradient(ellipse at 48% 86%,transparent 0 18%,rgba(75,58,45,.22) 19% 20%,transparent 21%),linear-gradient(118deg,transparent 0 48%,rgba(190,53,43,.38) 49% 51%,transparent 52%),linear-gradient(64deg,transparent 0 48%,rgba(190,53,43,.32) 49% 51%,transparent 52%),linear-gradient(0deg,rgba(77,132,133,.23) 0 20%,transparent 21%),repeating-linear-gradient(90deg,transparent 0 54px,rgba(71,103,93,.10) 55px 57px,transparent 58px 118px)}body.theme-neon{--bg:#141d2c;--bg2:#382333;--surface:rgba(255,255,255,.90);--op:.36;--art:linear-gradient(180deg,rgba(8,15,28,.36),rgba(255,255,255,.18) 64%,rgba(255,255,255,.30)),radial-gradient(circle at 74% 34%,rgba(255,66,116,.55),transparent 10%),radial-gradient(circle at 27% 30%,rgba(64,172,255,.48),transparent 12%),linear-gradient(112deg,transparent 0 45%,rgba(255,190,67,.28) 46% 48%,transparent 49%),repeating-linear-gradient(90deg,rgba(5,14,30,.35) 0 38px,rgba(255,69,105,.22) 39px 41px,rgba(50,157,255,.18) 42px 45px,transparent 46px 82px),linear-gradient(0deg,rgba(45,75,96,.38) 0 24%,transparent 25%)}body.theme-clean{--bg:#f5f8f7;--bg2:#eef4f2;--op:.28;--art:linear-gradient(160deg,rgba(255,255,255,.88),rgba(255,255,255,.55)),radial-gradient(circle at 16% 22%,rgba(78,121,110,.12),transparent 24%),radial-gradient(circle at 80% 74%,rgba(196,130,77,.10),transparent 28%)}
+button,input,select,summary{font:inherit}button,select,.file-button,summary,input{min-height:46px;border:1px solid var(--line);border-radius:14px;padding:.72rem .92rem;background:var(--solid);color:var(--ink);font-weight:800}button,select,.file-button,summary{cursor:pointer;transition:transform .12s,border-color .12s,background .12s}button:hover,select:hover,.file-button:hover,summary:hover{transform:translateY(-1px);border-color:var(--primary2)}button:disabled{cursor:default;opacity:.58;transform:none}.shell{width:min(1040px,100%);margin:0 auto;padding:max(.82rem,env(safe-area-inset-top)) 1rem 1rem}.app-header{padding:.35rem 0 .55rem}.eyebrow{margin:0 0 .22rem;color:var(--primary2);font-size:.74rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase}h1{margin:0;font-size:clamp(1.34rem,4.8vw,2.3rem);line-height:1.08}.subtitle{margin:.3rem 0 0;max-width:42rem;color:var(--muted);font-weight:650}.pill{display:inline-flex;align-items:center;justify-content:center;gap:.35rem;min-height:38px;border-radius:999px;padding:.42rem .66rem;background:rgba(255,255,255,.76);border:1px solid var(--line);color:var(--primary);font-size:.82rem;font-weight:900;white-space:nowrap}.top-controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.45rem;margin:.18rem 0 .55rem}.top-controls .pill,.utility-tab{width:100%;min-height:42px;border-radius:999px}.utility-tab{background:rgba(255,255,255,.76);color:var(--primary);font-size:.86rem}.progress-link{font-weight:1000}.utility-tab.active,.tab.active{background:var(--primary);color:#fff}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;margin:.25rem 0 .72rem}.tab{min-height:42px;padding:.55rem .4rem;font-size:.86rem;background:rgba(255,255,255,.76)}.panel{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);backdrop-filter:blur(10px)}.settings-panel{margin-bottom:.72rem;overflow:hidden}.settings-panel summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:.75rem;border:0;border-radius:0;background:rgba(255,255,255,.78)}.settings-title{display:flex;flex-direction:column;gap:.05rem}.settings-title span{color:var(--muted);font-size:.8rem;font-weight:750}.toolbar{display:grid;gap:.55rem;padding:.72rem;border-top:1px solid var(--line)}.toolbar-row{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}.toolbar-row>*{flex:1 1 150px}.learn-view{scroll-margin-top:.65rem}.card-panel{overflow:hidden}.card-strip{display:flex;align-items:center;justify-content:space-between;gap:.65rem;padding:.75rem .8rem;background:rgba(33,78,67,.96);color:#fff}.card-strip .pill{min-height:32px;background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.18)}.card-body{padding:1rem}.task-label{display:inline-flex;align-items:center;margin:0 0 .55rem;padding:.22rem .55rem;border-radius:999px;background:rgba(47,111,95,.10);color:var(--primary2);font-size:.76rem;font-weight:1000;letter-spacing:.04em;text-transform:uppercase}.front-reference .task-label{margin-bottom:.36rem;font-size:.68rem}.target{margin:0;font-size:clamp(1.8rem,8vw,3.35rem);line-height:1.13;letter-spacing:.01em;overflow-wrap:anywhere}.target.sign{font-size:clamp(2.25rem,12vw,4.4rem);text-align:center;padding:.58rem 0}.prompt-main{margin:0;font-size:clamp(1.22rem,5.5vw,2.05rem);line-height:1.28;font-weight:900;overflow-wrap:anywhere}.prompt-sub,.meaning-secondary,.note{color:var(--muted)}.reading{margin:.6rem 0 0;color:var(--primary2);font-size:clamp(1.02rem,4vw,1.12rem);font-weight:850;overflow-wrap:anywhere}.romaji{margin:.24rem 0 0;color:var(--muted);font-size:clamp(.94rem,3.7vw,1.02rem);font-weight:650;overflow-wrap:anywhere}.meaning-id{margin:0;font-size:clamp(1.18rem,4.8vw,1.7rem);font-weight:900;color:var(--primary);overflow-wrap:anywhere}.meaning-secondary{margin:.28rem 0 0;font-size:clamp(1rem,3.8vw,1.08rem);line-height:1.55;overflow-wrap:anywhere}.example-box{margin:.78rem 0 0;padding:.72rem .78rem;border-radius:16px;background:rgba(255,255,255,.68);border:1px solid var(--line)}.example-ja{margin:0;font-size:1.1rem;font-weight:850;line-height:1.95;overflow-wrap:anywhere}.example-ja rt{font-size:.56em;color:var(--primary2);font-weight:900;letter-spacing:.02em}.example-kana{margin:.28rem 0 0;color:var(--muted);font-size:.94rem;font-weight:760;line-height:1.55}.note{margin:.65rem 0 0}.answer-divider{margin-top:.95rem;padding-top:.88rem;border-top:2px solid var(--line2)}.front-reference{padding-bottom:.15rem}.front-reference .target{font-size:clamp(1.15rem,5vw,1.7rem)}.front-reference .reading{margin-top:.28rem;font-size:.95rem}.front-reference .romaji{font-size:.86rem}.audio-chip{min-height:32px;margin-top:.55rem;padding:.25rem .55rem;border-radius:999px;font-size:.78rem;color:var(--muted);background:rgba(255,255,255,.62)}.notice-box{border:1px solid rgba(49,89,79,.16);border-radius:18px;padding:.85rem;background:rgba(255,255,255,.82);font-weight:850;white-space:pre-wrap;overflow-wrap:anywhere}.question-box{margin-top:.65rem;border-left:4px solid var(--accent);padding:.58rem .7rem;background:rgba(255,246,235,.82);border-radius:14px}.question-box strong{display:block;margin-bottom:.22rem}.answer-box{border-left:4px solid var(--easy);padding:.62rem .75rem;background:rgba(236,247,241,.92);border-radius:14px}.tags{display:flex;flex-wrap:wrap;gap:.36rem;margin-top:.72rem}.tag{border-radius:999px;padding:.23rem .5rem;background:#edf3f8;color:#294d71;font-size:.74rem;font-weight:900}.actions{margin:.75rem auto 0;max-width:430px}.primary{width:100%;background:var(--primary);color:#fff}.review-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.45rem}.review-actions button{min-height:54px;border-radius:999px;padding:.42rem .4rem;font-size:.92rem}.again{border-color:rgba(166,66,66,.34);color:var(--danger)}.good{border-color:rgba(160,110,29,.34);color:var(--good)}.easy{border-color:rgba(36,114,79,.34);color:var(--easy)}.status-line{min-height:1.4rem;margin:.6rem 0 0;color:var(--muted);font-size:.86rem;font-weight:750}.progress-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.65rem}.stat{padding:.85rem;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.76)}.stat strong{display:block;font-size:1.65rem;line-height:1}.stat span{color:var(--muted);font-weight:850}.list{display:grid;gap:.55rem}.row{display:grid;gap:.25rem;padding:.75rem;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.72);text-align:left}.row-title{font-weight:900;overflow-wrap:anywhere}.row-meta{color:var(--muted);font-size:.86rem;font-weight:750}.about{padding:1rem}.about h2{margin-top:0}.file-button input{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;clip-path:inset(50%)}[hidden]{display:none!important}@media(min-width:760px){.shell{padding:1.35rem}.toolbar{grid-template-columns:1fr 1fr;align-items:end}.card-body{padding:1.28rem}.progress-grid{grid-template-columns:repeat(4,1fr)}}@media(max-width:520px){.shell{padding-inline:.82rem}.subtitle{display:none}.top-controls,.tabs{gap:.36rem}.tab,.utility-tab{font-size:.78rem;min-height:40px}.settings-panel{margin-bottom:.62rem}.card-body{padding:.9rem}.top-controls .pill{font-size:.76rem}}
+
+/* Unified study prototype overrides */
+.unified-header{display:grid;grid-template-columns:1fr auto;gap:.8rem;align-items:start;padding:.25rem 0 .6rem}
+.unified-header h1{font-size:clamp(1.65rem,7vw,2.65rem)}
+.settings-gear{width:46px;height:46px;border-radius:999px;padding:0;font-size:1.22rem;background:rgba(255,255,255,.86);box-shadow:0 8px 24px rgba(19,50,42,.08)}
+.today-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;margin:.15rem 0 .72rem}
+.today-pill{border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.76);padding:.62rem .5rem;text-align:center;box-shadow:0 8px 24px rgba(19,50,42,.06)}
+.today-pill strong{display:block;font-size:1.35rem;line-height:1;color:var(--primary)}
+.today-pill span{display:block;margin-top:.16rem;color:var(--muted);font-size:.75rem;font-weight:900}
+.top-controls,.tabs{display:none!important}
+.settings-panel{margin:.65rem 0 .72rem}
+.settings-panel summary{border-radius:18px;background:rgba(255,255,255,.82)}
+.settings-title strong{font-size:1rem}.settings-title span{display:none}
+.toolbar{display:block}.settings-table{width:100%;border-collapse:separate;border-spacing:0 .44rem}.settings-table th,.settings-table td{text-align:left;padding:.62rem .7rem;background:rgba(255,255,255,.74);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.settings-table th{width:42%;color:var(--primary);border-left:1px solid var(--line);border-radius:14px 0 0 14px}.settings-table td{border-right:1px solid var(--line);border-radius:0 14px 14px 0}.settings-table select,.settings-table input,.settings-table button{width:100%;min-height:40px}
+.settings-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:.55rem}.settings-stat{padding:.65rem;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.72)}.settings-stat strong{display:block;font-size:1.2rem;color:var(--primary)}.settings-stat span{font-size:.75rem;color:var(--muted);font-weight:850}
+.engine-note{margin:.65rem 0 0;color:var(--muted);font-size:.86rem;font-weight:650}.footer-brand{margin:1rem 0 .2rem;text-align:center;color:var(--muted);font-size:.78rem;font-weight:800}.footer-brand strong{display:block;color:var(--primary2);font-size:.8rem;letter-spacing:.04em;text-transform:uppercase}
+.review-actions{grid-template-columns:repeat(4,minmax(0,1fr))!important}.review-actions button{font-size:.84rem}.target{font-size:clamp(2.05rem,10vw,3.7rem)}.prompt-main{font-size:clamp(1.34rem,6vw,2.18rem)}
+@media(max-width:520px){.today-strip{gap:.34rem}.today-pill{padding:.5rem .25rem}.today-pill strong{font-size:1.15rem}.today-pill span{font-size:.63rem}.review-actions{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:.3rem}.review-actions button{font-size:.75rem;padding:.35rem .18rem}.settings-table th,.settings-table td{display:block;width:100%;border:1px solid var(--line)}.settings-table th{border-bottom:0;border-radius:14px 14px 0 0}.settings-table td{border-radius:0 0 14px 14px}.settings-stats{grid-template-columns:repeat(2,1fr)}}
+
+</style>
+</head>
+<body class="theme-bridge">
+<main class="shell">
+<header class="unified-header">
+  <div>
+    <h1>Today’s Study</h1>
+    <p class="subtitle">Open and continue. New, review, and weak cards are mixed automatically.</p>
+  </div>
+  <button type="button" class="settings-gear" id="settingsGear" aria-label="Open settings">⚙</button>
+</header>
+<section class="today-strip" aria-label="Today summary">
+  <div class="today-pill"><strong id="todayNew">0</strong><span>New today</span></div>
+  <div class="today-pill"><strong id="todayReview">0</strong><span>Review</span></div>
+  <div class="today-pill"><strong id="todayWeak">0</strong><span>Learning / weak</span></div>
+</section>
+<nav class="top-controls" aria-label="Hidden utility sections" hidden><span class="pill" id="cardCount">Loading</span><button class="utility-tab progress-link" id="progressNavBtn" type="button">Progress</button><button class="utility-tab" id="aboutNavBtn" type="button">About</button></nav>
+<nav class="tabs" aria-label="Hidden study sections" hidden><button class="tab active" data-view="learn" type="button">Study</button><button class="tab" data-view="review" type="button">Review</button><button class="tab" data-view="browse" type="button">Browse</button></nav>
+<details class="settings-panel panel" id="studyToolbar">
+  <summary>
+    <span class="settings-title"><strong>⚙ Settings / Progress / About</strong><span id="settingsSummary"></span></span>
+    <span>▾</span>
+  </summary>
+  <section class="toolbar">
+    <table class="settings-table" aria-label="Study settings">
+      <tr><th>Mode</th><td><select id="modeFilter" aria-label="Mode filter"><option value="all">All modes</option></select></td></tr>
+      <tr><th>Section</th><td><select id="sectionFilter" aria-label="JFT section filter"><option value="all">All sections</option></select></td></tr>
+      <tr><th>Theme</th><td><select id="themeSelect" aria-label="Theme selector"><option value="bridge">Bridge</option><option value="neon">Neon City</option><option value="clean">Clean</option></select></td></tr>
+      <tr><th>New cards / day</th><td><input id="newLimitInput" type="number" min="1" max="100" style="width:4rem;" /></td></tr>
+      <tr><th>Romaji</th><td><button type="button" id="romajiToggle">Romaji: On</button></td></tr>
+      <tr><th>English</th><td><button type="button" id="englishToggle">English: On</button></td></tr>
+    </table>
+    <div class="settings-stats" aria-label="Progress summary">
+      <div class="settings-stat"><strong id="settingsTotalCards">0</strong><span>Total cards</span></div>
+      <div class="settings-stat"><strong id="settingsTodayCards">0</strong><span>Today queue</span></div>
+      <div class="settings-stat"><strong id="settingsEngine">SRS v1</strong><span>Engine</span></div>
+    </div>
+    <p class="engine-note">Queue order: due reviews and weak cards first, then today’s new cards. The engine currently records Again / Hard / Good / Easy and schedules the next review from that history.</p>
+  </section>
+</details>
+<section id="learnView" class="learn-view"><section class="card-panel panel" aria-live="polite"><div class="card-strip"><span class="pill" id="cardPosition">Card 0/0</span><span class="pill" id="cardStatus">New</span></div><article class="card-body"><div id="frontFace"></div><div class="answer-divider" id="backFace" hidden></div></article></section><nav class="actions" aria-label="Card actions"><button type="button" class="primary" id="showAnswerBtn" disabled>Show answer</button><div class="review-actions" id="reviewActions" hidden><button type="button" class="again" id="againBtn">Again</button><button type="button" class="good" id="goodBtn">Good</button><button type="button" class="easy" id="easyBtn">Easy</button></div></nav><p class="status-line" id="statusLine" role="status"></p></section>
+<section id="browseView" class="panel about" hidden><h2>Browse cards</h2><div class="toolbar-row" style="margin-bottom:.75rem"><input id="searchInput" type="search" placeholder="Search Japanese, Indonesian, English..." aria-label="Search cards"></div><div class="list" id="browseList"></div></section>
+<section id="progressView" class="panel about" hidden><h2>Progress</h2><div class="progress-grid"><div class="stat"><strong id="newCount">0</strong><span>New</span></div><div class="stat"><strong id="learningCount">0</strong><span>Learning</span></div><div class="stat"><strong id="reviewCount">0</strong><span>Review</span></div><div class="stat"><strong id="masteredCount">0</strong><span>Mastered</span></div></div><div class="toolbar-row" style="margin-top:.85rem"><button type="button" id="exportBtn" disabled>Export progress</button><label class="file-button" for="importInput">Import progress<input id="importInput" type="file" accept="application/json"></label><button type="button" id="resetBtn">Reset local progress</button></div></section>
+<section id="aboutView" class="panel about" hidden><h2>About this app</h2><p>This app helps Indonesian learners build practical Japanese for JFT-Basic, SSW, and everyday work-life situations in Japan.</p><p>Cards focus on useful meanings, readings, short phrases, signs, listening-ready sentences, and small information-search tasks. Japanese examples now show furigana-style support for common kanji so beginners are not blocked by words like 説明.</p><p>All learner-facing examples are original. Public exam and Can-do information is used only to guide level, domain, and task design; official questions and textbook text are not copied.</p></section>
+
+<footer class="footer-brand"><strong>JFT-Basic / SSW / Work-in-Japan</strong><span>Stage 1B Practical Japanese · Indonesian-first with English fallback</span></footer>
+</main>
+<!-- Load the spaced‑repetition engine as an ES module.  We expose its
+     functions on the global SREngine object so that the main script can
+     access createCard(), reviewCard() and isDue(). -->
+<script type="module">
+import { createCard, reviewCard, isDue } from "./spacedRepetitionEngine.js";
+window.SREngine = { createCard, reviewCard, isDue };
+</script>
+<script>
+const MANIFEST_URL="data/deck_manifest.json",DEFAULT_PACK="stage1b_id_validation",STORAGE_KEY="jft-ssw-stage1b-progress-v2",UI_KEY="jft-ssw-stage1b-ui-v4";
+const MODE_LABELS={recognition:"Recognition",production:"Production",kanji_sign_reading:"Kanji / Sign",listening_ready:"Listening-ready",information_search_mini:"Information search"},TASK_LABELS={recognition:"Task: Meaning",production:"Task: Say in Japanese",kanji_sign_reading:"Task: Reading",listening_ready:"Task: Listening",information_search_mini:"Task: Find information"},SECTION_LABELS={script_vocabulary:"Script & Vocabulary",conversation_expression:"Conversation & Expression",listening_comprehension:"Listening",reading_comprehension:"Reading",ssw_workplace_overlay:"SSW Workplace"},THEME_LABELS={bridge:"Bridge",neon:"Neon City",clean:"Clean"};
+// Maximum number of new cards to introduce per study session (similar to
+// Anki's new cards/day setting).  You can adjust this value to control
+// how many fresh items appear before reviewing previously learned ones.
+const MAX_NEW_PER_DAY = 20;
+const READING_HELP=[
+["健康保険証","けんこうほけんしょう"],["住所変更","じゅうしょへんこう"],["在留カード","ざいりゅうカード"],["シフト表","シフトひょう"],["申請書","しんせいしょ"],["非常口","ひじょうぐち"],["市役所","しやくしょ"],["受付","うけつけ"],["在留","ざいりゅう"],["住所","じゅうしょ"],["変更","へんこう"],["引っ越し","ひっこし"],["引っ越したら","ひっこしたら"],["健康","けんこう"],["保険証","ほけんしょう"],["病院","びょういん"],["作業","さぎょう"],["朝","あさ"],["始めます","はじめます"],["表","ひょう"],["見ます","みます"],["予約","よやく"],["注意","ちゅうい"],["紙","かみ"],["読みます","よみます"],["上司","じょうし"],["連絡","れんらく"],["出口","でぐち"],["入口","いりぐち"],["左","ひだり"],["右","みぎ"],["危険","きけん"],["近づきません","ちかづきません"],["休憩","きゅうけい"],["書きます","かきます"],["説明","せつめい"],["書類","しょるい"],["名前","なまえ"],["電話番号","でんわばんごう"],["担当者","たんとうしゃ"],["会社","かいしゃ"],["仕事","しごと"],["時間","じかん"],["曜日","ようび"],["午前","ごぜん"],["午後","ごご"],["今日","きょう"],["明日","あした"],["来週","らいしゅう"],["休み","やすみ"],["出勤","しゅっきん"],["退勤","たいきん"],["残業","ざんぎょう"],["給料","きゅうりょう"],["安全","あんぜん"],["避難","ひなん"],["禁止","きんし"],["駐車場","ちゅうしゃじょう"],["駅","えき"],["使います","つかいます"],["持って","もって"],["忘れました","わすれました"],["遅れます","おくれます"],["体調","たいちょう"],["悪い","わるい"],["熱","ねつ"],["薬","くすり"],["飲みます","のみます"],["洗って","あらって"]
+].sort((a,b)=>b[0].length-a[0].length);
+const els = {
+  cardCount: document.getElementById("cardCount"),
+  progressNavBtn: document.getElementById("progressNavBtn"),
+  aboutNavBtn: document.getElementById("aboutNavBtn"),
+  tabs: [...document.querySelectorAll(".tab")],
+  studyToolbar: document.getElementById("studyToolbar"),
+  settingsSummary: document.getElementById("settingsSummary"),
+  learnView: document.getElementById("learnView"),
+  browseView: document.getElementById("browseView"),
+  progressView: document.getElementById("progressView"),
+  aboutView: document.getElementById("aboutView"),
+  modeFilter: document.getElementById("modeFilter"),
+  sectionFilter: document.getElementById("sectionFilter"),
+  themeSelect: document.getElementById("themeSelect"),
+  romajiToggle: document.getElementById("romajiToggle"),
+  englishToggle: document.getElementById("englishToggle"),
+  cardPosition: document.getElementById("cardPosition"),
+  cardStatus: document.getElementById("cardStatus"),
+  frontFace: document.getElementById("frontFace"),
+  backFace: document.getElementById("backFace"),
+  showAnswerBtn: document.getElementById("showAnswerBtn"),
+  reviewActions: document.getElementById("reviewActions"),
+  againBtn: document.getElementById("againBtn"),
+  hardBtn: document.getElementById("hardBtn"),
+  goodBtn: document.getElementById("goodBtn"),
+  easyBtn: document.getElementById("easyBtn"),
+  statusLine: document.getElementById("statusLine"),
+  searchInput: document.getElementById("searchInput"),
+  browseList: document.getElementById("browseList"),
+  newCount: document.getElementById("newCount"),
+  learningCount: document.getElementById("learningCount"),
+  reviewCount: document.getElementById("reviewCount"),
+  masteredCount: document.getElementById("masteredCount"),
+  exportBtn: document.getElementById("exportBtn"),
+  importInput: document.getElementById("importInput"),
+  resetBtn: document.getElementById("resetBtn"),
+  newLimitInput: document.getElementById("newLimitInput")
+};
+let cards=[],view="learn",showBack=false,appState={currentId:null,progress:{}},ui={theme:"bridge",showRomaji:true,showEnglish:true,mode:"all",section:"all",maxNew:20};
+const escapeHtml=v=>String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])),field=v=>v==null?"":String(v),meaning=(c,l)=>field(c.meaning&&c.meaning[l]),promptText=(c,l)=>field(c.prompt&&c.prompt[l]),answer=(c,l)=>field(c.expected_answer&&c.expected_answer[l]),example=(c,l)=>field(c.example&&c.example[l]),humanize=v=>field(v).replaceAll("_"," ");
+function annotateJapanese(value){const text=field(value);let html="",i=0;while(i<text.length){const hit=READING_HELP.find(([term])=>text.startsWith(term,i));if(hit){html+="<ruby>"+escapeHtml(hit[0])+"<rt>"+escapeHtml(hit[1])+"</rt></ruby>";i+=hit[0].length}else{html+=escapeHtml(text[i]);i++}}return html}
+function kanaText(value){let text=field(value);for(const [term,kana] of READING_HELP)text=text.split(term).join(kana);return text}
+const KANJI_RE=/[\u3400-\u9FFF々〆ヶ]/u,JAPANESE_RE=/[\u3040-\u30ff\u3400-\u9fff々〆ヶ]/u,LETTER_READINGS={A:"エー",B:"ビー",C:"シー",D:"ディー",E:"イー",F:"エフ",G:"ジー",H:"エイチ"};
+function hasKanjiText(value){return KANJI_RE.test(field(value))}
+function hasJapaneseText(value){return JAPANESE_RE.test(field(value))}
+function splitJapaneseRuns(text){const runs=[];let i=0;while(i<text.length){const type=KANJI_RE.test(text[i])?"kanji":"text";let value="";while(i<text.length&&(KANJI_RE.test(text[i])?"kanji":"text")===type)value+=text[i++];runs.push({type,value})}return runs}
+function literalKanaVariants(value){const mapped=[...value].map(ch=>LETTER_READINGS[ch.toUpperCase()]||ch).join("");return[...new Set([value,mapped])].filter(Boolean)}
+function rubyFromReviewedKana(text,kana){text=field(text);kana=field(kana);if(!text||!kana||!hasKanjiText(text))return"";const runs=splitJapaneseRuns(text);function walk(index,kanaIndex){if(index>=runs.length)return kanaIndex===kana.length?"":null;const run=runs[index];if(run.type==="text"){for(const candidate of literalKanaVariants(run.value)){if(kana.startsWith(candidate,kanaIndex)){const rest=walk(index+1,kanaIndex+candidate.length);if(rest!==null)return escapeHtml(run.value)+rest}}return null}for(let end=kana.length;end>kanaIndex;end--){const reading=kana.slice(kanaIndex,end),rest=walk(index+1,end);if(rest!==null)return"<ruby>"+escapeHtml(run.value)+"<rt>"+escapeHtml(reading)+"</rt></ruby>"+rest}return null}return walk(0,0)||""}
+function exampleDisplayText(c){let text=example(c,"ja"),kana=example(c,"kana");if(/^Target sentence is the audio-ready example\.?$/i.test(text)&&hasJapaneseText(c.target))text=field(c.target);if(kana&&text.includes(",")){const prefix=text.split(",")[0].trim();if(prefix&&hasJapaneseText(prefix))text=prefix}return text}
+function exampleJaBlock(text,reviewedKana){if(!text)return"";const ruby=rubyFromReviewedKana(text,reviewedKana),fallback=field(reviewedKana),helper=!ruby&&fallback&&hasKanjiText(text)?"<p class=\"example-kana\">よみ："+escapeHtml(fallback)+"</p>":"";return"<div class=\"example-box\"><p class=\"example-ja\">"+(ruby||annotateJapanese(text))+"</p>"+helper+"</div>"}
+function normalizeUi(){
+  if(!THEME_LABELS[ui.theme]) ui.theme = "bridge";
+  if(!ui.mode) ui.mode = "all";
+  if(!ui.section) ui.section = "all";
+  // Ensure the maxNew value is a positive integer.  If undefined or invalid, fall back to the default of 20.
+  if(!ui.maxNew || isNaN(ui.maxNew) || ui.maxNew < 1) ui.maxNew = 20;
+}
+function loadUi(){try{ui={...ui,...JSON.parse(localStorage.getItem(UI_KEY)||"{}")} }catch{}normalizeUi();applyUi()}
+function saveUi(){normalizeUi();localStorage.setItem(UI_KEY,JSON.stringify(ui))}
+function applyUi(){
+  normalizeUi();
+  document.body.className = "theme-" + ui.theme;
+  els.themeSelect.value = ui.theme;
+  els.romajiToggle.textContent = "Romaji: " + (ui.showRomaji ? "On" : "Off");
+  els.englishToggle.textContent = "English: " + (ui.showEnglish ? "On" : "Off");
+  els.modeFilter.value = ui.mode;
+  els.sectionFilter.value = ui.section;
+  // Update the new card limit input with the current setting
+  if (els.newLimitInput) {
+    els.newLimitInput.value = ui.maxNew;
+  }
+  els.settingsSummary.textContent = (ui.mode === "all" ? "All modes" : MODE_LABELS[ui.mode] || ui.mode) + " · " + (ui.section === "all" ? "All sections" : SECTION_LABELS[ui.section] || ui.section) + " · " + THEME_LABELS[ui.theme];
+}
+function scrollToStudyTop(){if(!(view==="learn"||view==="review"))return;const behavior=matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth";requestAnimationFrame(()=>{els.learnView.scrollIntoView({behavior,block:"start"});setTimeout(()=>els.learnView.scrollIntoView({behavior:"auto",block:"start"}),90)})}
+function closeSettingsAndReturnToCard(){if(view==="learn"||view==="review"){els.studyToolbar.open=false;scrollToStudyTop()}}
+function loadProgress(){try{const s=JSON.parse(localStorage.getItem(STORAGE_KEY)||"{}");if(s&&s.progress)appState={currentId:s.currentId||null,progress:s.progress||{}}}catch{}}
+function saveProgress(){localStorage.setItem(STORAGE_KEY,JSON.stringify({schema_version:2,deck_id:"jft_ssw_work_japan",pack_id:DEFAULT_PACK,currentId:appState.currentId,progress:appState.progress,updatedAt:new Date().toISOString()}))}
+function stateFor(id){return appState.progress[id]?.state||"new"}
+function ensureProgress(id){
+  if(!appState.progress[id]){
+    // Initialize a new progress entry.  In addition to the original fields we
+    // store a spaced‑repetition engine state.  The engine state is created
+    // using the SREngine.createCard() function imported from the
+    // spacedRepetitionEngine.js module.  This provides stability,
+    // interval and due date fields for adaptive scheduling.
+    const engineState = window.SREngine && typeof window.SREngine.createCard === 'function'
+      ? window.SREngine.createCard(id)
+      : { id, repetitions: 0, interval: 0, easeFactor: 2.5, stability: 1.0, targetRetention: 0.9, due: new Date(), lastReviewed: null };
+    appState.progress[id] = {
+      card_id: id,
+      state: "new",
+      wrong_count: 0,
+      right_count: 0,
+      last_reviewed_at: null,
+      next_due_at: null,
+      history: [],
+      engine: engineState
+    };
+  }
+  return appState.progress[id];
+}
+function baseFilteredCards(){return cards.filter(c=>(ui.mode==="all"||c.mode===ui.mode)&&(ui.section==="all"||c.jft_section===ui.section))}
+function reviewCards(){
+  const base = baseFilteredCards();
+  // Select cards whose next due date has passed.  If the spaced‑repetition
+  // engine is enabled, we choose cards due for review; otherwise fall back
+  // to the original state‑based logic.
+  if(window.SREngine){
+    const now = new Date();
+    const due = base.filter(c => {
+      const p = appState.progress[c.id];
+      return p && p.engine && p.engine.due && new Date(p.engine.due) <= now;
+    });
+    return due.length ? due : base.filter(c => stateFor(c.id) === "mastered");
+  } else {
+    const due = base.filter(c => ["learning","review"].includes(stateFor(c.id)));
+    return due.length ? due : base.filter(c => stateFor(c.id) === "mastered");
+  }
+}
+function studyCards(){
+  if(view === "review") return reviewCards();
+  // In learn mode mix due/review cards with a limited number of new cards.  We respect
+  // the MAX_NEW_PER_DAY setting to avoid overwhelming the learner with too many
+  // new items at once.  Due/review cards are shown first to encourage spaced repetition.
+  const base = baseFilteredCards();
+  const due = base.filter(c => stateFor(c.id) !== "new");
+  const limit = ui.maxNew || MAX_NEW_PER_DAY;
+  const newCards = base.filter(c => stateFor(c.id) === "new").slice(0, limit);
+  return [...due, ...newCards];
+}
+function currentCard(){const list=studyCards();return list.find(c=>c.id===appState.currentId)||list[0]||null}
+function selectFirstAvailable(){const list=studyCards();if(!list.length){appState.currentId=null;return}if(!list.some(c=>c.id===appState.currentId))appState.currentId=list[0].id}
+function populateFilters(){const modes=[...new Set(cards.map(c=>c.mode))],sections=[...new Set(cards.map(c=>c.jft_section))];els.modeFilter.innerHTML="<option value=\"all\">All modes</option>"+modes.map(m=>"<option value=\""+escapeHtml(m)+"\">"+escapeHtml(MODE_LABELS[m]||m)+"</option>").join("");els.sectionFilter.innerHTML="<option value=\"all\">All JFT/SSW sections</option>"+sections.map(s=>"<option value=\""+escapeHtml(s)+"\">"+escapeHtml(SECTION_LABELS[s]||s)+"</option>").join("")}
+
+function renderTodayCounts(){
+  const all = baseFilteredCards();
+  const due = all.filter(c => stateFor(c.id)!==="new" && appState.progress[c.id] && appState.progress[c.id].engine && new Date(appState.progress[c.id].engine.due) <= new Date()).length;
+  const weak = all.filter(c => { const p=appState.progress[c.id]; return p && (p.state==="learning" || p.wrong_count>0); }).length;
+  const fresh = all.filter(c => stateFor(c.id)==="new").slice(0, ui.maxNew || MAX_NEW_PER_DAY).length;
+  const queue = studyCards().length;
+  const set=(id,v)=>{const el=document.getElementById(id); if(el) el.textContent=v;};
+  set("todayNew", fresh);
+  set("todayReview", due);
+  set("todayWeak", weak);
+  set("settingsTotalCards", cards.length);
+  set("settingsTodayCards", queue);
+  set("settingsEngine", window.SREngine ? "SRS v1" : "Fallback");
+}
+
+function render(){applyUi();selectFirstAvailable();renderNavigation();renderSummary();renderTodayCounts();renderCard(showBack);renderBrowse();els.cardCount.textContent=cards.length?cards.length+" cards":"No cards";els.exportBtn.disabled=!cards.length}
+function renderNavigation(){els.tabs.forEach(t=>t.classList.toggle("active",t.dataset.view===view));els.progressNavBtn.classList.toggle("active",view==="progress");els.aboutNavBtn.classList.toggle("active",view==="about");els.learnView.hidden=!(view==="learn"||view==="review");els.studyToolbar.hidden=!(view==="learn"||view==="review"||view==="browse");els.browseView.hidden=view!=="browse";els.progressView.hidden=view!=="progress";els.aboutView.hidden=view!=="about"}
+function renderSummary(){const counts={new:0,learning:0,review:0,mastered:0};cards.forEach(c=>{counts[stateFor(c.id)]=(counts[stateFor(c.id)]||0)+1});els.newCount.textContent=counts.new;els.learningCount.textContent=counts.learning;els.reviewCount.textContent=counts.review;els.masteredCount.textContent=counts.mastered}
+function renderCard(backVisible){const card=currentCard(),list=studyCards();if(!card){els.cardPosition.textContent="Card 0/0";els.cardStatus.textContent=view==="review"?"Review":"No cards";els.frontFace.innerHTML=view==="review"?"<h2 class=\"target\" style=\"font-size:1.45rem\">No review cards yet.</h2><p class=\"meaning-secondary\">Study in Learn first.</p>":"<h2 class=\"target\" style=\"font-size:1.45rem\">No cards match this filter.</h2>";els.backFace.hidden=true;setStudyButtons(false,false);return}const pos=Math.max(0,list.findIndex(i=>i.id===card.id))+1;els.cardPosition.textContent="Card "+pos+"/"+list.length;els.cardStatus.textContent=stateFor(card.id).replace(/^./,c=>c.toUpperCase());els.frontFace.innerHTML=backVisible?renderFrontReference(card):renderFront(card);els.backFace.innerHTML=renderBack(card);els.backFace.hidden=!backVisible;setStudyButtons(true,backVisible)}
+function setStudyButtons(hasCard,answerShown){els.showAnswerBtn.hidden=!hasCard||answerShown;els.showAnswerBtn.disabled=!hasCard||answerShown;els.reviewActions.hidden=!hasCard||!answerShown}
+const taskLabel=c=>"<p class=\"task-label\">"+escapeHtml(TASK_LABELS[c.mode]||"Task")+"</p>";
+function audioChip(c){return c.audio?.needs_recording||c.mode==="listening_ready"?"<button type=\"button\" class=\"audio-chip\" disabled>♪ Audio planned</button>":""}
+function badges(c){const v=[MODE_LABELS[c.mode]||c.mode,SECTION_LABELS[c.jft_section]||c.jft_section,humanize(c.scenario)].filter(Boolean).slice(0,3);return"<div class=\"tags\">"+v.map(x=>"<span class=\"tag\">"+escapeHtml(x)+"</span>").join("")+"</div>"}
+function romaji(c){return ui.showRomaji&&c.romaji?"<p class=\"romaji\">"+escapeHtml(c.romaji)+"</p>":""}
+function english(v,cls="meaning-secondary"){return ui.showEnglish&&v?"<p class=\""+cls+"\">"+escapeHtml(v)+"</p>":""}
+function reading(c){return c.reading?"<p class=\"reading\">"+escapeHtml(c.reading)+"</p>":""}
+function renderFrontReference(c){if(c.mode==="production")return"<div class=\"front-reference\">"+taskLabel(c)+"<p class=\"prompt-main\">"+escapeHtml(promptText(c,"id")||meaning(c,"id"))+"</p>"+english(promptText(c,"en"))+"</div>";if(c.mode==="information_search_mini")return"<div class=\"front-reference\">"+taskLabel(c)+"<div class=\"notice-box\">"+escapeHtml(c.target)+"</div></div>";if(c.mode==="kanji_sign_reading")return"<div class=\"front-reference\">"+taskLabel(c)+"<h2 class=\"target sign\">"+escapeHtml(c.target)+"</h2></div>";return"<div class=\"front-reference\">"+taskLabel(c)+"<h2 class=\"target\">"+escapeHtml(c.target)+"</h2>"+reading(c)+romaji(c)+audioChip(c)+"</div>"}
+function renderFront(c){if(c.mode==="production")return taskLabel(c)+"<p class=\"prompt-main\">"+escapeHtml(promptText(c,"id")||meaning(c,"id"))+"</p>"+english(promptText(c,"en"))+badges(c);if(c.mode==="kanji_sign_reading")return taskLabel(c)+"<h2 class=\"target sign\">"+escapeHtml(c.target)+"</h2>"+badges(c);if(c.mode==="listening_ready")return taskLabel(c)+"<h2 class=\"target\">"+escapeHtml(c.target)+"</h2>"+audioChip(c)+badges(c);if(c.mode==="information_search_mini")return taskLabel(c)+"<div class=\"notice-box\">"+escapeHtml(c.target)+"</div><div class=\"question-box\"><strong>Question</strong><p class=\"prompt-main\" style=\"font-size:1.08rem\">"+escapeHtml(promptText(c,"id"))+"</p>"+english(promptText(c,"en"))+"</div>"+badges(c);return taskLabel(c)+"<h2 class=\"target\">"+escapeHtml(c.target)+"</h2>"+reading(c)+romaji(c)+audioChip(c)+badges(c)}
+function renderBack(c){const ja=answer(c,"ja")||c.target,id=answer(c,"id")||meaning(c,"id"),en=answer(c,"en")||meaning(c,"en");if(c.mode==="information_search_mini")return"<div class=\"answer-box\"><p class=\"meaning-id\">"+escapeHtml(ja||en)+"</p>"+english(en)+"</div>"+supportBlock(c);if(c.mode==="production")return"<h2 class=\"target\">"+escapeHtml(ja)+"</h2>"+reading(c)+romaji(c)+audioChip(c)+"<p class=\"meaning-id\">"+escapeHtml(id)+"</p>"+english(en)+supportBlock(c);if(c.mode==="kanji_sign_reading")return reading(c)+romaji(c)+"<p class=\"meaning-id\">"+escapeHtml(id)+"</p>"+english(en)+supportBlock(c);return"<p class=\"meaning-id\">"+escapeHtml(meaning(c,"id"))+"</p>"+english(meaning(c,"en"))+supportBlock(c)}
+function supportBlock(c){const exJa=exampleDisplayText(c),exKana=example(c,"kana"),exId=example(c,"id"),exEn=example(c,"en"),note=field(c.usage_note&&(c.usage_note.id||c.usage_note.en||c.usage_note.ja));return exampleJaBlock(exJa,exKana)+(exId?"<p class=\"meaning-secondary\">"+escapeHtml(exId)+"</p>":"")+english(exEn)+(note?"<p class=\"note\">"+escapeHtml(note)+"</p>":"")}
+function renderBrowse(){if(view!=="browse")return;const q=els.searchInput.value.trim().toLowerCase();const list=baseFilteredCards().filter(c=>!q||JSON.stringify([c.id,c.target,c.reading,c.romaji,c.meaning,c.prompt,c.expected_answer,c.example,c.scenario,c.jft_section]).toLowerCase().includes(q));els.browseList.innerHTML=list.map(c=>"<button class=\"row\" type=\"button\" data-card-id=\""+escapeHtml(c.id)+"\"><span class=\"row-title\">"+escapeHtml(c.target)+"</span><span class=\"row-meta\">"+escapeHtml(c.id)+" · "+escapeHtml(MODE_LABELS[c.mode]||c.mode)+" · "+escapeHtml(SECTION_LABELS[c.jft_section]||c.jft_section)+" · "+escapeHtml(humanize(c.scenario))+"</span></button>").join("")||"<p>No cards match.</p>"}
+function gradeCurrent(kind){
+  const card=currentCard();
+  if(!card)return;
+  const before=studyCards();
+  const beforeIndex=Math.max(0,before.findIndex(i=>i.id===card.id));
+  const r=ensureProgress(card.id);
+  // Determine a quality value based on the button clicked.  The engine uses
+  // a 0–5 scale where 0 is complete failure and 5 is perfect.  We map
+  // 'again'→1, 'hard'→2, 'good'→3 and 'easy'→5 to preserve the four‑button UI.
+  let quality;
+  if(kind === "again"){
+    quality = 1;
+    // mark as an incorrect response
+    r.wrong_count += 1;
+  }else if(kind === "hard"){
+    // treat 'hard' as a partially correct response
+    quality = 2;
+    r.right_count += 1;
+  }else if(kind === "good"){
+    quality = 3;
+    r.right_count += 1;
+  }else{
+    // 'easy'
+    quality = 5;
+    r.right_count += 1;
+  }
+  const now = new Date();
+  r.last_reviewed_at = now.toISOString();
+  r.history.push({at: r.last_reviewed_at, grade: kind});
+  // Initialise engine state if not present
+  if(!r.engine){
+    r.engine = window.SREngine && window.SREngine.createCard ? window.SREngine.createCard(card.id) : null;
+  }
+  // Update the engine state using the review quality.  This will compute a new
+  // interval and due date.  If the engine module failed to load we skip this.
+  if(r.engine && window.SREngine && typeof window.SREngine.reviewCard === 'function'){
+    r.engine = window.SREngine.reviewCard(r.engine, quality, now);
+    r.next_due_at = r.engine.due.toISOString();
+    // Update the human‑readable state based on repetition count.  Cards with
+    // few repetitions remain in 'learning', then move to 'review' and finally
+    // to 'mastered' once the repetition count is high.  Failures reset to
+    // 'learning'.
+    // Determine a human‑readable status based on the quality and number of repetitions.
+    // Low quality (again/hard) keeps the card in learning.  After a few repetitions
+    // the card graduates to review, and eventually mastered once the interval grows.
+    if(quality < 3){
+      r.state = "learning";
+    }else if(r.engine.repetitions >= 4){
+      r.state = "mastered";
+    }else if(r.engine.repetitions >= 2){
+      r.state = "review";
+    }else{
+      r.state = "learning";
+    }
+  }else{
+    // Fallback: preserve the original behaviour if the engine is not available.
+    if(kind === "again"){
+      r.state = "learning";
+    }else if(kind === "hard"){
+      // keep in learning for now or move to review if already learning/review
+      r.state = r.state === "new" || r.state === "learning" ? "learning" : "review";
+    }else if(kind === "good"){
+      r.state = r.state === "new" || r.state === "learning" ? "review" : "mastered";
+    }else if(kind === "easy"){
+      r.state = "mastered";
+    }
+  }
+  moveAfterGrade(card.id,beforeIndex);
+  setStatusLine(card.id+" marked "+kind+".");
+}
+function moveAfterGrade(previousId,previousIndex){const nextList=studyCards();if(!nextList.length){appState.currentId=null;showBack=false;saveProgress();render();scrollToStudyTop();return}const still=nextList.findIndex(c=>c.id===previousId),nextIndex=still>=0?(still+1)%nextList.length:Math.min(previousIndex,nextList.length-1);appState.currentId=nextList[nextIndex].id;showBack=false;saveProgress();render();scrollToStudyTop()}
+function setStatusLine(t){els.statusLine.textContent=t}
+function exportProgress(){const payload={app:"jft-ssw-stage1b",schema_version:2,exportedAt:new Date().toISOString(),...appState},blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),link=document.createElement("a");link.href=url;link.download="jft-ssw-stage1b-progress-v2.json";link.click();URL.revokeObjectURL(url);setStatusLine("Progress exported.")}
+function importProgress(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const imported=JSON.parse(String(reader.result));if(imported.progress&&typeof imported.progress==="object")appState={currentId:imported.currentId||appState.currentId,progress:imported.progress};saveProgress();render();setStatusLine("Progress imported.")}catch{setStatusLine("Could not import this file.")}};reader.readAsText(file)}
+async function loadCards(){loadUi();loadProgress();try{const manifest=await fetch(MANIFEST_URL,{cache:"no-store"}).then(r=>r.json()),packs=manifest.decks.flatMap(d=>d.packs||[]),pack=packs.find(p=>p.pack_id===DEFAULT_PACK),file=pack?.card_file||"data/cards.stage1b.id.sample.json",data=await fetch(file,{cache:"no-store"}).then(r=>r.json());cards=Array.isArray(data)?data:(data.cards||[]);populateFilters();render();setStatusLine("Stage 1B demo loaded. Japanese examples include reading support for common kanji.")}catch(error){console.error(error);setStatusLine("Could not load Stage 1B cards: "+error.message)}}
+els.tabs.forEach(tab=>tab.addEventListener("click",()=>{view=tab.dataset.view;showBack=false;render();if(view==="learn"||view==="review")scrollToStudyTop()}));
+els.progressNavBtn.addEventListener("click",()=>{view="progress";render()});els.aboutNavBtn.addEventListener("click",()=>{view="about";render()});
+els.showAnswerBtn.addEventListener("click",()=>{showBack=true;render();scrollToStudyTop()});
+els.againBtn.addEventListener("click",()=>gradeCurrent("again"));els.goodBtn.addEventListener("click",()=>gradeCurrent("good"));els.easyBtn.addEventListener("click",()=>gradeCurrent("easy"));
+els.modeFilter.addEventListener("change",e=>{ui.mode=e.target.value;showBack=false;saveUi();render();closeSettingsAndReturnToCard()});els.sectionFilter.addEventListener("change",e=>{ui.section=e.target.value;showBack=false;saveUi();render();closeSettingsAndReturnToCard()});
+
+// Dynamically insert the Hard button for a four‑button review interface.  If the
+// button already exists it will not be added again.  The hard button is
+// inserted between the Again and Good buttons to match the order: Again,
+// Hard, Good, Easy.  We also expand the grid to four columns.  See README
+// for details on how the SRS engine handles this grade.
+(function(){
+  try{
+    if(!els.hardBtn && els.reviewActions && els.goodBtn){
+      const hardBtn=document.createElement("button");
+      hardBtn.type="button";
+      hardBtn.className="hard";
+      hardBtn.id="hardBtn";
+      hardBtn.textContent="Hard";
+      els.reviewActions.insertBefore(hardBtn, els.goodBtn);
+      els.hardBtn = hardBtn;
+      // apply a visual style similar to the other buttons.  Use the accent
+      // colour defined in the CSS variables for the text and a matching
+      // translucent border colour.
+      const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#c36a35';
+      hardBtn.style.borderColor = 'rgba(195,106,53,0.34)';
+      hardBtn.style.color = accent.trim();
+      // ensure four equal columns
+      els.reviewActions.style.gridTemplateColumns = 'repeat(4,minmax(0,1fr))';
+      hardBtn.addEventListener('click', () => gradeCurrent('hard'));
+    }
+  }catch(e){
+    console.error("Failed to add hard button", e);
+  }
+})();
+els.themeSelect.addEventListener("change",e=>{ui.theme=e.target.value;saveUi();render()});els.romajiToggle.addEventListener("click",()=>{ui.showRomaji=!ui.showRomaji;saveUi();render()});els.englishToggle.addEventListener("click",()=>{ui.showEnglish=!ui.showEnglish;saveUi();render()});
+els.searchInput.addEventListener("input",renderBrowse);els.browseList.addEventListener("click",e=>{const row=e.target.closest("[data-card-id]");if(!row)return;appState.currentId=row.dataset.cardId;view="learn";showBack=false;saveProgress();render();scrollToStudyTop()});
+els.exportBtn.addEventListener("click",exportProgress);els.importInput.addEventListener("change",e=>importProgress(e.target.files[0]));els.resetBtn.addEventListener("click",()=>{if(!confirm("Reset local progress for this browser?"))return;appState.progress={};saveProgress();render();setStatusLine("Local progress reset.")});
+// Update the maximum number of new cards per session when the user changes the setting
+if (els.newLimitInput) {
+  els.newLimitInput.addEventListener("change", e => {
+    const val = parseInt(e.target.value, 10);
+    ui.maxNew = (!isNaN(val) && val > 0) ? val : 1;
+    saveUi();
+    render();
+  });
+}
+const settingsGear=document.getElementById("settingsGear"); if(settingsGear) settingsGear.addEventListener("click",()=>{els.studyToolbar.open=!els.studyToolbar.open});
+if("serviceWorker" in navigator&&window.isSecureContext)navigator.serviceWorker.register("sw.js").catch(()=>{});loadCards();
+</script>
+</body>
+</html>
