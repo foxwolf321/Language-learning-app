@@ -25,56 +25,31 @@ button,input,select,summary{font:inherit}button,select,.file-button,input{min-he
 
   <section class="settings-panel" id="settingsPanel" hidden>
     <div class="settings-head">
-      <div><h2>Settings</h2><p id="settingsSummary">Loading settings</p></div>
-      <button type="button" id="closeSettingsBtn" aria-label="Close settings">×</button>
+      <div><h2>Study settings</h2><p id="settingsSummary">All modes · All sections</p></div>
+      <button id="closeSettingsBtn" type="button">Close</button>
     </div>
-    <section class="settings-grid" aria-label="Study settings table">
-      <div class="setting-row"><label for="modeFilter">Mode</label><select id="modeFilter"><option value="all">All modes</option></select></div>
-      <div class="setting-row"><label for="sectionFilter">Section</label><select id="sectionFilter"><option value="all">All JFT/SSW sections</option></select></div>
+    <div class="settings-grid">
+      <div class="setting-row"><label for="modeFilter">Mode</label><select id="modeFilter"></select></div>
+      <div class="setting-row"><label for="sectionFilter">Section</label><select id="sectionFilter"></select></div>
       <div class="setting-row"><label for="themeSelect">Theme</label><select id="themeSelect"><option value="bridge">Bridge</option><option value="neon">Neon City</option><option value="clean">Clean</option></select></div>
-      <div class="setting-row"><label for="newLimitInput">New cards/session</label><input id="newLimitInput" type="number" min="1" max="100" inputmode="numeric"></div>
-      <div class="setting-row"><span class="label">Romaji</span><button type="button" id="romajiToggle">Romaji: On</button></div>
-      <div class="setting-row"><span class="label">English fallback</span><button type="button" id="englishToggle">English: On</button></div>
-      <div class="setting-row"><span class="label">Total cards</span><span class="value" id="cardCount">Loading</span></div>
-    </section>
-    <details class="sub" open>
-      <summary>Engine analysis / progress <span>▾</span></summary>
-      <div class="sub-body">
-        <p class="status-line" id="engineStatusLine">Checking engine...</p>
-        <ul class="engine-list">
-          <li>Connected file: <strong>spacedRepetitionEngine.js</strong></li>
-          <li>Required ES module functions: <strong>createCard</strong>, <strong>reviewCard</strong>, <strong>isDue</strong></li>
-          <li>Current status: experimental local SRS integration, not the final evidence-gate scheduler.</li>
-          <li>Saved engine fields: repetitions, interval, easeFactor, stability, targetRetention, due, lastReviewed.</li>
-          <li>Next product step: keep UI work separate from the evidence-based scheduler decision before paid release.</li>
-        </ul>
-      </div>
-    </details>
-    <details class="sub">
-      <summary>Progress / backup <span>▾</span></summary>
-      <div class="sub-body">
-        <section class="settings-grid">
-          <div class="setting-row"><span class="label">Mastered</span><span class="value" id="masteredCount">0</span></div>
-          <div class="setting-row"><span class="label">Answered</span><span class="value" id="answeredCount">0</span></div>
-        </section>
-        <div class="button-row" style="margin-top:.6rem"><button type="button" id="exportBtn" disabled>Export progress</button><label class="file-button" for="importInput">Import progress<input id="importInput" type="file" accept="application/json"></label><button type="button" id="resetBtn">Reset local progress</button></div>
-      </div>
-    </details>
-    <details class="sub">
-      <summary>Browse cards <span>▾</span></summary>
-      <div class="sub-body"><input class="search-box" id="searchInput" type="search" placeholder="Search Japanese, Indonesian, English..." aria-label="Search cards"><div class="list" id="browseList"></div></div>
-    </details>
-    <details class="sub">
-      <summary>About <span>▾</span></summary>
-      <div class="sub-body"><p>This app helps Indonesian learners build practical Japanese for JFT-Basic, SSW, and everyday work-life situations in Japan.</p><p>All learner-facing examples are original. Public exam and Can-do information guides structure, domain, task type, and level only; official questions and textbook text are not copied.</p></div>
-    </details>
+      <div class="setting-row"><span class="label">Help text</span><div class="button-row"><button id="romajiToggle" type="button">Romaji: On</button><button id="englishToggle" type="button">English: On</button></div></div>
+      <div class="setting-row"><label for="newLimitInput">New cards/session</label><input id="newLimitInput" type="number" min="1" max="100" step="1" value="20"></div>
+      <div class="setting-row"><span class="label">Progress</span><div class="button-row"><button id="exportBtn" type="button">Export JSON</button><label class="file-button">Import JSON<input id="importInput" type="file" accept="application/json"></label><button id="resetBtn" type="button">Reset</button></div></div>
+    </div>
+    <details class="sub"><summary>Browse cards</summary><div class="sub-body"><input class="search-box" id="searchInput" type="search" placeholder="Search card text"><div class="list" id="browseList"></div></div></details>
+    <details class="sub"><summary>Engine status</summary><div class="sub-body"><p class="row-meta" id="engineStatusLine"></p><ul class="engine-list"><li>External engine: spacedRepetitionEngine.js ES module</li><li>Fallback engine runs only if module loading fails.</li></ul></div></details>
   </section>
 
-  <section id="learnView" class="learn-view">
-    <section class="card-panel" aria-live="polite">
-      <div class="card-strip"><span class="pill" id="cardPosition">Card 0/0</span><span class="pill" id="cardStatus">Loading</span></div>
-      <article class="card-body"><div id="frontFace"></div><div class="answer-divider" id="backFace" hidden></div></article>
-    </section>
+  <section class="card-panel" aria-live="polite">
+    <header class="card-strip">
+      <span class="pill" id="cardPosition">Card 0/0</span>
+      <span class="pill" id="cardStatus">Loading</span>
+      <span class="pill" id="cardCount">0 cards</span>
+    </header>
+    <article class="card-body">
+      <div id="frontFace"></div>
+      <div class="answer-divider" id="backFace" hidden></div>
+    </article>
     <nav class="actions" aria-label="Card actions">
       <button type="button" class="primary" id="showAnswerBtn" disabled>Show answer</button>
       <div class="review-actions" id="reviewActions" hidden>
@@ -89,14 +64,19 @@ button,input,select,summary{font:inherit}button,select,.file-button,input{min-he
   <p class="bottom-meta">JFT-Basic / SSW / Work-in-Japan / Stage 1B</p>
 </main>
 <script type="module">
-const fallbackEngine={createCard(id){const now=new Date();return{id,repetitions:0,interval:0,easeFactor:2.5,stability:1,targetRetention:.9,due:now,lastReviewed:null}},isDue(card,now=new Date()){const due=new Date(card?.due||now);return due.getTime()<=new Date(now).getTime()},reviewCard(card,quality,reviewedAt=new Date()){const c={...fallbackEngine.createCard(card?.id||"unknown"),...(card||{})},q=Math.max(0,Math.min(5,Number(quality)||0)),now=new Date(reviewedAt);let easeFactor=c.easeFactor,repetitions=c.repetitions,interval=c.interval,stability=c.stability;if(q<3){repetitions=0;interval=q<=1?10/(24*60):1/24;easeFactor=Math.max(1.3,Math.min(3,easeFactor-(q<=1?.2:.1)));stability=Math.max(.2,Math.min(36500,stability*.65))}else{repetitions+=1;const bonus=q===5?1.35:q===4?1.15:1;easeFactor=Math.max(1.3,Math.min(3,easeFactor+(q===5?.08:q===4?.02:-.02)));if(repetitions===1)interval=q===5?4:q===4?2:1;else if(repetitions===2)interval=q===5?7:q===4?4:3;else interval=Math.max(1,Math.round(interval*easeFactor*bonus));stability=Math.max(.2,Math.min(36500,Math.max(stability,interval)*bonus))}return{...c,repetitions,interval,easeFactor,stability,targetRetention:.9,due:new Date(now.getTime()+interval*86400000),lastReviewed:now}}};
+const fallbackEngine={
+  createCard(id){return{id,repetitions:0,interval:0,easeFactor:2.5,stability:1,targetRetention:.9,due:new Date(),lastReviewed:null}},
+  isDue(card,now=new Date()){return new Date(card?.due||now).getTime()<=new Date(now).getTime()},
+  reviewCard(card,quality,reviewedAt=new Date()){const q=Math.max(0,Math.min(5,Number(quality)||0)),now=new Date(reviewedAt),base={...fallbackEngine.createCard(card?.id||"unknown"),...(card||{})};let repetitions=Number.isFinite(base.repetitions)?base.repetitions:0,interval=Number.isFinite(base.interval)?base.interval:0,easeFactor=Number.isFinite(base.easeFactor)?base.easeFactor:2.5,stability=Math.max(1,Number.isFinite(base.stability)?base.stability:1),targetRetention=Number.isFinite(base.targetRetention)&&base.targetRetention>0&&base.targetRetention<1?base.targetRetention:.9;if(q<=1){repetitions=0;stability=Math.max(1,Math.min(36500,stability*.5));interval=10/(24*60)}else{repetitions+=1;const stabilityMultiplier=q===2?1.2:(q===3||q===4)?1.7:2.5;stability=Math.max(1,Math.min(36500,stability*stabilityMultiplier));interval=-stability*Math.log(targetRetention)}return{...base,repetitions,interval,easeFactor,stability,targetRetention,due:new Date(now.getTime()+interval*86400000),lastReviewed:now}}
+};
 let SREngine=fallbackEngine,engineConnected=false,engineError="";
 try{const mod=await import("./spacedRepetitionEngine.js");if(typeof mod.createCard!=="function"||typeof mod.reviewCard!=="function"||typeof mod.isDue!=="function")throw new Error("Missing ES module exports");SREngine={createCard:mod.createCard,reviewCard:mod.reviewCard,isDue:mod.isDue};engineConnected=true}catch(error){engineError=error?.message||String(error)}
 window.SREngine=SREngine;
 const MANIFEST_URL="data/deck_manifest.json",DEFAULT_PACK="stage1b_id_validation",STORAGE_KEY="jft-ssw-stage1b-progress-v2",UI_KEY="jft-ssw-stage1b-ui-v5";
 const MODE_LABELS={recognition:"Recognition",production:"Production",kanji_sign_reading:"Kanji / Sign",listening_ready:"Listening-ready",information_search_mini:"Information search"},TASK_LABELS={recognition:"Task: Meaning",production:"Task: Say in Japanese",kanji_sign_reading:"Task: Reading",listening_ready:"Task: Listening",information_search_mini:"Task: Find information"},SECTION_LABELS={script_vocabulary:"Script & Vocabulary",conversation_expression:"Conversation & Expression",listening_comprehension:"Listening",reading_comprehension:"Reading",ssw_workplace_overlay:"SSW Workplace"},THEME_LABELS={bridge:"Bridge",neon:"Neon City",clean:"Clean"};
 const READING_HELP=[["健康保険証","けんこうほけんしょう"],["住所変更","じゅうしょへんこう"],["在留カード","ざいりゅうカード"],["シフト表","シフトひょう"],["申請書","しんせいしょ"],["非常口","ひじょうぐち"],["市役所","しやくしょ"],["受付","うけつけ"],["在留","ざいりゅう"],["住所","じゅうしょ"],["変更","へんこう"],["引っ越し","ひっこし"],["引っ越したら","ひっこしたら"],["健康","けんこう"],["保険証","ほけんしょう"],["病院","びょういん"],["作業","さぎょう"],["朝","あさ"],["始めます","はじめます"],["表","ひょう"],["見ます","みます"],["予約","よやく"],["注意","ちゅうい"],["紙","かみ"],["読みます","よみます"],["上司","じょうし"],["連絡","れんらく"],["出口","でぐち"],["入口","いりぐち"],["左","ひだり"],["右","みぎ"],["危険","きけん"],["近づきません","ちかづきません"],["休憩","きゅうけい"],["書きます","かきます"],["説明","せつめい"],["書類","しょるい"],["名前","なまえ"],["電話番号","でんわばんごう"],["担当者","たんとうしゃ"],["会社","かいしゃ"],["仕事","しごと"],["時間","じかん"],["曜日","ようび"],["午前","ごぜん"],["午後","ごご"],["今日","きょう"],["明日","あした"],["来週","らいしゅう"],["休み","やすみ"],["出勤","しゅっきん"],["退勤","たいきん"],["残業","ざんぎょう"],["給料","きゅうりょう"],["安全","あんぜん"],["避難","ひなん"],["禁止","きんし"],["駐車場","ちゅうしゃじょう"],["駅","えき"],["使います","つかいます"],["持って","もって"],["忘れました","わすれました"],["遅れます","おくれます"],["体調","たいちょう"],["悪い","わるい"],["熱","ねつ"],["薬","くすり"],["飲みます","のみます"],["洗って","あらって"]].sort((a,b)=>b[0].length-a[0].length);
-const els={topNewCount:document.getElementById("topNewCount"),topReviewCount:document.getElementById("topReviewCount"),topLearningCount:document.getElementById("topLearningCount"),settingsBtn:document.getElementById("settingsBtn"),settingsPanel:document.getElementById("settingsPanel"),closeSettingsBtn:document.getElementById("closeSettingsBtn"),settingsSummary:document.getElementById("settingsSummary"),engineStatusLine:document.getElementById("engineStatusLine"),modeFilter:document.getElementById("modeFilter"),sectionFilter:document.getElementById("sectionFilter"),themeSelect:document.getElementById("themeSelect"),romajiToggle:document.getElementById("romajiToggle"),englishToggle:document.getElementById("englishToggle"),newLimitInput:document.getElementById("newLimitInput"),cardCount:document.getElementById("cardCount"),masteredCount:document.getElementById("masteredCount"),answeredCount:document.getElementById("answeredCount"),exportBtn:document.getElementById("exportBtn"),importInput:document.getElementById("importInput"),resetBtn:document.getElementById("resetBtn"),searchInput:document.getElementById("searchInput"),browseList:document.getElementById("browseList"),learnView:document.getElementById("learnView"),cardPosition:document.getElementById("cardPosition"),cardStatus:document.getElementById("cardStatus"),frontFace:document.getElementById("frontFace"),backFace:document.getElementById("backFace"),showAnswerBtn:document.getElementById("showAnswerBtn"),reviewActions:document.getElementById("reviewActions"),againBtn:document.getElementById("againBtn"),hardBtn:document.getElementById("hardBtn"),goodBtn:document.getElementById("goodBtn"),easyBtn:document.getElementById("easyBtn"),statusLine:document.getElementById("statusLine")};
+const els={topNewCount:document.getElementById("topNewCount"),topReviewCount:document.getElementById("topReviewCount"),topLearningCount:document.getElementById("topLearningCount"),settingsBtn:document.getElementById("settingsBtn"),settingsPanel:document.getElementById("settingsPanel"),closeSettingsBtn:document.getElementById("closeSettingsBtn"),settingsSummary:document.getElementById("settingsSummary"),engineStatusLine:document.getElementById("engineStatusLine"),modeFilter:document.getElementById("modeFilter"),sectionFilter:document.getElementById("sectionFilter"),themeSelect:document.getElementById("themeSelect"),romajiToggle:document.getElementById("romajiToggle"),englishToggle:document.getElementById("englishToggle"),newLimitInput:document.getElementById("newLimitInput"),cardCount:document.getElementById("cardCount"),masteredCount:null,answeredCount:null,exportBtn:document.getElementById("exportBtn"),importInput:document.getElementById("importInput"),resetBtn:document.getElementById("resetBtn"),searchInput:document.getElementById("searchInput"),browseList:document.getElementById("browseList"),cardPosition:document.getElementById("cardPosition"),cardStatus:document.getElementById("cardStatus"),frontFace:document.getElementById("frontFace"),backFace:document.getElementById("backFace"),showAnswerBtn:document.getElementById("showAnswerBtn"),reviewActions:document.getElementById("reviewActions"),againBtn:document.getElementById("againBtn"),hardBtn:document.getElementById("hardBtn"),goodBtn:document.getElementById("goodBtn"),easyBtn:document.getElementById("easyBtn"),statusLine:document.getElementById("statusLine")};
+els.masteredCount=document.createElement("span");els.answeredCount=document.createElement("span");
 let cards=[],showBack=false,appState={currentId:null,progress:{}},ui={theme:"bridge",showRomaji:true,showEnglish:true,mode:"all",section:"all",maxNew:20,settingsOpen:false};
 const escapeHtml=v=>String(v??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])),field=v=>v==null?"":String(v),meaning=(c,l)=>field(c.meaning&&c.meaning[l]),promptText=(c,l)=>field(c.prompt&&c.prompt[l]),answer=(c,l)=>field(c.expected_answer&&c.expected_answer[l]),example=(c,l)=>field(c.example&&c.example[l]),humanize=v=>field(v).replaceAll("_"," ");
 function annotateJapanese(value){const text=field(value);let html="",i=0;while(i<text.length){const hit=READING_HELP.find(([term])=>text.startsWith(term,i));if(hit){html+="<ruby>"+escapeHtml(hit[0])+"<rt>"+escapeHtml(hit[1])+"</rt></ruby>";i+=hit[0].length}else{html+=escapeHtml(text[i]);i++}}return html}
