@@ -109,10 +109,16 @@ The currently visible study engine file is:
 
 Current safe wording:
 
-- It is a retention-model v1 prototype under evidence-gate review.
+- The current implementation is still the retention-model v1 prototype under evidence-gate review.
 - It is used by `app-v35-unified-study.html`.
 - It should not be described as the final V2 engine.
-- FSRS / `ts-fsrs` remains the leading candidate, but is not yet formally adopted in this repository.
+- The strategic decision is to stop trying to beat established spaced-repetition engines with original tweaks.
+- The V2 direction is to use an already distributed and maintained FSRS-family engine, with `ts-fsrs` as the first candidate because it is suitable for Web/PWA integration.
+- `ts-fsrs` is the adoption direction, not merely an equal option among many; however, it is not yet implemented or verified in the production app.
+- Before implementation, the project still needs rights confirmation, license/notice placement, integration design, migration design, and tests.
+- Existing public exports must remain stable: `createCard`, `reviewCard`, and `isDue`.
+- Do not touch `app-v34-codex-engine.html`, `app-v35-unified-study.html`, or HTML fallback engines as part of the engine-design step.
+- Parameter optimization is not part of the first V2 implementation. Use fixed parameters first, then consider optimization only after enough review history exists.
 - PR #38 / SRS v1 should be treated as frozen historical work unless reopened deliberately.
 
 ## Old documents warning
