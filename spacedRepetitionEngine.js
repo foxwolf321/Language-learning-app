@@ -1,123 +1,201 @@
-// Retention-curve spaced-repetition engine for the unified study app.
+// FSRS v2 scheduler adapter for the clean v36 study path.
 //
-// Status: v1 prototype under evidence-gate review.
-// This is a small ES module used by app-v35-unified-study.html. It intentionally
-// keeps the public exports createCard, reviewCard, and isDue so the browser UI,
-// card loading, and local progress saving can continue to work.
-//
-// The scheduler uses a transparent exponential retention model:
-//   R = exp(-elapsedDays / stabilityDays)
-//   nextIntervalDays = -stabilityDays * ln(targetRetention)
-// See docs/STUDY_ENGINE_V1_RETENTION_SPEC.md for the rationale and safe wording.
+// This module intentionally exposes only the app-facing API:
+// createCard(cardId, now?), reviewCard(cardState, rating, now?), isDue(cardState, now?).
+// It does not keep the v1 prototype scheduler in the production path.
 
-const DEFAULT_EASE = 2.5;
-const DEFAULT_STABILITY = 1.0;
-const TARGET_RETENTION = 0.9;
-const MS_PER_DAY = 24 * 60 * 60 * 1000;
-const MIN_STABILITY = 1.0;
-const MAX_STABILITY = 36500;
-const AGAIN_INTERVAL_DAYS = 10 / (24 * 60);
+import {
+  Rating,
+  State,
+  createEmptyCard,
+  fsrs,
+  generatorParameters,
+} from "./vendor/ts-fsrs/index.mjs";
 
-const HARD_STABILITY_MULTIPLIER = 1.2;
-const GOOD_STABILITY_MULTIPLIER = 1.7;
-const EASY_STABILITY_MULTIPLIER = 2.5;
+const ENGINE_VERSION = "fsrs-v2";
+const ENGINE_NAME = "ts-fsrs";
+const LIBRARY_VERSION = "5.2.3";
+const PARAMETER_PROFILE = "fsrs-v2-ts-fsrs-5.2.3-default-2026-06";
 
-function asDate(value) {
+const FSRS_PARAMETER_INPUT = Object.freeze({
+  request_retention: 0.9,
+  maximum_interval: 365,
+  enable_fuzz: true,
+  enable_short_term: true,
+  learning_steps: ["1m", "10m"],
+  relearning_steps: ["10m"],
+});
+
+const FSRS_PARAMETERS = generatorParameters(FSRS_PARAMETER_INPUT);
+const scheduler = fsrs(FSRS_PARAMETERS);
+
+const RATING_MAP = Object.freeze({
+  again: Rating.Again,
+  hard: Rating.Hard,
+  good: Rating.Good,
+  easy: Rating.Easy,
+});
+
+function asDate(value, fallback = new Date()) {
   if (value instanceof Date) return value;
-  const parsed = value ? new Date(value) : new Date();
-  return Number.isNaN(parsed.getTime()) ? new Date() : parsed;
+  if (typeof value === "number" || typeof value === "string") {
+    const parsed = new Date(value);
+    if (!Number.isNaN(parsed.getTime())) return parsed;
+  }
+  return fallback instanceof Date ? fallback : new Date(fallback);
 }
 
-function addDays(baseDate, days) {
-  return new Date(asDate(baseDate).getTime() + days * MS_PER_DAY);
+function iso(value) {
+  return asDate(value).toISOString();
 }
 
-function clamp(value, min, max) {
-  return Math.min(max, Math.max(min, value));
+function serialize(value) {
+  return JSON.parse(JSON.stringify(value));
 }
 
-function validTargetRetention(value) {
-  return Number.isFinite(value) && value > 0 && value < 1;
+function isFsrsV2Card(cardState) {
+  return cardState?.engine_version === ENGINE_VERSION &&
+    cardState?.engine_name === ENGINE_NAME &&
+    (cardState?.fsrs_card || cardState?.engine_state?.fsrs_card);
 }
 
-function nextIntervalFromRetention(stabilityDays, targetRetention) {
-  return -stabilityDays * Math.log(targetRetention);
-}
-
-function normalizeCard(card) {
-  const now = new Date();
-  const targetRetention = validTargetRetention(card?.targetRetention)
-    ? card.targetRetention
-    : TARGET_RETENTION;
-
+function fsrsCardFrom(cardState, now = new Date()) {
+  const source = cardState?.fsrs_card || cardState?.engine_state?.fsrs_card || createEmptyCard(now);
   return {
-    id: card?.id || "unknown-card",
-    repetitions: Number.isFinite(card?.repetitions) ? card.repetitions : 0,
-    interval: Number.isFinite(card?.interval) ? card.interval : 0,
-    easeFactor: Number.isFinite(card?.easeFactor) ? card.easeFactor : DEFAULT_EASE,
-    stability: Number.isFinite(card?.stability) ? Math.max(card.stability, MIN_STABILITY) : DEFAULT_STABILITY,
-    targetRetention,
-    due: asDate(card?.due || now),
-    lastReviewed: card?.lastReviewed ? asDate(card.lastReviewed) : null,
+    ...source,
+    due: asDate(source.due, now),
+    last_review: source.last_review ? asDate(source.last_review, now) : undefined,
   };
 }
 
-export function createCard(id) {
-  const now = new Date();
+function projectStateFromFsrsCard(fsrsCard) {
+  switch (fsrsCard.state) {
+    case State.New:
+      return "new";
+    case State.Learning:
+      return "learning";
+    case State.Review:
+      return "review";
+    case State.Relearning:
+      return "relearning";
+    default:
+      return "review";
+  }
+}
+
+function createState(cardId, fsrsCard, options = {}) {
+  const cleanFsrsCard = fsrsCardFrom({ fsrs_card: fsrsCard }, fsrsCard?.due || new Date());
+  const due = cleanFsrsCard.due;
+
   return {
-    id,
-    repetitions: 0,
-    interval: 0,
-    easeFactor: DEFAULT_EASE,
-    stability: DEFAULT_STABILITY,
-    targetRetention: TARGET_RETENTION,
-    due: now,
-    lastReviewed: null,
+    id: cardId,
+    card_id: cardId,
+    engine_version: ENGINE_VERSION,
+    engine_name: ENGINE_NAME,
+    library_version: LIBRARY_VERSION,
+    parameter_profile: PARAMETER_PROFILE,
+    parameter_summary: { ...FSRS_PARAMETER_INPUT },
+    due,
+    last_review: null,
+    review_count: 0,
+    lapse_count: 0,
+    state: projectStateFromFsrsCard(cleanFsrsCard),
+    fsrs_card: cleanFsrsCard,
+    engine_state: {
+      fsrs_card: cleanFsrsCard,
+    },
+    review_log: [],
+    ...(options.legacy_prototype_reset ? {
+      legacy_prototype_reset: true,
+      legacy_notice: "V36 uses a clean FSRS/V2 study history. Old prototype SRS state was not migrated.",
+    } : {}),
   };
 }
 
-export function isDue(card, now = new Date()) {
-  const c = normalizeCard(card);
-  return asDate(c.due).getTime() <= asDate(now).getTime();
-}
-
-export function reviewCard(card, quality, reviewedAt = new Date()) {
-  const c = normalizeCard(card);
-  const q = clamp(Number(quality) || 0, 0, 5);
-  const now = asDate(reviewedAt);
-
-  let repetitions = c.repetitions;
-  let interval = c.interval;
-  let stability = c.stability;
-
-  if (q <= 1) {
-    // Again = failure. Short relearning interval, not a long review interval.
-    repetitions = 0;
-    stability = clamp(stability * 0.5, MIN_STABILITY, MAX_STABILITY);
-    interval = AGAIN_INTERVAL_DAYS;
-  } else {
-    // Hard/Good/Easy are all successful retrievals. Hard is weak success and
-    // must not reset repetitions.
-    repetitions += 1;
-
-    const stabilityMultiplier = q === 2
-      ? HARD_STABILITY_MULTIPLIER
-      : q === 3 || q === 4
-        ? GOOD_STABILITY_MULTIPLIER
-        : EASY_STABILITY_MULTIPLIER;
-
-    stability = clamp(stability * stabilityMultiplier, MIN_STABILITY, MAX_STABILITY);
-    interval = nextIntervalFromRetention(stability, c.targetRetention);
+function ensureV2State(cardState, now = new Date()) {
+  if (isFsrsV2Card(cardState)) {
+    const fsrsCard = fsrsCardFrom(cardState, now);
+    return {
+      ...cardState,
+      id: cardState.id || cardState.card_id,
+      card_id: cardState.card_id || cardState.id,
+      due: asDate(cardState.due || fsrsCard.due, now),
+      last_review: cardState.last_review ? asDate(cardState.last_review, now) : null,
+      review_count: Number.isFinite(cardState.review_count) ? cardState.review_count : fsrsCard.reps || 0,
+      lapse_count: Number.isFinite(cardState.lapse_count) ? cardState.lapse_count : fsrsCard.lapses || 0,
+      state: cardState.state || projectStateFromFsrsCard(fsrsCard),
+      fsrs_card: fsrsCard,
+      engine_state: {
+        ...cardState.engine_state,
+        fsrs_card: fsrsCard,
+      },
+      review_log: Array.isArray(cardState.review_log) ? cardState.review_log : [],
+    };
   }
 
+  const cardId = cardState?.card_id || cardState?.id || "legacy-prototype-card";
+  return createState(cardId, createEmptyCard(now), { legacy_prototype_reset: true });
+}
+
+function normalizeRating(rating) {
+  if (typeof rating !== "string") {
+    throw new TypeError("FSRS v2 reviewCard expects rating to be one of: again, hard, good, easy.");
+  }
+
+  const normalized = rating.toLowerCase();
+  const fsrsRating = RATING_MAP[normalized];
+
+  if (!fsrsRating) {
+    throw new TypeError("Unknown FSRS v2 rating. Expected: again, hard, good, easy.");
+  }
+
+  return [normalized, fsrsRating];
+}
+
+export function createCard(cardId, now = new Date()) {
+  return createState(cardId, createEmptyCard(asDate(now)));
+}
+
+export function isDue(cardState, now = new Date()) {
+  const due = asDate(cardState?.due || cardState?.fsrs_card?.due || cardState?.engine_state?.fsrs_card?.due, now);
+  return due.getTime() <= asDate(now).getTime();
+}
+
+export function reviewCard(cardState, rating, now = new Date()) {
+  const reviewedAt = asDate(now);
+  const [normalizedRating, fsrsRating] = normalizeRating(rating);
+  const before = ensureV2State(cardState, reviewedAt);
+  const beforeFsrsCard = fsrsCardFrom(before, reviewedAt);
+  const result = scheduler.next(beforeFsrsCard, reviewedAt, fsrsRating);
+  const nextFsrsCard = fsrsCardFrom({ fsrs_card: result.card }, reviewedAt);
+  const reviewLog = Array.isArray(before.review_log) ? before.review_log : [];
+  const event = {
+    reviewed_at: iso(reviewedAt),
+    rating: normalizedRating,
+    fsrs_rating: fsrsRating,
+    previous_due: iso(before.due || beforeFsrsCard.due),
+    due: iso(nextFsrsCard.due),
+    state: projectStateFromFsrsCard(nextFsrsCard),
+    scheduled_days: nextFsrsCard.scheduled_days,
+    fsrs_log: serialize(result.log),
+  };
+
   return {
-    ...c,
-    repetitions,
-    interval,
-    easeFactor: c.easeFactor,
-    stability,
-    targetRetention: c.targetRetention,
-    due: addDays(now, interval),
-    lastReviewed: now,
+    ...before,
+    engine_version: ENGINE_VERSION,
+    engine_name: ENGINE_NAME,
+    library_version: LIBRARY_VERSION,
+    parameter_profile: PARAMETER_PROFILE,
+    parameter_summary: { ...FSRS_PARAMETER_INPUT },
+    due: nextFsrsCard.due,
+    last_review: reviewedAt,
+    review_count: before.review_count + 1,
+    lapse_count: before.lapse_count + (normalizedRating === "again" ? 1 : 0),
+    state: projectStateFromFsrsCard(nextFsrsCard),
+    fsrs_card: nextFsrsCard,
+    engine_state: {
+      fsrs_card: nextFsrsCard,
+    },
+    review_log: [...reviewLog, event],
   };
 }
