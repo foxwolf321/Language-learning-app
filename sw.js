@@ -1,9 +1,9 @@
-const CACHE_NAME = 'jft-ssw-stage1b-v7-codex-engine';
+const CACHE_NAME = 'jft-ssw-stage1b-v8-v35-unified';
 const APP_SHELL = [
   './',
   './index.html',
   './app-latest.html',
-  './app-v34-codex-engine.html',
+  './app-v35-unified-study.html',
   './spacedRepetitionEngine.js',
   './manifest.webmanifest',
   './data/deck_manifest.json',
@@ -63,11 +63,12 @@ self.addEventListener('fetch', (event) => {
   const isHtml = url.pathname.endsWith('/') ||
     url.pathname.endsWith('/index.html') ||
     url.pathname.endsWith('/app-latest.html') ||
+    url.pathname.endsWith('/app-v35-unified-study.html') ||
     url.pathname.endsWith('/app-v34-codex-engine.html') ||
     url.pathname.endsWith('/app-v34.html');
 
   if (isNavigation || isHtml) {
-    event.respondWith(networkFirst(request, './app-v34-codex-engine.html'));
+    event.respondWith(networkFirst(request, './app-v35-unified-study.html'));
     return;
   }
 
