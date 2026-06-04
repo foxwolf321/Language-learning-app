@@ -9,20 +9,33 @@
 <style>
 :root {
   color-scheme: light;
-  --bg: #f4f6f8;
-  --surface: #ffffff;
+  --bg: #eaf4ef;
+  --bg2: #fff1dd;
+  --surface: rgba(255, 255, 255, .95);
+  --solid: #ffffff;
   --surface-soft: #eef4f1;
-  --ink: #18212b;
-  --muted: #647180;
-  --line: #d7dee6;
-  --primary: #233f56;
-  --primary-2: #2d6f66;
-  --accent: #b9682e;
-  --danger: #a63d3d;
-  --warning: #8a650f;
-  --ok: #1f6f4a;
-  --shadow: 0 12px 32px rgba(28, 43, 58, .10);
-  --radius: 8px;
+  --ink: #14211d;
+  --muted: #64736e;
+  --line: rgba(30, 64, 55, .16);
+  --line-2: rgba(30, 64, 55, .34);
+  --primary: #214e43;
+  --primary-2: #2f6f5f;
+  --accent: #c36a35;
+  --danger: #a64242;
+  --warning: #9a6a20;
+  --ok: #24724f;
+  --easy: #1f6651;
+  --shadow: 0 18px 46px rgba(19, 50, 42, .16);
+  --radius: 22px;
+  --art-opacity: .38;
+  --art:
+    linear-gradient(180deg, rgba(247, 252, 255, .86) 0 30%, rgba(255, 255, 255, .48) 54%, rgba(255, 255, 255, .18)),
+    radial-gradient(ellipse at 42% 80%, rgba(203, 64, 42, .34) 0 5%, rgba(202, 66, 43, .24) 6% 9%, transparent 10%),
+    radial-gradient(ellipse at 48% 86%, transparent 0 18%, rgba(75, 58, 45, .20) 19% 20%, transparent 21%),
+    linear-gradient(118deg, transparent 0 48%, rgba(190, 53, 43, .32) 49% 51%, transparent 52%),
+    linear-gradient(64deg, transparent 0 48%, rgba(190, 53, 43, .26) 49% 51%, transparent 52%),
+    linear-gradient(0deg, rgba(77, 132, 133, .22) 0 20%, transparent 21%),
+    repeating-linear-gradient(90deg, transparent 0 54px, rgba(71, 103, 93, .09) 55px 57px, transparent 58px 118px);
 }
 
 * {
@@ -40,9 +53,22 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, .76), rgba(255, 255, 255, 0) 42%),
-    linear-gradient(135deg, #f4f6f8 0%, #edf4f1 46%, #f8f1e9 100%);
+    radial-gradient(circle at 14% 14%, rgba(255, 255, 255, .72), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(255, 205, 160, .34), transparent 32%),
+    linear-gradient(140deg, var(--bg), var(--bg2));
   background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--art-opacity);
+  background-image: var(--art);
+  background-size: cover;
+  background-position: center bottom;
 }
 
 button,
@@ -84,19 +110,19 @@ input {
 }
 
 .app {
-  width: min(1040px, 100%);
+  width: min(620px, 100%);
   margin: 0 auto;
-  padding: max(.75rem, env(safe-area-inset-top)) .85rem calc(1rem + env(safe-area-inset-bottom));
+  padding: max(.58rem, env(safe-area-inset-top)) .76rem calc(1rem + env(safe-area-inset-bottom));
 }
 
 .topbar {
   position: sticky;
   top: 0;
   z-index: 5;
-  margin: 0 -.85rem .8rem;
-  padding: max(.55rem, env(safe-area-inset-top)) .85rem .65rem;
-  background: rgba(244, 246, 248, .92);
-  border-bottom: 1px solid rgba(215, 222, 230, .72);
+  margin: 0 -.76rem .62rem;
+  padding: max(.46rem, env(safe-area-inset-top)) .76rem .52rem;
+  background: linear-gradient(180deg, rgba(234, 244, 239, .96), rgba(234, 244, 239, .78) 72%, rgba(234, 244, 239, 0));
+  border-bottom: 0;
   backdrop-filter: blur(10px);
 }
 
@@ -133,18 +159,20 @@ input {
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: .45rem;
-  margin-top: .65rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  gap: .42rem;
+  align-items: stretch;
+  margin-top: 0;
 }
 
 .stat {
-  min-height: 56px;
+  min-height: 50px;
   padding: .45rem .3rem;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, .82);
+  border-radius: 17px;
+  background: rgba(255, 255, 255, .78);
   text-align: center;
+  box-shadow: 0 6px 20px rgba(19, 50, 42, .07);
 }
 
 .stat strong {
@@ -164,10 +192,24 @@ input {
   text-transform: uppercase;
 }
 
+.answered-stat {
+  display: none;
+}
+
+.gear {
+  inline-size: 50px;
+  min-height: 50px;
+  padding: 0;
+  border-radius: 17px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1.16rem;
+}
+
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: .85rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .7rem;
   align-items: start;
 }
 
@@ -219,6 +261,8 @@ input {
 
 .study-card {
   overflow: hidden;
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
 }
 
 .card-head {
@@ -226,53 +270,57 @@ input {
   justify-content: space-between;
   gap: .6rem;
   align-items: center;
-  padding: .72rem .82rem;
-  background: var(--primary);
+  padding: .66rem .76rem;
+  background: rgba(33, 78, 67, .96);
   color: #fff;
 }
 
 .pill {
   display: inline-flex;
   align-items: center;
-  min-height: 30px;
+  justify-content: center;
+  gap: .35rem;
+  min-height: 32px;
   border: 1px solid rgba(255, 255, 255, .24);
   border-radius: 999px;
-  padding: .22rem .55rem;
-  background: rgba(255, 255, 255, .13);
+  padding: .32rem .58rem;
+  background: rgba(255, 255, 255, .16);
   color: inherit;
   font-size: .76rem;
-  font-weight: 900;
+  font-weight: 1000;
   white-space: nowrap;
 }
 
 .card-body {
   min-height: 360px;
-  padding: 1.05rem;
+  padding: 1rem .88rem;
+  background: rgba(255, 255, 255, .96);
 }
 
 .task-label {
   display: inline-flex;
-  margin: 0 0 .6rem;
+  align-items: center;
+  margin: 0 0 .52rem;
   padding: .2rem .52rem;
   border-radius: 999px;
-  background: #e7f1ee;
+  background: rgba(47, 111, 95, .10);
   color: var(--primary-2);
   font-size: .72rem;
-  font-weight: 950;
+  font-weight: 1000;
   letter-spacing: .04em;
   text-transform: uppercase;
 }
 
 .target {
   margin: 0;
-  font-size: clamp(2rem, 8vw, 3.8rem);
-  line-height: 1.15;
+  font-size: clamp(1.9rem, 11vw, 3.4rem);
+  line-height: 1.13;
   letter-spacing: 0;
   overflow-wrap: anywhere;
 }
 
 .target.compact {
-  font-size: clamp(1.45rem, 5.8vw, 2.35rem);
+  font-size: clamp(1.42rem, 6.2vw, 2.2rem);
 }
 
 .prompt {
@@ -342,7 +390,7 @@ input {
 }
 
 .tags {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: .36rem;
   margin-top: .8rem;
@@ -364,32 +412,42 @@ input {
   position: sticky;
   bottom: 0;
   z-index: 4;
-  margin-top: .75rem;
-  padding: .65rem .85rem calc(.7rem + env(safe-area-inset-bottom));
-  border: 1px solid rgba(215, 222, 230, .72);
-  border-radius: var(--radius);
-  background: rgba(244, 246, 248, .92);
+  margin: .7rem -.76rem 0;
+  padding: .56rem .76rem calc(.58rem + env(safe-area-inset-bottom));
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(0deg, rgba(234, 244, 239, .96), rgba(234, 244, 239, .80) 72%, rgba(234, 244, 239, 0));
   backdrop-filter: blur(10px);
 }
 
 .primary-action {
   display: block;
-  width: min(420px, 100%);
+  width: min(430px, 100%);
   margin: 0 auto;
   border-color: var(--primary);
+  border-radius: 999px;
   background: var(--primary);
   color: #fff;
 }
 
 .grade-row {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: .45rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .34rem;
+  flex-wrap: nowrap;
 }
 
 .grade-row button {
-  min-width: 0;
+  flex: 0 0 auto;
   min-height: 50px;
+  min-width: 0;
+  padding: .48rem .64rem;
+  border-radius: 999px;
+  background: var(--solid);
+  font-size: .88rem;
+  line-height: 1;
+  font-weight: 950;
 }
 
 .again {
@@ -408,7 +466,7 @@ input {
 }
 
 .easy {
-  color: var(--primary-2);
+  color: var(--easy);
   border-color: rgba(45, 111, 102, .35);
 }
 
@@ -424,10 +482,19 @@ input {
 .sidebar {
   display: grid;
   gap: .75rem;
+  margin: .5rem 0 .7rem;
+  padding: .82rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
 }
 
 .sidebar-section {
-  padding: .82rem;
+  padding: .72rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .62);
   box-shadow: none;
 }
 
@@ -530,10 +597,6 @@ input {
   .layout {
     grid-template-columns: 1fr;
   }
-
-  .sidebar {
-    order: -1;
-  }
 }
 
 @media (max-width: 520px) {
@@ -547,16 +610,15 @@ input {
   }
 
   .top-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto;
   }
 
   .top-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
   }
 
   .stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
   }
 
   .card-body {
@@ -569,8 +631,8 @@ input {
   }
 
   .grade-row button {
-    padding-inline: .38rem;
-    font-size: .86rem;
+    padding-inline: .5rem;
+    font-size: .82rem;
   }
 }
 </style>
@@ -578,21 +640,12 @@ input {
 <body>
 <main class="app">
   <header class="topbar">
-    <div class="top-grid">
-      <div class="brand">
-        <h1 class="brand-title">JFT/SSW Work-in-Japan Cards</h1>
-        <p class="brand-meta">v36 clean FSRS candidate</p>
-      </div>
-      <div class="top-actions">
-        <button type="button" id="toggleSettingsBtn" aria-controls="sidebar">Settings</button>
-        <button type="button" id="resetBtn">Reset progress</button>
-      </div>
-    </div>
     <section class="stats" aria-label="Study counts">
       <div class="stat"><strong id="newCount">0</strong><span>New</span></div>
-      <div class="stat"><strong id="dueCount">0</strong><span>Due</span></div>
+      <div class="stat"><strong id="dueCount">0</strong><span>Review</span></div>
       <div class="stat"><strong id="learningCount">0</strong><span>Learning</span></div>
-      <div class="stat"><strong id="answeredCount">0</strong><span>Answered</span></div>
+      <button type="button" class="gear" id="toggleSettingsBtn" aria-controls="sidebar" aria-expanded="false" aria-label="Settings">⚙</button>
+      <div class="stat answered-stat" hidden><strong id="answeredCount">0</strong><span>Answered</span></div>
     </section>
   </header>
 
@@ -651,6 +704,7 @@ input {
             <button type="button" id="romajiToggle">Romaji On</button>
             <button type="button" id="englishToggle">English On</button>
           </div>
+          <button type="button" id="resetBtn">Reset progress</button>
         </div>
       </section>
 
@@ -755,7 +809,7 @@ let appState = {
 let legacyProgressDetected = false;
 
 let ui = {
-  showSidebar: true,
+  showSidebar: false,
   showRomaji: true,
   showEnglish: true,
   mode: "all",
@@ -782,7 +836,7 @@ function normalizeUi() {
   ui.mode = ui.mode || "all";
   ui.section = ui.section || "all";
   ui.maxNew = Math.min(100, Math.max(1, Number.parseInt(ui.maxNew, 10) || 20));
-  ui.showSidebar = ui.showSidebar !== false;
+  ui.showSidebar = ui.showSidebar === true;
   ui.showRomaji = ui.showRomaji !== false;
   ui.showEnglish = ui.showEnglish !== false;
 }
@@ -794,6 +848,7 @@ function loadUi() {
     ui = { ...ui };
   }
   normalizeUi();
+  ui.showSidebar = false;
 }
 
 function saveUi() {
