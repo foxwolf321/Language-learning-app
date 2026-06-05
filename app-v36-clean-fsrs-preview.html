@@ -9,20 +9,33 @@
 <style>
 :root {
   color-scheme: light;
-  --bg: #f4f6f8;
-  --surface: #ffffff;
+  --bg: #eaf4ef;
+  --bg2: #fff1dd;
+  --surface: rgba(255, 255, 255, .95);
+  --solid: #ffffff;
   --surface-soft: #eef4f1;
-  --ink: #18212b;
-  --muted: #647180;
-  --line: #d7dee6;
-  --primary: #233f56;
-  --primary-2: #2d6f66;
-  --accent: #b9682e;
-  --danger: #a63d3d;
-  --warning: #8a650f;
-  --ok: #1f6f4a;
-  --shadow: 0 12px 32px rgba(28, 43, 58, .10);
-  --radius: 8px;
+  --ink: #14211d;
+  --muted: #64736e;
+  --line: rgba(30, 64, 55, .16);
+  --line-2: rgba(30, 64, 55, .34);
+  --primary: #214e43;
+  --primary-2: #2f6f5f;
+  --accent: #c36a35;
+  --danger: #a64242;
+  --warning: #9a6a20;
+  --ok: #24724f;
+  --easy: #1f6651;
+  --shadow: 0 18px 46px rgba(19, 50, 42, .16);
+  --radius: 22px;
+  --art-opacity: .38;
+  --art:
+    linear-gradient(180deg, rgba(247, 252, 255, .86) 0 30%, rgba(255, 255, 255, .48) 54%, rgba(255, 255, 255, .18)),
+    radial-gradient(ellipse at 42% 80%, rgba(203, 64, 42, .34) 0 5%, rgba(202, 66, 43, .24) 6% 9%, transparent 10%),
+    radial-gradient(ellipse at 48% 86%, transparent 0 18%, rgba(75, 58, 45, .20) 19% 20%, transparent 21%),
+    linear-gradient(118deg, transparent 0 48%, rgba(190, 53, 43, .32) 49% 51%, transparent 52%),
+    linear-gradient(64deg, transparent 0 48%, rgba(190, 53, 43, .26) 49% 51%, transparent 52%),
+    linear-gradient(0deg, rgba(77, 132, 133, .22) 0 20%, transparent 21%),
+    repeating-linear-gradient(90deg, transparent 0 54px, rgba(71, 103, 93, .09) 55px 57px, transparent 58px 118px);
 }
 
 * {
@@ -40,9 +53,49 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, .76), rgba(255, 255, 255, 0) 42%),
-    linear-gradient(135deg, #f4f6f8 0%, #edf4f1 46%, #f8f1e9 100%);
+    radial-gradient(circle at 14% 14%, rgba(255, 255, 255, .72), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(255, 205, 160, .34), transparent 32%),
+    linear-gradient(140deg, var(--bg), var(--bg2));
   background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--art-opacity);
+  background-image: var(--art);
+  background-size: cover;
+  background-position: center bottom;
+}
+
+body[data-wallpaper="daily"] {
+  --bg: #eaf4ef;
+  --bg2: #fff1dd;
+  --art-opacity: .38;
+}
+
+body[data-wallpaper="soft"] {
+  --bg: #f5efe8;
+  --bg2: #e9f3ef;
+  --art-opacity: .28;
+  --art:
+    linear-gradient(180deg, rgba(255, 255, 255, .88) 0 34%, rgba(255, 255, 255, .42) 68%, rgba(255, 255, 255, .18)),
+    radial-gradient(ellipse at 50% 90%, rgba(161, 73, 56, .22) 0 8%, transparent 9%),
+    linear-gradient(116deg, transparent 0 48%, rgba(104, 81, 63, .16) 49% 50%, transparent 51%),
+    repeating-linear-gradient(90deg, transparent 0 72px, rgba(84, 105, 94, .07) 73px 75px, transparent 76px 150px);
+}
+
+body[data-wallpaper="clean"] {
+  --bg: #f6f9f7;
+  --bg2: #eef4f2;
+  --art-opacity: .18;
+  --art:
+    linear-gradient(160deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .55)),
+    radial-gradient(circle at 16% 22%, rgba(78, 121, 110, .12), transparent 24%),
+    radial-gradient(circle at 80% 74%, rgba(196, 130, 77, .10), transparent 28%);
 }
 
 button,
@@ -84,19 +137,19 @@ input {
 }
 
 .app {
-  width: min(1040px, 100%);
+  width: min(620px, 100%);
   margin: 0 auto;
-  padding: max(.75rem, env(safe-area-inset-top)) .85rem calc(1rem + env(safe-area-inset-bottom));
+  padding: max(.58rem, env(safe-area-inset-top)) .76rem calc(1rem + env(safe-area-inset-bottom));
 }
 
 .topbar {
   position: sticky;
   top: 0;
   z-index: 5;
-  margin: 0 -.85rem .8rem;
-  padding: max(.55rem, env(safe-area-inset-top)) .85rem .65rem;
-  background: rgba(244, 246, 248, .92);
-  border-bottom: 1px solid rgba(215, 222, 230, .72);
+  margin: 0 -.76rem .62rem;
+  padding: max(.46rem, env(safe-area-inset-top)) .76rem .52rem;
+  background: linear-gradient(180deg, rgba(234, 244, 239, .96), rgba(234, 244, 239, .78) 72%, rgba(234, 244, 239, 0));
+  border-bottom: 0;
   backdrop-filter: blur(10px);
 }
 
@@ -133,18 +186,20 @@ input {
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: .45rem;
-  margin-top: .65rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  gap: .42rem;
+  align-items: stretch;
+  margin-top: 0;
 }
 
 .stat {
-  min-height: 56px;
+  min-height: 50px;
   padding: .45rem .3rem;
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, .82);
+  border-radius: 17px;
+  background: rgba(255, 255, 255, .78);
   text-align: center;
+  box-shadow: 0 6px 20px rgba(19, 50, 42, .07);
 }
 
 .stat strong {
@@ -164,10 +219,24 @@ input {
   text-transform: uppercase;
 }
 
+.answered-stat {
+  display: none;
+}
+
+.gear {
+  inline-size: 50px;
+  min-height: 50px;
+  padding: 0;
+  border-radius: 17px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1.16rem;
+}
+
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: .85rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .7rem;
   align-items: start;
 }
 
@@ -219,6 +288,8 @@ input {
 
 .study-card {
   overflow: hidden;
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
 }
 
 .card-head {
@@ -226,53 +297,57 @@ input {
   justify-content: space-between;
   gap: .6rem;
   align-items: center;
-  padding: .72rem .82rem;
-  background: var(--primary);
+  padding: .66rem .76rem;
+  background: rgba(33, 78, 67, .96);
   color: #fff;
 }
 
 .pill {
   display: inline-flex;
   align-items: center;
-  min-height: 30px;
+  justify-content: center;
+  gap: .35rem;
+  min-height: 32px;
   border: 1px solid rgba(255, 255, 255, .24);
   border-radius: 999px;
-  padding: .22rem .55rem;
-  background: rgba(255, 255, 255, .13);
+  padding: .32rem .58rem;
+  background: rgba(255, 255, 255, .16);
   color: inherit;
   font-size: .76rem;
-  font-weight: 900;
+  font-weight: 1000;
   white-space: nowrap;
 }
 
 .card-body {
   min-height: 360px;
-  padding: 1.05rem;
+  padding: 1rem .88rem;
+  background: rgba(255, 255, 255, .96);
 }
 
 .task-label {
   display: inline-flex;
-  margin: 0 0 .6rem;
+  align-items: center;
+  margin: 0 0 .52rem;
   padding: .2rem .52rem;
   border-radius: 999px;
-  background: #e7f1ee;
+  background: rgba(47, 111, 95, .10);
   color: var(--primary-2);
   font-size: .72rem;
-  font-weight: 950;
+  font-weight: 1000;
   letter-spacing: .04em;
   text-transform: uppercase;
 }
 
 .target {
   margin: 0;
-  font-size: clamp(2rem, 8vw, 3.8rem);
-  line-height: 1.15;
+  font-size: clamp(1.9rem, 11vw, 3.4rem);
+  line-height: 1.13;
   letter-spacing: 0;
   overflow-wrap: anywhere;
 }
 
 .target.compact {
-  font-size: clamp(1.45rem, 5.8vw, 2.35rem);
+  font-size: clamp(1.42rem, 6.2vw, 2.2rem);
 }
 
 .prompt {
@@ -342,7 +417,7 @@ input {
 }
 
 .tags {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: .36rem;
   margin-top: .8rem;
@@ -364,32 +439,42 @@ input {
   position: sticky;
   bottom: 0;
   z-index: 4;
-  margin-top: .75rem;
-  padding: .65rem .85rem calc(.7rem + env(safe-area-inset-bottom));
-  border: 1px solid rgba(215, 222, 230, .72);
-  border-radius: var(--radius);
-  background: rgba(244, 246, 248, .92);
+  margin: .7rem -.76rem 0;
+  padding: .56rem .76rem calc(.58rem + env(safe-area-inset-bottom));
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(0deg, rgba(234, 244, 239, .96), rgba(234, 244, 239, .80) 72%, rgba(234, 244, 239, 0));
   backdrop-filter: blur(10px);
 }
 
 .primary-action {
   display: block;
-  width: min(420px, 100%);
+  width: min(430px, 100%);
   margin: 0 auto;
   border-color: var(--primary);
+  border-radius: 999px;
   background: var(--primary);
   color: #fff;
 }
 
 .grade-row {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: .45rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .34rem;
+  flex-wrap: nowrap;
 }
 
 .grade-row button {
-  min-width: 0;
+  flex: 0 0 auto;
   min-height: 50px;
+  min-width: 0;
+  padding: .48rem .64rem;
+  border-radius: 999px;
+  background: var(--solid);
+  font-size: .88rem;
+  line-height: 1;
+  font-weight: 950;
 }
 
 .again {
@@ -408,7 +493,7 @@ input {
 }
 
 .easy {
-  color: var(--primary-2);
+  color: var(--easy);
   border-color: rgba(45, 111, 102, .35);
 }
 
@@ -424,10 +509,19 @@ input {
 .sidebar {
   display: grid;
   gap: .75rem;
+  margin: .5rem 0 .7rem;
+  padding: .82rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
 }
 
 .sidebar-section {
-  padding: .82rem;
+  padding: .72rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .62);
   box-shadow: none;
 }
 
@@ -460,6 +554,26 @@ input {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: .45rem;
+}
+
+.analysis-block {
+  display: grid;
+  gap: .35rem;
+  color: var(--muted);
+  font-size: .82rem;
+  font-weight: 720;
+}
+
+.analysis-block p {
+  margin: 0;
+}
+
+.analysis-block strong {
+  color: var(--primary);
+}
+
+.csv-action {
+  width: 100%;
 }
 
 .search {
@@ -530,10 +644,6 @@ input {
   .layout {
     grid-template-columns: 1fr;
   }
-
-  .sidebar {
-    order: -1;
-  }
 }
 
 @media (max-width: 520px) {
@@ -547,16 +657,15 @@ input {
   }
 
   .top-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto;
   }
 
   .top-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
   }
 
   .stats {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
   }
 
   .card-body {
@@ -569,8 +678,8 @@ input {
   }
 
   .grade-row button {
-    padding-inline: .38rem;
-    font-size: .86rem;
+    padding-inline: .5rem;
+    font-size: .82rem;
   }
 }
 </style>
@@ -578,21 +687,12 @@ input {
 <body>
 <main class="app">
   <header class="topbar">
-    <div class="top-grid">
-      <div class="brand">
-        <h1 class="brand-title">JFT/SSW Work-in-Japan Cards</h1>
-        <p class="brand-meta">v36 clean FSRS candidate</p>
-      </div>
-      <div class="top-actions">
-        <button type="button" id="toggleSettingsBtn" aria-controls="sidebar">Settings</button>
-        <button type="button" id="resetBtn">Reset progress</button>
-      </div>
-    </div>
     <section class="stats" aria-label="Study counts">
       <div class="stat"><strong id="newCount">0</strong><span>New</span></div>
-      <div class="stat"><strong id="dueCount">0</strong><span>Due</span></div>
+      <div class="stat"><strong id="dueCount">0</strong><span>Review</span></div>
       <div class="stat"><strong id="learningCount">0</strong><span>Learning</span></div>
-      <div class="stat"><strong id="answeredCount">0</strong><span>Answered</span></div>
+      <button type="button" class="gear" id="toggleSettingsBtn" aria-controls="sidebar" aria-expanded="false" aria-label="Settings">⚙</button>
+      <div class="stat answered-stat" hidden><strong id="answeredCount">0</strong><span>Answered</span></div>
     </section>
   </header>
 
@@ -637,20 +737,33 @@ input {
         <div class="control-grid">
           <div class="control-row">
             <label for="modeFilter">Mode</label>
-            <select id="modeFilter"><option value="all">All modes</option></select>
+            <select id="modeFilter"></select>
           </div>
           <div class="control-row">
             <label for="sectionFilter">Section</label>
-            <select id="sectionFilter"><option value="all">All sections</option></select>
+            <select id="sectionFilter"></select>
+          </div>
+          <div class="control-row">
+            <label for="wallpaperSelect">Wallpaper</label>
+            <select id="wallpaperSelect">
+              <option value="daily">Daily life</option>
+              <option value="soft">Soft traditional</option>
+              <option value="clean">Clean</option>
+            </select>
           </div>
           <div class="control-row">
             <label for="newLimitInput">New cards/session</label>
             <input id="newLimitInput" type="number" min="1" max="100" inputmode="numeric">
           </div>
           <div class="toggle-row">
+            <button type="button" id="readingToggle">Furigana Off</button>
+            <button type="button" id="answerReadingToggle">Answer Furigana Off</button>
+          </div>
+          <div class="toggle-row">
             <button type="button" id="romajiToggle">Romaji On</button>
             <button type="button" id="englishToggle">English On</button>
           </div>
+          <button type="button" id="resetBtn">Reset progress</button>
         </div>
       </section>
 
@@ -658,6 +771,36 @@ input {
         <h2>Engine</h2>
         <p id="engineStatus" class="muted">Checking spacedRepetitionEngine.js...</p>
         <p class="muted">Using createCard / reviewCard / isDue from the ES module.</p>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Study Stats</h2>
+        <div class="analysis-block" id="studyStats"></div>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Mode Stats</h2>
+        <div class="analysis-block" id="modeStats"></div>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Content Stats</h2>
+        <div class="analysis-block" id="contentStats"></div>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>FSRS Memory</h2>
+        <div class="analysis-block" id="fsrsMemory"></div>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Creator Analysis</h2>
+        <div class="analysis-block" id="creatorAnalysis"></div>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>CSV Export</h2>
+        <button type="button" class="csv-action" id="csvExportBtn">Export CSV</button>
       </section>
 
       <section class="sidebar-section">
@@ -675,6 +818,9 @@ const DEFAULT_PACK = "stage1b_id_validation";
 const STORAGE_KEY = "jft-ssw-stage1b-progress-v36-clean-fsrs";
 const UI_KEY = "jft-ssw-stage1b-ui-v36-clean-fsrs";
 const LEGACY_PROGRESS_KEYS = ["jft-ssw-stage1b-progress-v2"];
+const DEFAULT_MODE = "recognition";
+const DEFAULT_SECTION = "script_vocabulary";
+const DEFAULT_WALLPAPER = "daily";
 
 const MODE_LABELS = {
   recognition: "Recognition",
@@ -690,6 +836,12 @@ const SECTION_LABELS = {
   listening_comprehension: "Listening",
   reading_comprehension: "Reading",
   ssw_workplace_overlay: "SSW Workplace",
+};
+
+const WALLPAPER_LABELS = {
+  daily: "Daily life",
+  soft: "Soft traditional",
+  clean: "Clean",
 };
 
 const TASK_LABELS = {
@@ -731,10 +883,19 @@ const els = {
   statusLine: document.getElementById("statusLine"),
   modeFilter: document.getElementById("modeFilter"),
   sectionFilter: document.getElementById("sectionFilter"),
+  wallpaperSelect: document.getElementById("wallpaperSelect"),
   newLimitInput: document.getElementById("newLimitInput"),
+  readingToggle: document.getElementById("readingToggle"),
+  answerReadingToggle: document.getElementById("answerReadingToggle"),
   romajiToggle: document.getElementById("romajiToggle"),
   englishToggle: document.getElementById("englishToggle"),
   engineStatus: document.getElementById("engineStatus"),
+  studyStats: document.getElementById("studyStats"),
+  modeStats: document.getElementById("modeStats"),
+  contentStats: document.getElementById("contentStats"),
+  fsrsMemory: document.getElementById("fsrsMemory"),
+  creatorAnalysis: document.getElementById("creatorAnalysis"),
+  csvExportBtn: document.getElementById("csvExportBtn"),
   searchInput: document.getElementById("searchInput"),
   browseList: document.getElementById("browseList"),
 };
@@ -755,11 +916,14 @@ let appState = {
 let legacyProgressDetected = false;
 
 let ui = {
-  showSidebar: true,
-  showRomaji: true,
+  showSidebar: false,
+  showReading: false,
+  showAnswerReading: false,
+  showRomaji: false,
   showEnglish: true,
-  mode: "all",
-  section: "all",
+  mode: DEFAULT_MODE,
+  section: DEFAULT_SECTION,
+  wallpaper: DEFAULT_WALLPAPER,
   maxNew: 20,
 };
 
@@ -779,11 +943,14 @@ const example = (card, key) => lang(card.example, key);
 const humanize = (value) => field(value).replaceAll("_", " ");
 
 function normalizeUi() {
-  ui.mode = ui.mode || "all";
-  ui.section = ui.section || "all";
+  ui.mode = ui.mode && ui.mode !== "all" ? ui.mode : DEFAULT_MODE;
+  ui.section = ui.section && ui.section !== "all" ? ui.section : DEFAULT_SECTION;
+  ui.wallpaper = WALLPAPER_LABELS[ui.wallpaper] ? ui.wallpaper : DEFAULT_WALLPAPER;
   ui.maxNew = Math.min(100, Math.max(1, Number.parseInt(ui.maxNew, 10) || 20));
-  ui.showSidebar = ui.showSidebar !== false;
-  ui.showRomaji = ui.showRomaji !== false;
+  ui.showSidebar = ui.showSidebar === true;
+  ui.showReading = ui.showReading === true;
+  ui.showAnswerReading = ui.showAnswerReading === true;
+  ui.showRomaji = ui.showRomaji === true;
   ui.showEnglish = ui.showEnglish !== false;
 }
 
@@ -794,6 +961,7 @@ function loadUi() {
     ui = { ...ui };
   }
   normalizeUi();
+  ui.showSidebar = false;
 }
 
 function saveUi() {
@@ -911,8 +1079,8 @@ function isDueRecord(record, now = new Date()) {
 
 function baseFilteredCards() {
   return cards.filter((card) => (
-    (ui.mode === "all" || card.mode === ui.mode) &&
-    (ui.section === "all" || card.jft_section === ui.section)
+    card.mode === ui.mode &&
+    card.jft_section === ui.section
   ));
 }
 
@@ -961,25 +1129,43 @@ function nextState(rating, engineCard) {
 
 function populateFilters() {
   const modes = [...new Set(cards.map((card) => card.mode).filter(Boolean))];
-  const sections = [...new Set(cards.map((card) => card.jft_section).filter(Boolean))];
+  if (!modes.includes(ui.mode)) ui.mode = modes.includes(DEFAULT_MODE) ? DEFAULT_MODE : modes[0];
 
-  els.modeFilter.innerHTML = `<option value="all">All modes</option>${modes.map((mode) => (
+  els.modeFilter.innerHTML = modes.map((mode) => (
     `<option value="${escapeHtml(mode)}">${escapeHtml(MODE_LABELS[mode] || humanize(mode))}</option>`
-  )).join("")}`;
+  )).join("");
 
-  els.sectionFilter.innerHTML = `<option value="all">All sections</option>${sections.map((section) => (
+  populateSectionFilter();
+}
+
+function sectionsForMode(mode) {
+  return [...new Set(cards
+    .filter((card) => card.mode === mode)
+    .map((card) => card.jft_section)
+    .filter(Boolean))];
+}
+
+function populateSectionFilter() {
+  const sections = sectionsForMode(ui.mode);
+  if (!sections.includes(ui.section)) ui.section = sections.includes(DEFAULT_SECTION) ? DEFAULT_SECTION : sections[0];
+
+  els.sectionFilter.innerHTML = sections.map((section) => (
     `<option value="${escapeHtml(section)}">${escapeHtml(SECTION_LABELS[section] || humanize(section))}</option>`
-  )).join("")}`;
+  )).join("");
 }
 
 function applyUi() {
   normalizeUi();
+  document.body.dataset.wallpaper = ui.wallpaper;
   els.sidebar.hidden = !ui.showSidebar;
   els.legacyProgressAlert.hidden = !legacyProgressDetected;
   els.toggleSettingsBtn.setAttribute("aria-expanded", String(ui.showSidebar));
   els.modeFilter.value = ui.mode;
   els.sectionFilter.value = ui.section;
+  els.wallpaperSelect.value = ui.wallpaper;
   els.newLimitInput.value = ui.maxNew;
+  els.readingToggle.textContent = `Furigana ${ui.showReading ? "On" : "Off"}`;
+  els.answerReadingToggle.textContent = `Answer Furigana ${ui.showAnswerReading ? "On" : "Off"}`;
   els.romajiToggle.textContent = `Romaji ${ui.showRomaji ? "On" : "Off"}`;
   els.englishToggle.textContent = `English ${ui.showEnglish ? "On" : "Off"}`;
 
@@ -997,6 +1183,7 @@ function render() {
   selectCurrentCard();
   renderStats();
   renderCard();
+  renderAnalysis();
   renderBrowse();
 }
 
@@ -1018,6 +1205,56 @@ function renderStats() {
   els.dueCount.textContent = String(due.length);
   els.learningCount.textContent = String(learning);
   els.answeredCount.textContent = String(answered);
+}
+
+function countBy(items, labelFor) {
+  const counts = new Map();
+  for (const item of items) {
+    const label = labelFor(item) || "Unknown";
+    counts.set(label, (counts.get(label) || 0) + 1);
+  }
+  return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+}
+
+function analysisRows(rows) {
+  return rows.map(([label, value]) => (
+    `<p><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></p>`
+  )).join("");
+}
+
+function renderAnalysis() {
+  const base = baseFilteredCards();
+  const progressRecords = Object.values(appState.progress).map((record) => normalizeRecord(record, record.card_id));
+  const reviewedRecords = progressRecords.filter((record) => (
+    record.last_reviewed_at || record.history.length || record.right_count || record.wrong_count
+  ));
+  const scheduledRecords = progressRecords.filter((record) => record.engine);
+  const stateCounts = countBy(base, (card) => stateFor(card.id));
+  const modeCounts = countBy(cards, (card) => MODE_LABELS[card.mode] || humanize(card.mode));
+  const sectionCounts = countBy(cards, (card) => SECTION_LABELS[card.jft_section] || humanize(card.jft_section));
+  const scenarioCount = new Set(cards.map((card) => card.scenario).filter(Boolean)).size;
+
+  els.studyStats.innerHTML = analysisRows([
+    ["Loaded cards", cards.length],
+    ["Selected cards", base.length],
+    ["Reviewed cards", reviewedRecords.length],
+    ["Answered in selected mode", Number(els.answeredCount.textContent) || 0],
+  ]);
+
+  els.modeStats.innerHTML = analysisRows(modeCounts);
+  els.contentStats.innerHTML = analysisRows(sectionCounts);
+  els.fsrsMemory.innerHTML = analysisRows([
+    ["Engine", engine.ready ? "Connected" : "Stopped"],
+    ["Scheduled records", scheduledRecords.length],
+    ["Due now", dueCards().length],
+    ["Current card", appState.currentId || "None"],
+  ]);
+  els.creatorAnalysis.innerHTML = analysisRows([
+    ["Modes", modeCounts.length],
+    ["Sections", sectionCounts.length],
+    ["Scenarios", scenarioCount],
+    ["Selected states", stateCounts.map(([label, count]) => `${label}: ${count}`).join(", ") || "None"],
+  ]);
 }
 
 function renderCard() {
@@ -1065,7 +1302,7 @@ function taskLabel(card) {
 }
 
 function readingLine(card) {
-  return card.reading ? `<p class="reading">${escapeHtml(card.reading)}</p>` : "";
+  return ui.showReading && card.reading ? `<p class="reading">${escapeHtml(card.reading)}</p>` : "";
 }
 
 function romajiLine(card) {
@@ -1077,12 +1314,7 @@ function englishLine(value) {
 }
 
 function tags(card) {
-  const values = [
-    MODE_LABELS[card.mode] || humanize(card.mode),
-    SECTION_LABELS[card.jft_section] || humanize(card.jft_section),
-    humanize(card.scenario),
-  ].filter(Boolean);
-  return `<div class="tags">${values.map((value) => `<span class="tag">${escapeHtml(value)}</span>`).join("")}</div>`;
+  return "";
 }
 
 function renderFront(card) {
@@ -1122,10 +1354,10 @@ function renderBack(card) {
 
   const top = card.mode === "recognition"
     ? `<p class="meaning">${escapeHtml(answerId)}</p>${englishLine(answerEn)}`
-    : `<h2 class="target compact">${escapeHtml(answerJa)}</h2>${answerReading ? `<p class="reading">${escapeHtml(answerReading)}</p>` : ""}${romajiLine(card)}<p class="meaning">${escapeHtml(answerId)}</p>${englishLine(answerEn)}`;
+    : `<h2 class="target compact">${escapeHtml(answerJa)}</h2>${ui.showAnswerReading && answerReading ? `<p class="reading">${escapeHtml(answerReading)}</p>` : ""}${romajiLine(card)}<p class="meaning">${escapeHtml(answerId)}</p>${englishLine(answerEn)}`;
 
   const exampleBlock = exampleJa || exampleKana || exampleId || exampleEn
-    ? `<div class="example">${exampleJa ? `<p class="example-ja">${escapeHtml(exampleJa)}</p>` : ""}${exampleKana ? `<p class="romaji">${escapeHtml(exampleKana)}</p>` : ""}${exampleId ? `<p class="example-id">${escapeHtml(exampleId)}</p>` : ""}${ui.showEnglish && exampleEn ? `<p class="example-id">${escapeHtml(exampleEn)}</p>` : ""}</div>`
+    ? `<div class="example">${exampleJa ? `<p class="example-ja">${escapeHtml(exampleJa)}</p>` : ""}${ui.showAnswerReading && exampleKana ? `<p class="reading">${escapeHtml(exampleKana)}</p>` : ""}${exampleId ? `<p class="example-id">${escapeHtml(exampleId)}</p>` : ""}${ui.showEnglish && exampleEn ? `<p class="example-id">${escapeHtml(exampleEn)}</p>` : ""}</div>`
     : "";
 
   return `${top}${exampleBlock}${note ? `<p class="note">${escapeHtml(note)}</p>` : ""}`;
@@ -1156,6 +1388,46 @@ function renderBrowse() {
       <span class="browse-meta">${escapeHtml(card.id)} · ${escapeHtml(MODE_LABELS[card.mode] || humanize(card.mode))} · ${escapeHtml(SECTION_LABELS[card.jft_section] || humanize(card.jft_section))}</span>
     </button>`
   )).join("") || `<p class="muted">No matching cards.</p>`;
+}
+
+function csvCell(value) {
+  return `"${String(value ?? "").replaceAll("\"", "\"\"")}"`;
+}
+
+function exportCsv() {
+  const header = [
+    "card_id",
+    "mode",
+    "section",
+    "state",
+    "right_count",
+    "wrong_count",
+    "last_reviewed_at",
+    "next_due_at",
+  ];
+  const rows = cards.map((card) => {
+    const record = normalizeRecord(recordFor(card.id), card.id);
+    return [
+      card.id,
+      card.mode,
+      card.jft_section,
+      record.state,
+      record.right_count,
+      record.wrong_count,
+      record.last_reviewed_at,
+      record.next_due_at,
+    ];
+  });
+  const csv = [header, ...rows].map((row) => row.map(csvCell).join(",")).join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "v36-preview-progress.csv";
+  document.body.append(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
 }
 
 function setStatus(message) {
@@ -1292,6 +1564,7 @@ els.easyBtn.addEventListener("click", () => reviewCurrent("easy"));
 
 els.modeFilter.addEventListener("change", (event) => {
   ui.mode = event.target.value;
+  populateSectionFilter();
   appState.currentId = null;
   showBack = false;
   saveUi();
@@ -1314,6 +1587,24 @@ els.newLimitInput.addEventListener("change", (event) => {
   render();
 });
 
+els.wallpaperSelect.addEventListener("change", (event) => {
+  ui.wallpaper = event.target.value;
+  saveUi();
+  render();
+});
+
+els.readingToggle.addEventListener("click", () => {
+  ui.showReading = !ui.showReading;
+  saveUi();
+  render();
+});
+
+els.answerReadingToggle.addEventListener("click", () => {
+  ui.showAnswerReading = !ui.showAnswerReading;
+  saveUi();
+  render();
+});
+
 els.romajiToggle.addEventListener("click", () => {
   ui.showRomaji = !ui.showRomaji;
   saveUi();
@@ -1327,6 +1618,8 @@ els.englishToggle.addEventListener("click", () => {
 });
 
 els.searchInput.addEventListener("input", renderBrowse);
+
+els.csvExportBtn.addEventListener("click", exportCsv);
 
 els.browseList.addEventListener("click", (event) => {
   const row = event.target.closest("[data-card-id]");
