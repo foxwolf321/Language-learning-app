@@ -1,0 +1,1374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#233f56">
+<title>JFT/SSW Work-in-Japan Cards v36 Clean FSRS</title>
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --surface-soft: #eef4f1;
+  --ink: #18212b;
+  --muted: #647180;
+  --line: #d7dee6;
+  --primary: #233f56;
+  --primary-2: #2d6f66;
+  --accent: #b9682e;
+  --danger: #a63d3d;
+  --warning: #8a650f;
+  --ok: #1f6f4a;
+  --shadow: 0 12px 32px rgba(28, 43, 58, .10);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .76), rgba(255, 255, 255, 0) 42%),
+    linear-gradient(135deg, #f4f6f8 0%, #edf4f1 46%, #f8f1e9 100%);
+  background-attachment: fixed;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+select,
+input {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+button,
+select {
+  min-height: 42px;
+  padding: .58rem .72rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button:hover,
+select:hover {
+  border-color: var(--primary-2);
+}
+
+button:disabled {
+  cursor: default;
+  opacity: .56;
+}
+
+input {
+  min-height: 42px;
+  padding: .55rem .68rem;
+}
+
+.app {
+  width: min(1040px, 100%);
+  margin: 0 auto;
+  padding: max(.75rem, env(safe-area-inset-top)) .85rem calc(1rem + env(safe-area-inset-bottom));
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -.85rem .8rem;
+  padding: max(.55rem, env(safe-area-inset-top)) .85rem .65rem;
+  background: rgba(244, 246, 248, .92);
+  border-bottom: 1px solid rgba(215, 222, 230, .72);
+  backdrop-filter: blur(10px);
+}
+
+.top-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .7rem;
+  align-items: center;
+}
+
+.brand {
+  min-width: 0;
+}
+
+.brand-title {
+  margin: 0;
+  color: var(--primary);
+  font-size: clamp(1rem, 4vw, 1.35rem);
+  line-height: 1.2;
+  font-weight: 950;
+}
+
+.brand-meta {
+  margin: .15rem 0 0;
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 760;
+}
+
+.top-actions {
+  display: flex;
+  gap: .45rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .45rem;
+  margin-top: .65rem;
+}
+
+.stat {
+  min-height: 56px;
+  padding: .45rem .3rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .82);
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  color: var(--primary);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.stat span {
+  display: block;
+  margin-top: .22rem;
+  color: var(--muted);
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: .85rem;
+  align-items: start;
+}
+
+.panel,
+.study-card,
+.sidebar-section,
+.engine-alert {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .94);
+  box-shadow: var(--shadow);
+}
+
+.engine-alert {
+  margin-bottom: .75rem;
+  padding: .8rem .9rem;
+  border-color: rgba(166, 61, 61, .34);
+  background: #fff7f6;
+}
+
+.engine-alert strong {
+  color: var(--danger);
+}
+
+.engine-alert p {
+  margin: .25rem 0 0;
+  color: #704242;
+  font-weight: 720;
+}
+
+.prototype-alert {
+  margin-bottom: .75rem;
+  padding: .8rem .9rem;
+  border: 1px solid rgba(185, 104, 46, .34);
+  border-radius: var(--radius);
+  background: #fffaf2;
+  box-shadow: var(--shadow);
+}
+
+.prototype-alert strong {
+  color: var(--accent);
+}
+
+.prototype-alert p {
+  margin: .25rem 0 0;
+  color: #6f4d25;
+  font-weight: 720;
+}
+
+.study-card {
+  overflow: hidden;
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: .6rem;
+  align-items: center;
+  padding: .72rem .82rem;
+  background: var(--primary);
+  color: #fff;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  border: 1px solid rgba(255, 255, 255, .24);
+  border-radius: 999px;
+  padding: .22rem .55rem;
+  background: rgba(255, 255, 255, .13);
+  color: inherit;
+  font-size: .76rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.card-body {
+  min-height: 360px;
+  padding: 1.05rem;
+}
+
+.task-label {
+  display: inline-flex;
+  margin: 0 0 .6rem;
+  padding: .2rem .52rem;
+  border-radius: 999px;
+  background: #e7f1ee;
+  color: var(--primary-2);
+  font-size: .72rem;
+  font-weight: 950;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.target {
+  margin: 0;
+  font-size: clamp(2rem, 8vw, 3.8rem);
+  line-height: 1.15;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.target.compact {
+  font-size: clamp(1.45rem, 5.8vw, 2.35rem);
+}
+
+.prompt {
+  margin: 0;
+  font-size: clamp(1.25rem, 4.8vw, 2rem);
+  line-height: 1.35;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.reading {
+  margin: .55rem 0 0;
+  color: var(--primary-2);
+  font-size: 1.1rem;
+  font-weight: 820;
+  overflow-wrap: anywhere;
+}
+
+.romaji,
+.muted,
+.example-id,
+.note {
+  color: var(--muted);
+}
+
+.romaji {
+  margin: .2rem 0 0;
+  font-weight: 720;
+  overflow-wrap: anywhere;
+}
+
+.answer {
+  margin-top: .95rem;
+  padding-top: .95rem;
+  border-top: 2px solid var(--line);
+}
+
+.meaning {
+  margin: 0;
+  color: var(--primary);
+  font-size: clamp(1.2rem, 4.6vw, 1.8rem);
+  font-weight: 940;
+  overflow-wrap: anywhere;
+}
+
+.example {
+  margin-top: .85rem;
+  padding: .75rem .82rem;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  background: #fffaf4;
+}
+
+.example-ja {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 820;
+  overflow-wrap: anywhere;
+}
+
+.example-id,
+.note {
+  margin: .35rem 0 0;
+  font-weight: 700;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .36rem;
+  margin-top: .8rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: .16rem .46rem;
+  border-radius: 999px;
+  background: #edf1f5;
+  color: #34495e;
+  font-size: .72rem;
+  font-weight: 850;
+}
+
+.actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+  margin-top: .75rem;
+  padding: .65rem .85rem calc(.7rem + env(safe-area-inset-bottom));
+  border: 1px solid rgba(215, 222, 230, .72);
+  border-radius: var(--radius);
+  background: rgba(244, 246, 248, .92);
+  backdrop-filter: blur(10px);
+}
+
+.primary-action {
+  display: block;
+  width: min(420px, 100%);
+  margin: 0 auto;
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+.grade-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .45rem;
+}
+
+.grade-row button {
+  min-width: 0;
+  min-height: 50px;
+}
+
+.again {
+  color: var(--danger);
+  border-color: rgba(166, 61, 61, .35);
+}
+
+.hard {
+  color: var(--warning);
+  border-color: rgba(138, 101, 15, .35);
+}
+
+.good {
+  color: var(--ok);
+  border-color: rgba(31, 111, 74, .35);
+}
+
+.easy {
+  color: var(--primary-2);
+  border-color: rgba(45, 111, 102, .35);
+}
+
+.status-line {
+  min-height: 1.35rem;
+  margin: .55rem 0 0;
+  color: var(--muted);
+  font-size: .84rem;
+  font-weight: 740;
+  text-align: center;
+}
+
+.sidebar {
+  display: grid;
+  gap: .75rem;
+}
+
+.sidebar-section {
+  padding: .82rem;
+  box-shadow: none;
+}
+
+.sidebar-section h2 {
+  margin: 0 0 .6rem;
+  color: var(--primary);
+  font-size: .95rem;
+}
+
+.control-grid {
+  display: grid;
+  gap: .55rem;
+}
+
+.control-row {
+  display: grid;
+  gap: .28rem;
+}
+
+.control-row label,
+.control-row .label {
+  color: var(--muted);
+  font-size: .76rem;
+  font-weight: 900;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+.toggle-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .45rem;
+}
+
+.search {
+  width: 100%;
+  margin-bottom: .55rem;
+}
+
+.browse-list {
+  display: grid;
+  gap: .42rem;
+  max-height: 420px;
+  overflow: auto;
+}
+
+.browse-item {
+  width: 100%;
+  min-height: auto;
+  padding: .58rem .62rem;
+  text-align: left;
+}
+
+.browse-title {
+  display: block;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.browse-meta {
+  display: block;
+  margin-top: .12rem;
+  color: var(--muted);
+  font-size: .74rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.engine-ok {
+  color: var(--ok);
+  font-weight: 850;
+}
+
+.engine-bad {
+  color: var(--danger);
+  font-weight: 850;
+}
+
+.empty {
+  padding: 1rem 0;
+}
+
+.empty h2 {
+  margin: 0 0 .35rem;
+  color: var(--primary);
+  font-size: 1.25rem;
+}
+
+.empty p {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 720;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    order: -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .app {
+    padding-inline: .65rem;
+  }
+
+  .topbar {
+    margin-inline: -.65rem;
+    padding-inline: .65rem;
+  }
+
+  .top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .top-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .card-body {
+    min-height: 330px;
+    padding: .9rem;
+  }
+
+  .grade-row {
+    gap: .3rem;
+  }
+
+  .grade-row button {
+    padding-inline: .38rem;
+    font-size: .86rem;
+  }
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="topbar">
+    <div class="top-grid">
+      <div class="brand">
+        <h1 class="brand-title">JFT/SSW Work-in-Japan Cards</h1>
+        <p class="brand-meta">v36 clean FSRS candidate</p>
+      </div>
+      <div class="top-actions">
+        <button type="button" id="toggleSettingsBtn" aria-controls="sidebar">Settings</button>
+        <button type="button" id="resetBtn">Reset progress</button>
+      </div>
+    </div>
+    <section class="stats" aria-label="Study counts">
+      <div class="stat"><strong id="newCount">0</strong><span>New</span></div>
+      <div class="stat"><strong id="dueCount">0</strong><span>Due</span></div>
+      <div class="stat"><strong id="learningCount">0</strong><span>Learning</span></div>
+      <div class="stat"><strong id="answeredCount">0</strong><span>Answered</span></div>
+    </section>
+  </header>
+
+  <section class="engine-alert" id="engineAlert" role="alert" hidden>
+    <strong>FSRS engine unavailable.</strong>
+    <p id="engineAlertText">Study controls are disabled until spacedRepetitionEngine.js loads successfully.</p>
+  </section>
+
+  <section class="prototype-alert" id="legacyProgressAlert" hidden>
+    <strong>旧プロトタイプ学習データがあります。</strong>
+    <p>V36では新しい学習履歴を使います。旧データは読み込まず、複雑な移行も行いません。</p>
+  </section>
+
+  <div class="layout">
+    <section>
+      <article class="study-card" aria-live="polite">
+        <div class="card-head">
+          <span class="pill" id="cardPosition">Card 0/0</span>
+          <span class="pill" id="cardState">Loading</span>
+        </div>
+        <div class="card-body">
+          <section id="frontFace"></section>
+          <section class="answer" id="backFace" hidden></section>
+        </div>
+      </article>
+
+      <nav class="actions" aria-label="Study actions">
+        <button type="button" class="primary-action" id="showAnswerBtn" disabled>Show answer</button>
+        <div class="grade-row" id="gradeRow" hidden>
+          <button type="button" class="again" id="againBtn">Again</button>
+          <button type="button" class="hard" id="hardBtn">Hard</button>
+          <button type="button" class="good" id="goodBtn">Good</button>
+          <button type="button" class="easy" id="easyBtn">Easy</button>
+        </div>
+        <p class="status-line" id="statusLine" role="status"></p>
+      </nav>
+    </section>
+
+    <aside class="sidebar" id="sidebar">
+      <section class="sidebar-section">
+        <h2>Filters</h2>
+        <div class="control-grid">
+          <div class="control-row">
+            <label for="modeFilter">Mode</label>
+            <select id="modeFilter"><option value="all">All modes</option></select>
+          </div>
+          <div class="control-row">
+            <label for="sectionFilter">Section</label>
+            <select id="sectionFilter"><option value="all">All sections</option></select>
+          </div>
+          <div class="control-row">
+            <label for="newLimitInput">New cards/session</label>
+            <input id="newLimitInput" type="number" min="1" max="100" inputmode="numeric">
+          </div>
+          <div class="toggle-row">
+            <button type="button" id="romajiToggle">Romaji On</button>
+            <button type="button" id="englishToggle">English On</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Engine</h2>
+        <p id="engineStatus" class="muted">Checking spacedRepetitionEngine.js...</p>
+        <p class="muted">Using createCard / reviewCard / isDue from the ES module.</p>
+      </section>
+
+      <section class="sidebar-section">
+        <h2>Browse</h2>
+        <input class="search" id="searchInput" type="search" placeholder="Search cards" aria-label="Search cards">
+        <div class="browse-list" id="browseList"></div>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<script type="module">
+const MANIFEST_URL = "data/deck_manifest.json";
+const DEFAULT_PACK = "stage1b_id_validation";
+const STORAGE_KEY = "jft-ssw-stage1b-progress-v36-clean-fsrs";
+const UI_KEY = "jft-ssw-stage1b-ui-v36-clean-fsrs";
+const LEGACY_PROGRESS_KEYS = ["jft-ssw-stage1b-progress-v2"];
+
+const MODE_LABELS = {
+  recognition: "Recognition",
+  production: "Production",
+  kanji_sign_reading: "Kanji / Sign",
+  listening_ready: "Listening",
+  information_search_mini: "Information Search",
+};
+
+const SECTION_LABELS = {
+  script_vocabulary: "Script & Vocabulary",
+  conversation_expression: "Conversation",
+  listening_comprehension: "Listening",
+  reading_comprehension: "Reading",
+  ssw_workplace_overlay: "SSW Workplace",
+};
+
+const TASK_LABELS = {
+  recognition: "Meaning",
+  production: "Say it in Japanese",
+  kanji_sign_reading: "Read the sign",
+  listening_ready: "Audio-ready sentence",
+  information_search_mini: "Find the information",
+};
+
+const REVIEW_RATINGS = {
+  again: "again",
+  hard: "hard",
+  good: "good",
+  easy: "easy",
+};
+
+const els = {
+  toggleSettingsBtn: document.getElementById("toggleSettingsBtn"),
+  resetBtn: document.getElementById("resetBtn"),
+  sidebar: document.getElementById("sidebar"),
+  engineAlert: document.getElementById("engineAlert"),
+  engineAlertText: document.getElementById("engineAlertText"),
+  legacyProgressAlert: document.getElementById("legacyProgressAlert"),
+  newCount: document.getElementById("newCount"),
+  dueCount: document.getElementById("dueCount"),
+  learningCount: document.getElementById("learningCount"),
+  answeredCount: document.getElementById("answeredCount"),
+  cardPosition: document.getElementById("cardPosition"),
+  cardState: document.getElementById("cardState"),
+  frontFace: document.getElementById("frontFace"),
+  backFace: document.getElementById("backFace"),
+  showAnswerBtn: document.getElementById("showAnswerBtn"),
+  gradeRow: document.getElementById("gradeRow"),
+  againBtn: document.getElementById("againBtn"),
+  hardBtn: document.getElementById("hardBtn"),
+  goodBtn: document.getElementById("goodBtn"),
+  easyBtn: document.getElementById("easyBtn"),
+  statusLine: document.getElementById("statusLine"),
+  modeFilter: document.getElementById("modeFilter"),
+  sectionFilter: document.getElementById("sectionFilter"),
+  newLimitInput: document.getElementById("newLimitInput"),
+  romajiToggle: document.getElementById("romajiToggle"),
+  englishToggle: document.getElementById("englishToggle"),
+  engineStatus: document.getElementById("engineStatus"),
+  searchInput: document.getElementById("searchInput"),
+  browseList: document.getElementById("browseList"),
+};
+
+let cards = [];
+let showBack = false;
+let engine = {
+  api: null,
+  ready: false,
+  error: "",
+};
+
+let appState = {
+  currentId: null,
+  progress: {},
+};
+
+let legacyProgressDetected = false;
+
+let ui = {
+  showSidebar: true,
+  showRomaji: true,
+  showEnglish: true,
+  mode: "all",
+  section: "all",
+  maxNew: 20,
+};
+
+const escapeHtml = (value) => String(value ?? "").replace(/[&<>"]/g, (char) => ({
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  "\"": "&quot;",
+}[char]));
+
+const field = (value) => value == null ? "" : String(value);
+const lang = (object, key) => field(object && object[key]);
+const meaning = (card, key) => lang(card.meaning, key);
+const promptText = (card, key) => lang(card.prompt, key);
+const expected = (card, key) => lang(card.expected_answer, key);
+const example = (card, key) => lang(card.example, key);
+const humanize = (value) => field(value).replaceAll("_", " ");
+
+function normalizeUi() {
+  ui.mode = ui.mode || "all";
+  ui.section = ui.section || "all";
+  ui.maxNew = Math.min(100, Math.max(1, Number.parseInt(ui.maxNew, 10) || 20));
+  ui.showSidebar = ui.showSidebar !== false;
+  ui.showRomaji = ui.showRomaji !== false;
+  ui.showEnglish = ui.showEnglish !== false;
+}
+
+function loadUi() {
+  try {
+    ui = { ...ui, ...JSON.parse(localStorage.getItem(UI_KEY) || "{}") };
+  } catch {
+    ui = { ...ui };
+  }
+  normalizeUi();
+}
+
+function saveUi() {
+  normalizeUi();
+  localStorage.setItem(UI_KEY, JSON.stringify(ui));
+}
+
+function normalizeRecord(record, cardId) {
+  const source = record && typeof record === "object" ? record : {};
+  return {
+    card_id: source.card_id || cardId,
+    state: source.state || "new",
+    wrong_count: Number.isFinite(source.wrong_count) ? source.wrong_count : 0,
+    right_count: Number.isFinite(source.right_count) ? source.right_count : 0,
+    last_reviewed_at: source.last_reviewed_at || null,
+    next_due_at: source.next_due_at || null,
+    history: Array.isArray(source.history) ? source.history : [],
+    engine: source.engine || null,
+  };
+}
+
+function loadProgress() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    const progress = saved.progress && typeof saved.progress === "object" ? saved.progress : {};
+    appState = {
+      currentId: saved.currentId || null,
+      progress: Object.fromEntries(Object.entries(progress).map(([id, record]) => [id, normalizeRecord(record, id)])),
+    };
+  } catch {
+    appState = { currentId: null, progress: {} };
+  }
+}
+
+function saveProgress() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    schema_version: 3,
+    scheduler_generation: "fsrs-v2-clean-break",
+    scheduler_module: "spacedRepetitionEngine.js",
+    scheduler_api: ["createCard", "reviewCard", "isDue"],
+    deck_id: "jft_ssw_work_japan",
+    pack_id: DEFAULT_PACK,
+    currentId: appState.currentId,
+    progress: appState.progress,
+    updatedAt: new Date().toISOString(),
+  }));
+}
+
+function detectLegacyProgress() {
+  legacyProgressDetected = LEGACY_PROGRESS_KEYS.some((key) => {
+    const raw = localStorage.getItem(key);
+    if (!raw) return false;
+    try {
+      const parsed = JSON.parse(raw);
+      return Boolean(parsed && parsed.progress && Object.keys(parsed.progress).length);
+    } catch {
+      return true;
+    }
+  });
+}
+
+async function loadEngine() {
+  try {
+    const mod = await import("./spacedRepetitionEngine.js");
+    for (const name of ["createCard", "reviewCard", "isDue"]) {
+      if (typeof mod[name] !== "function") {
+        throw new Error(`Missing export: ${name}`);
+      }
+    }
+    engine = {
+      api: {
+        createCard: mod.createCard,
+        reviewCard: mod.reviewCard,
+        isDue: mod.isDue,
+      },
+      ready: true,
+      error: "",
+    };
+  } catch (error) {
+    engine = {
+      api: null,
+      ready: false,
+      error: error && error.message ? error.message : String(error),
+    };
+  }
+}
+
+function engineErrorMessage() {
+  return `Study controls are disabled because ./spacedRepetitionEngine.js did not load: ${engine.error}`;
+}
+
+function showEngineRuntimeError(error) {
+  engine = {
+    api: null,
+    ready: false,
+    error: error && error.message ? error.message : String(error),
+  };
+  showBack = false;
+  render();
+  setStatus(engineErrorMessage());
+}
+
+function recordFor(id) {
+  return appState.progress[id] || null;
+}
+
+function stateFor(id) {
+  return recordFor(id)?.state || "new";
+}
+
+function isDueRecord(record, now = new Date()) {
+  if (!engine.ready || !engine.api || !record || !record.engine) return false;
+  return engine.api.isDue(record.engine, now);
+}
+
+function baseFilteredCards() {
+  return cards.filter((card) => (
+    (ui.mode === "all" || card.mode === ui.mode) &&
+    (ui.section === "all" || card.jft_section === ui.section)
+  ));
+}
+
+function dueCards() {
+  const now = new Date();
+  return baseFilteredCards().filter((card) => {
+    const record = recordFor(card.id);
+    return record && record.state !== "new" && isDueRecord(record, now);
+  });
+}
+
+function newCards() {
+  return baseFilteredCards()
+    .filter((card) => stateFor(card.id) === "new")
+    .slice(0, ui.maxNew);
+}
+
+function studyQueue() {
+  return [...dueCards(), ...newCards()];
+}
+
+function currentCard() {
+  const queue = studyQueue();
+  return queue.find((card) => card.id === appState.currentId) || queue[0] || null;
+}
+
+function selectCurrentCard() {
+  const queue = studyQueue();
+  if (!queue.length) {
+    appState.currentId = null;
+    return;
+  }
+  if (!queue.some((card) => card.id === appState.currentId)) {
+    appState.currentId = queue[0].id;
+  }
+}
+
+function serializeEngineCard(engineCard) {
+  return JSON.parse(JSON.stringify(engineCard));
+}
+
+function nextState(rating, engineCard) {
+  if (rating === "again") return "learning";
+  return engineCard.state || "learning";
+}
+
+function populateFilters() {
+  const modes = [...new Set(cards.map((card) => card.mode).filter(Boolean))];
+  const sections = [...new Set(cards.map((card) => card.jft_section).filter(Boolean))];
+
+  els.modeFilter.innerHTML = `<option value="all">All modes</option>${modes.map((mode) => (
+    `<option value="${escapeHtml(mode)}">${escapeHtml(MODE_LABELS[mode] || humanize(mode))}</option>`
+  )).join("")}`;
+
+  els.sectionFilter.innerHTML = `<option value="all">All sections</option>${sections.map((section) => (
+    `<option value="${escapeHtml(section)}">${escapeHtml(SECTION_LABELS[section] || humanize(section))}</option>`
+  )).join("")}`;
+}
+
+function applyUi() {
+  normalizeUi();
+  els.sidebar.hidden = !ui.showSidebar;
+  els.legacyProgressAlert.hidden = !legacyProgressDetected;
+  els.toggleSettingsBtn.setAttribute("aria-expanded", String(ui.showSidebar));
+  els.modeFilter.value = ui.mode;
+  els.sectionFilter.value = ui.section;
+  els.newLimitInput.value = ui.maxNew;
+  els.romajiToggle.textContent = `Romaji ${ui.showRomaji ? "On" : "Off"}`;
+  els.englishToggle.textContent = `English ${ui.showEnglish ? "On" : "Off"}`;
+
+  els.engineAlert.hidden = engine.ready;
+  if (engine.ready) {
+    els.engineStatus.innerHTML = `<span class="engine-ok">Connected.</span> ES module exports loaded.`;
+  } else {
+    els.engineStatus.innerHTML = `<span class="engine-bad">Stopped.</span> ${escapeHtml(engine.error || "Engine not loaded.")}`;
+    els.engineAlertText.textContent = engineErrorMessage();
+  }
+}
+
+function render() {
+  applyUi();
+  selectCurrentCard();
+  renderStats();
+  renderCard();
+  renderBrowse();
+}
+
+function renderStats() {
+  const base = baseFilteredCards();
+  const due = dueCards();
+  let learning = 0;
+  let answered = 0;
+  let fresh = 0;
+
+  for (const card of base) {
+    const record = recordFor(card.id);
+    if (!record || record.state === "new") fresh += 1;
+    if (record?.state === "learning") learning += 1;
+    if (record && (record.right_count || record.wrong_count || record.history.length)) answered += 1;
+  }
+
+  els.newCount.textContent = String(fresh);
+  els.dueCount.textContent = String(due.length);
+  els.learningCount.textContent = String(learning);
+  els.answeredCount.textContent = String(answered);
+}
+
+function renderCard() {
+  const queue = studyQueue();
+  const card = currentCard();
+
+  if (!card) {
+    els.cardPosition.textContent = "Card 0/0";
+    els.cardState.textContent = "Done";
+    els.frontFace.innerHTML = `<div class="empty"><h2>No cards due now.</h2><p>Change filters or raise the new-card limit to continue.</p></div>`;
+    els.backFace.hidden = true;
+    els.backFace.innerHTML = "";
+    setStudyButtons(false, false);
+    return;
+  }
+
+  const index = Math.max(0, queue.findIndex((item) => item.id === card.id)) + 1;
+  els.cardPosition.textContent = `Card ${index}/${queue.length}`;
+  els.cardState.textContent = cardStatus(card);
+  els.frontFace.innerHTML = showBack ? renderFrontReference(card) : renderFront(card);
+  els.backFace.innerHTML = renderBack(card);
+  els.backFace.hidden = !showBack;
+  setStudyButtons(true, showBack);
+}
+
+function setStudyButtons(hasCard, answerShown) {
+  const canStudy = hasCard && engine.ready;
+  els.showAnswerBtn.hidden = !hasCard || answerShown;
+  els.showAnswerBtn.disabled = !canStudy || answerShown;
+  els.gradeRow.hidden = !hasCard || !answerShown;
+  for (const button of [els.againBtn, els.hardBtn, els.goodBtn, els.easyBtn]) {
+    button.disabled = !canStudy || !answerShown;
+  }
+}
+
+function cardStatus(card) {
+  const record = recordFor(card.id);
+  if (!record || record.state === "new") return "New";
+  if (isDueRecord(record)) return "Due";
+  return (record.state || "learning").replace(/^./, (char) => char.toUpperCase());
+}
+
+function taskLabel(card) {
+  return `<p class="task-label">${escapeHtml(TASK_LABELS[card.mode] || "Card")}</p>`;
+}
+
+function readingLine(card) {
+  return card.reading ? `<p class="reading">${escapeHtml(card.reading)}</p>` : "";
+}
+
+function romajiLine(card) {
+  return ui.showRomaji && card.romaji ? `<p class="romaji">${escapeHtml(card.romaji)}</p>` : "";
+}
+
+function englishLine(value) {
+  return ui.showEnglish && value ? `<p class="muted">${escapeHtml(value)}</p>` : "";
+}
+
+function tags(card) {
+  const values = [
+    MODE_LABELS[card.mode] || humanize(card.mode),
+    SECTION_LABELS[card.jft_section] || humanize(card.jft_section),
+    humanize(card.scenario),
+  ].filter(Boolean);
+  return `<div class="tags">${values.map((value) => `<span class="tag">${escapeHtml(value)}</span>`).join("")}</div>`;
+}
+
+function renderFront(card) {
+  if (card.mode === "production") {
+    return `${taskLabel(card)}<p class="prompt">${escapeHtml(promptText(card, "id") || meaning(card, "id"))}</p>${englishLine(promptText(card, "en"))}${tags(card)}`;
+  }
+
+  if (card.mode === "information_search_mini") {
+    return `${taskLabel(card)}<h2 class="target compact">${escapeHtml(card.target)}</h2><div class="example"><p class="example-ja">${escapeHtml(promptText(card, "id"))}</p>${englishLine(promptText(card, "en"))}</div>${tags(card)}`;
+  }
+
+  return `${taskLabel(card)}<h2 class="target">${escapeHtml(card.target)}</h2>${readingLine(card)}${romajiLine(card)}${tags(card)}`;
+}
+
+function renderFrontReference(card) {
+  if (card.mode === "production") {
+    return `${taskLabel(card)}<p class="prompt">${escapeHtml(promptText(card, "id") || meaning(card, "id"))}</p>${englishLine(promptText(card, "en"))}`;
+  }
+
+  if (card.mode === "information_search_mini") {
+    return `${taskLabel(card)}<h2 class="target compact">${escapeHtml(card.target)}</h2>`;
+  }
+
+  return `${taskLabel(card)}<h2 class="target compact">${escapeHtml(card.target)}</h2>${readingLine(card)}${romajiLine(card)}`;
+}
+
+function renderBack(card) {
+  const answerJa = expected(card, "ja") || card.target;
+  const answerReading = expected(card, "reading") || card.reading;
+  const answerId = expected(card, "id") || meaning(card, "id");
+  const answerEn = expected(card, "en") || meaning(card, "en");
+  const exampleJa = example(card, "ja");
+  const exampleKana = example(card, "kana");
+  const exampleId = example(card, "id");
+  const exampleEn = example(card, "en");
+  const note = field(card.usage_note && (card.usage_note.id || card.usage_note.en || card.usage_note.ja));
+
+  const top = card.mode === "recognition"
+    ? `<p class="meaning">${escapeHtml(answerId)}</p>${englishLine(answerEn)}`
+    : `<h2 class="target compact">${escapeHtml(answerJa)}</h2>${answerReading ? `<p class="reading">${escapeHtml(answerReading)}</p>` : ""}${romajiLine(card)}<p class="meaning">${escapeHtml(answerId)}</p>${englishLine(answerEn)}`;
+
+  const exampleBlock = exampleJa || exampleKana || exampleId || exampleEn
+    ? `<div class="example">${exampleJa ? `<p class="example-ja">${escapeHtml(exampleJa)}</p>` : ""}${exampleKana ? `<p class="romaji">${escapeHtml(exampleKana)}</p>` : ""}${exampleId ? `<p class="example-id">${escapeHtml(exampleId)}</p>` : ""}${ui.showEnglish && exampleEn ? `<p class="example-id">${escapeHtml(exampleEn)}</p>` : ""}</div>`
+    : "";
+
+  return `${top}${exampleBlock}${note ? `<p class="note">${escapeHtml(note)}</p>` : ""}`;
+}
+
+function renderBrowse() {
+  const query = els.searchInput.value.trim().toLowerCase();
+  const visible = baseFilteredCards().filter((card) => {
+    if (!query) return true;
+    return JSON.stringify([
+      card.id,
+      card.target,
+      card.reading,
+      card.romaji,
+      card.meaning,
+      card.prompt,
+      card.expected_answer,
+      card.example,
+      card.scenario,
+      card.jft_section,
+      card.mode,
+    ]).toLowerCase().includes(query);
+  });
+
+  els.browseList.innerHTML = visible.map((card) => (
+    `<button type="button" class="browse-item" data-card-id="${escapeHtml(card.id)}">
+      <span class="browse-title">${escapeHtml(card.target)}</span>
+      <span class="browse-meta">${escapeHtml(card.id)} · ${escapeHtml(MODE_LABELS[card.mode] || humanize(card.mode))} · ${escapeHtml(SECTION_LABELS[card.jft_section] || humanize(card.jft_section))}</span>
+    </button>`
+  )).join("") || `<p class="muted">No matching cards.</p>`;
+}
+
+function setStatus(message) {
+  els.statusLine.textContent = message;
+}
+
+function formatDue(value) {
+  const due = new Date(value);
+  const now = new Date();
+  const diffMs = due.getTime() - now.getTime();
+  if (!Number.isFinite(diffMs)) return "unknown";
+  if (diffMs <= 0) return "now";
+  if (diffMs < 60 * 60 * 1000) return "soon";
+  if (diffMs < 24 * 60 * 60 * 1000) return "later today";
+  return due.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+}
+
+function reviewCurrent(grade) {
+  if (!engine.ready || !engine.api) {
+    setStatus(engineErrorMessage());
+    return;
+  }
+
+  const card = currentCard();
+  if (!card) return;
+
+  const rating = REVIEW_RATINGS[grade];
+  const before = studyQueue();
+  const beforeIndex = Math.max(0, before.findIndex((item) => item.id === card.id));
+  const existing = normalizeRecord(recordFor(card.id), card.id);
+  const reviewedAt = new Date();
+
+  try {
+    const startingEngineCard = existing.engine || engine.api.createCard(card.id, reviewedAt);
+    const reviewedEngineCard = engine.api.reviewCard(startingEngineCard, rating, reviewedAt);
+    const serializedEngineCard = serializeEngineCard(reviewedEngineCard);
+    const nextDueAt = serializedEngineCard.due ? new Date(serializedEngineCard.due).toISOString() : null;
+
+    appState.progress[card.id] = {
+      ...existing,
+      card_id: card.id,
+      state: nextState(rating, reviewedEngineCard),
+      wrong_count: existing.wrong_count + (grade === "again" ? 1 : 0),
+      right_count: existing.right_count + (grade === "again" ? 0 : 1),
+      last_reviewed_at: reviewedAt.toISOString(),
+      next_due_at: nextDueAt,
+      history: [
+        ...existing.history,
+        {
+          at: reviewedAt.toISOString(),
+          grade,
+          rating,
+          due: nextDueAt,
+        },
+      ],
+      engine: serializedEngineCard,
+    };
+  } catch (error) {
+    showEngineRuntimeError(error);
+    return;
+  }
+
+  saveProgress();
+  moveAfterReview(beforeIndex);
+  setStatus(`${card.id} saved as ${grade}. Next due: ${formatDue(appState.progress[card.id].next_due_at)}.`);
+}
+
+function moveAfterReview(previousIndex) {
+  const nextQueue = studyQueue();
+  if (!nextQueue.length) {
+    appState.currentId = null;
+  } else {
+    appState.currentId = nextQueue[Math.min(previousIndex, nextQueue.length - 1)].id;
+  }
+  showBack = false;
+  saveProgress();
+  render();
+}
+
+async function loadCards() {
+  try {
+    const manifest = await fetch(MANIFEST_URL, { cache: "no-store" }).then((response) => {
+      if (!response.ok) throw new Error(`manifest ${response.status}`);
+      return response.json();
+    });
+    const packs = manifest.decks.flatMap((deck) => deck.packs || []);
+    const pack = packs.find((item) => item.pack_id === DEFAULT_PACK);
+    const cardFile = pack?.card_file || "data/cards.stage1b.id.sample.json";
+    const data = await fetch(cardFile, { cache: "no-store" }).then((response) => {
+      if (!response.ok) throw new Error(`cards ${response.status}`);
+      return response.json();
+    });
+    cards = Array.isArray(data) ? data : data.cards || [];
+    populateFilters();
+    render();
+    setStatus(`Loaded ${cards.length} cards.`);
+  } catch (error) {
+    cards = [];
+    render();
+    setStatus(`Could not load cards: ${error && error.message ? error.message : String(error)}`);
+  }
+}
+
+function resetProgress() {
+  if (!confirm("Reset local progress for v36 in this browser?")) return;
+  appState = { currentId: null, progress: {} };
+  showBack = false;
+  saveProgress();
+  render();
+  setStatus("Progress reset.");
+}
+
+els.toggleSettingsBtn.addEventListener("click", () => {
+  ui.showSidebar = !ui.showSidebar;
+  saveUi();
+  render();
+});
+
+els.resetBtn.addEventListener("click", resetProgress);
+
+els.showAnswerBtn.addEventListener("click", () => {
+  if (!engine.ready) {
+    setStatus(engineErrorMessage());
+    return;
+  }
+  showBack = true;
+  render();
+});
+
+els.againBtn.addEventListener("click", () => reviewCurrent("again"));
+els.hardBtn.addEventListener("click", () => reviewCurrent("hard"));
+els.goodBtn.addEventListener("click", () => reviewCurrent("good"));
+els.easyBtn.addEventListener("click", () => reviewCurrent("easy"));
+
+els.modeFilter.addEventListener("change", (event) => {
+  ui.mode = event.target.value;
+  appState.currentId = null;
+  showBack = false;
+  saveUi();
+  render();
+});
+
+els.sectionFilter.addEventListener("change", (event) => {
+  ui.section = event.target.value;
+  appState.currentId = null;
+  showBack = false;
+  saveUi();
+  render();
+});
+
+els.newLimitInput.addEventListener("change", (event) => {
+  ui.maxNew = event.target.value;
+  appState.currentId = null;
+  showBack = false;
+  saveUi();
+  render();
+});
+
+els.romajiToggle.addEventListener("click", () => {
+  ui.showRomaji = !ui.showRomaji;
+  saveUi();
+  render();
+});
+
+els.englishToggle.addEventListener("click", () => {
+  ui.showEnglish = !ui.showEnglish;
+  saveUi();
+  render();
+});
+
+els.searchInput.addEventListener("input", renderBrowse);
+
+els.browseList.addEventListener("click", (event) => {
+  const row = event.target.closest("[data-card-id]");
+  if (!row) return;
+  appState.currentId = row.dataset.cardId;
+  showBack = false;
+  saveProgress();
+  render();
+});
+
+window.__APP_V36_CLEAN_FSRS__ = {
+  storageKey: STORAGE_KEY,
+  uiKey: UI_KEY,
+  get engineReady() {
+    return engine.ready;
+  },
+  get engineError() {
+    return engine.error;
+  },
+  get cardCount() {
+    return cards.length;
+  },
+  get currentId() {
+    return appState.currentId;
+  },
+  get progress() {
+    return JSON.parse(JSON.stringify(appState.progress));
+  },
+  get legacyProgressDetected() {
+    return legacyProgressDetected;
+  },
+  dueCount() {
+    return dueCards().length;
+  },
+};
+
+loadUi();
+detectLegacyProgress();
+loadProgress();
+await loadEngine();
+render();
+await loadCards();
+</script>
+</body>
+</html>
