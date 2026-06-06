@@ -57,6 +57,7 @@
 - Settings layout overflow: passed after screenshot fix. Buttons, selects, and wallpaper strength slider stay inside the settings screen at 390px width.
 - Study layout horizontal overflow: passed after screenshot fix.
 - Direct file open handling: passed. The screen now shows a short local-HTTP/GitHub Pages instruction instead of a long local path. Full app operation still requires HTTP/GitHub Pages because browser module imports and card JSON fetches are blocked from direct file open.
+- Empty queue with waiting learning cards: passed. If selected cards have no New or due Review cards but still have Learning cards, V37 keeps showing the Learning cards instead of stopping at Card 0/0.
 
 ### Unchecked Items
 - Real phone hardware check is not performed in this Codex session.

@@ -1384,8 +1384,21 @@ function newCards() {
     .slice(0, ui.maxNew);
 }
 
+function waitingLearningCards() {
+  const now = new Date();
+  return baseFilteredCards().filter((card) => {
+    const record = recordFor(card.id);
+    if (!record) return false;
+    if (record.state !== "learning" && record.state !== "relearning") return false;
+    return !isDueRecord(record, now);
+  });
+}
+
 function studyQueue() {
-  return ui.reviewFirst ? [...dueCards(), ...newCards()] : [...newCards(), ...dueCards()];
+  const due = dueCards();
+  const fresh = newCards();
+  const queue = ui.reviewFirst ? [...due, ...fresh] : [...fresh, ...due];
+  return queue.length ? queue : waitingLearningCards();
 }
 
 function currentCard() {
