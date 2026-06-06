@@ -1,0 +1,2136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#233f56">
+<title>JFT/SSW Work-in-Japan Cards v37 Clean FSRS</title>
+<link rel="icon" href="data:,">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #eaf4ef;
+  --bg2: #fff1dd;
+  --surface: rgba(255, 255, 255, .95);
+  --solid: #ffffff;
+  --surface-soft: #eef4f1;
+  --ink: #14211d;
+  --muted: #64736e;
+  --line: rgba(30, 64, 55, .16);
+  --line-2: rgba(30, 64, 55, .34);
+  --primary: #214e43;
+  --primary-2: #2f6f5f;
+  --accent: #c36a35;
+  --danger: #a64242;
+  --warning: #9a6a20;
+  --ok: #24724f;
+  --easy: #1f6651;
+  --shadow: 0 18px 46px rgba(19, 50, 42, .16);
+  --radius: 22px;
+  --art-opacity: .38;
+  --art:
+    linear-gradient(180deg, rgba(247, 252, 255, .86) 0 30%, rgba(255, 255, 255, .48) 54%, rgba(255, 255, 255, .18)),
+    radial-gradient(ellipse at 42% 80%, rgba(203, 64, 42, .34) 0 5%, rgba(202, 66, 43, .24) 6% 9%, transparent 10%),
+    radial-gradient(ellipse at 48% 86%, transparent 0 18%, rgba(75, 58, 45, .20) 19% 20%, transparent 21%),
+    linear-gradient(118deg, transparent 0 48%, rgba(190, 53, 43, .32) 49% 51%, transparent 52%),
+    linear-gradient(64deg, transparent 0 48%, rgba(190, 53, 43, .26) 49% 51%, transparent 52%),
+    linear-gradient(0deg, rgba(77, 132, 133, .22) 0 20%, transparent 21%),
+    repeating-linear-gradient(90deg, transparent 0 54px, rgba(71, 103, 93, .09) 55px 57px, transparent 58px 118px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--ink);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  background:
+    radial-gradient(circle at 14% 14%, rgba(255, 255, 255, .72), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(255, 205, 160, .34), transparent 32%),
+    linear-gradient(140deg, var(--bg), var(--bg2));
+  background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: var(--art-opacity);
+  background-image: var(--art);
+  background-size: cover;
+  background-position: center bottom;
+}
+
+body[data-wallpaper="daily"] {
+  --bg: #eaf4ef;
+  --bg2: #fff1dd;
+  --art-opacity: .38;
+}
+
+body[data-wallpaper="soft"] {
+  --bg: #f5efe8;
+  --bg2: #e9f3ef;
+  --art-opacity: .28;
+  --art:
+    linear-gradient(180deg, rgba(255, 255, 255, .88) 0 34%, rgba(255, 255, 255, .42) 68%, rgba(255, 255, 255, .18)),
+    radial-gradient(ellipse at 50% 90%, rgba(161, 73, 56, .22) 0 8%, transparent 9%),
+    linear-gradient(116deg, transparent 0 48%, rgba(104, 81, 63, .16) 49% 50%, transparent 51%),
+    repeating-linear-gradient(90deg, transparent 0 72px, rgba(84, 105, 94, .07) 73px 75px, transparent 76px 150px);
+}
+
+body[data-wallpaper="clean"] {
+  --bg: #f6f9f7;
+  --bg2: #eef4f2;
+  --art-opacity: .18;
+  --art:
+    linear-gradient(160deg, rgba(255, 255, 255, .9), rgba(255, 255, 255, .55)),
+    radial-gradient(circle at 16% 22%, rgba(78, 121, 110, .12), transparent 24%),
+    radial-gradient(circle at 80% 74%, rgba(196, 130, 77, .10), transparent 28%);
+}
+
+body[data-wallpaper-enabled="false"]::before {
+  opacity: 0;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+select,
+input {
+  max-width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+button,
+select {
+  min-height: 42px;
+  padding: .58rem .72rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+button:hover,
+select:hover {
+  border-color: var(--primary-2);
+}
+
+button:disabled {
+  cursor: default;
+  opacity: .56;
+}
+
+input {
+  width: 100%;
+  min-height: 42px;
+  padding: .55rem .68rem;
+}
+
+select {
+  width: 100%;
+}
+
+.app {
+  width: min(620px, 100%);
+  margin: 0 auto;
+  padding: max(.58rem, env(safe-area-inset-top)) .76rem calc(1rem + env(safe-area-inset-bottom));
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 -.76rem .62rem;
+  padding: max(.46rem, env(safe-area-inset-top)) .76rem .52rem;
+  background: linear-gradient(180deg, rgba(234, 244, 239, .96), rgba(234, 244, 239, .78) 72%, rgba(234, 244, 239, 0));
+  border-bottom: 0;
+  backdrop-filter: blur(10px);
+}
+
+.top-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .7rem;
+  align-items: center;
+}
+
+.brand {
+  min-width: 0;
+}
+
+.brand-title {
+  margin: 0;
+  color: var(--primary);
+  font-size: clamp(1rem, 4vw, 1.35rem);
+  line-height: 1.2;
+  font-weight: 950;
+}
+
+.brand-meta {
+  margin: .15rem 0 0;
+  color: var(--muted);
+  font-size: .78rem;
+  font-weight: 760;
+}
+
+.top-actions {
+  display: flex;
+  gap: .45rem;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  gap: .42rem;
+  align-items: stretch;
+  margin-top: 0;
+}
+
+.stat {
+  min-height: 50px;
+  padding: .45rem .3rem;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: rgba(255, 255, 255, .78);
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(19, 50, 42, .07);
+}
+
+.stat strong {
+  display: block;
+  color: var(--primary);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.stat span {
+  display: block;
+  margin-top: .22rem;
+  color: var(--muted);
+  font-size: .68rem;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.answered-stat {
+  display: none;
+}
+
+.gear {
+  inline-size: 50px;
+  width: 50px;
+  min-height: 50px;
+  padding: 0;
+  border-radius: 17px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1.16rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .7rem;
+  align-items: start;
+}
+
+.study-view,
+.settings-view,
+.analysis-view {
+  display: block;
+}
+
+.view-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .7rem;
+  align-items: center;
+  margin-bottom: .75rem;
+  padding: .8rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .95);
+  box-shadow: var(--shadow);
+}
+
+.view-head h1 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.28rem;
+  line-height: 1.2;
+}
+
+.back-button {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+}
+
+.study-card,
+.settings-section,
+.engine-alert {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .94);
+  box-shadow: var(--shadow);
+}
+
+.engine-alert {
+  margin-bottom: .75rem;
+  padding: .8rem .9rem;
+  border-color: rgba(166, 61, 61, .34);
+  background: #fff7f6;
+  overflow-wrap: anywhere;
+}
+
+.engine-alert strong {
+  color: var(--danger);
+}
+
+.engine-alert p {
+  margin: .25rem 0 0;
+  color: #704242;
+  font-weight: 720;
+}
+
+.prototype-alert {
+  margin-bottom: .75rem;
+  padding: .8rem .9rem;
+  border: 1px solid rgba(185, 104, 46, .34);
+  border-radius: var(--radius);
+  background: #fffaf2;
+  box-shadow: var(--shadow);
+}
+
+.prototype-alert strong {
+  color: var(--accent);
+}
+
+.prototype-alert p {
+  margin: .25rem 0 0;
+  color: #6f4d25;
+  font-weight: 720;
+}
+
+.study-card {
+  overflow: hidden;
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
+}
+
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  gap: .6rem;
+  align-items: center;
+  padding: .66rem .76rem;
+  background: rgba(33, 78, 67, .96);
+  color: #fff;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
+  min-height: 32px;
+  border: 1px solid rgba(255, 255, 255, .24);
+  border-radius: 999px;
+  padding: .32rem .58rem;
+  background: rgba(255, 255, 255, .16);
+  color: inherit;
+  font-size: .76rem;
+  font-weight: 1000;
+  white-space: nowrap;
+}
+
+.card-body {
+  min-height: 360px;
+  padding: 1rem .88rem;
+  background: rgba(255, 255, 255, .96);
+}
+
+.task-label {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 .52rem;
+  padding: .2rem .52rem;
+  border-radius: 999px;
+  background: rgba(47, 111, 95, .10);
+  color: var(--primary-2);
+  font-size: .72rem;
+  font-weight: 1000;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.target {
+  margin: 0;
+  font-size: clamp(1.9rem, 11vw, 3.4rem);
+  line-height: 1.13;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.target.compact {
+  font-size: clamp(1.42rem, 6.2vw, 2.2rem);
+}
+
+body[data-font-size="small"] .target {
+  font-size: clamp(1.62rem, 9.2vw, 2.85rem);
+}
+
+body[data-font-size="large"] .target {
+  font-size: clamp(2.22rem, 12.5vw, 3.85rem);
+}
+
+body[data-font-size="small"] .target.compact,
+body[data-font-size="small"] .prompt {
+  font-size: clamp(1.18rem, 5.4vw, 1.75rem);
+}
+
+body[data-font-size="large"] .target.compact,
+body[data-font-size="large"] .prompt {
+  font-size: clamp(1.65rem, 7vw, 2.45rem);
+}
+
+.prompt {
+  margin: 0;
+  font-size: clamp(1.25rem, 4.8vw, 2rem);
+  line-height: 1.35;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.reading {
+  margin: .55rem 0 0;
+  color: var(--primary-2);
+  font-size: clamp(1.02rem, 4.2vw, 1.32rem);
+  font-weight: 820;
+  overflow-wrap: anywhere;
+}
+
+.target-wrap,
+.example-line {
+  display: grid;
+  gap: .26rem;
+}
+
+.romaji,
+.muted,
+.example-id,
+.note {
+  color: var(--muted);
+}
+
+.romaji {
+  margin: .2rem 0 0;
+  font-weight: 720;
+  overflow-wrap: anywhere;
+}
+
+.answer {
+  margin-top: .95rem;
+  padding-top: .95rem;
+  border-top: 2px solid var(--line);
+}
+
+.meaning {
+  margin: 0;
+  color: var(--primary);
+  font-size: clamp(1.2rem, 4.6vw, 1.8rem);
+  font-weight: 940;
+  overflow-wrap: anywhere;
+}
+
+.example {
+  margin-top: .85rem;
+  padding: .75rem .82rem;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  background: #fffaf4;
+}
+
+.example-ja {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 820;
+  overflow-wrap: anywhere;
+}
+
+.example-id,
+.note {
+  margin: .35rem 0 0;
+  font-weight: 700;
+}
+
+.tags {
+  display: none;
+  flex-wrap: wrap;
+  gap: .36rem;
+  margin-top: .8rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: .16rem .46rem;
+  border-radius: 999px;
+  background: #edf1f5;
+  color: #34495e;
+  font-size: .72rem;
+  font-weight: 850;
+}
+
+.actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+  margin: .7rem -.76rem 0;
+  padding: .56rem .76rem calc(.58rem + env(safe-area-inset-bottom));
+  border: 0;
+  border-radius: 0;
+  background: linear-gradient(0deg, rgba(234, 244, 239, .96), rgba(234, 244, 239, .80) 72%, rgba(234, 244, 239, 0));
+  backdrop-filter: blur(10px);
+}
+
+.primary-action {
+  display: block;
+  width: min(430px, 100%);
+  margin: 0 auto;
+  border-color: var(--primary);
+  border-radius: 999px;
+  background: var(--primary);
+  color: #fff;
+}
+
+.grade-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .34rem;
+  flex-wrap: nowrap;
+}
+
+.grade-row button {
+  flex: 0 0 auto;
+  min-height: 50px;
+  min-width: 0;
+  padding: .48rem .64rem;
+  border-radius: 999px;
+  background: var(--solid);
+  font-size: .88rem;
+  line-height: 1;
+  font-weight: 950;
+}
+
+.again {
+  color: var(--danger);
+  border-color: rgba(166, 61, 61, .35);
+}
+
+.hard {
+  color: var(--warning);
+  border-color: rgba(138, 101, 15, .35);
+}
+
+.good {
+  color: var(--ok);
+  border-color: rgba(31, 111, 74, .35);
+}
+
+.easy {
+  color: var(--easy);
+  border-color: rgba(45, 111, 102, .35);
+}
+
+.status-line {
+  min-height: 1.35rem;
+  margin: .55rem 0 0;
+  color: var(--muted);
+  font-size: .84rem;
+  font-weight: 740;
+  text-align: center;
+}
+
+.settings-list {
+  display: grid;
+  gap: .75rem;
+  margin: .5rem 0 .7rem;
+  padding: .82rem;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.settings-section {
+  padding: .72rem;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .62);
+  box-shadow: none;
+}
+
+.settings-section button {
+  width: 100%;
+  min-width: 0;
+}
+
+.settings-section h2 {
+  margin: 0 0 .6rem;
+  color: var(--primary);
+  font-size: .95rem;
+}
+
+.control-grid {
+  display: grid;
+  gap: .55rem;
+  min-width: 0;
+}
+
+.control-row {
+  display: grid;
+  gap: .28rem;
+  min-width: 0;
+}
+
+.control-row label,
+.control-row .label {
+  color: var(--muted);
+  font-size: .76rem;
+  font-weight: 900;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+.toggle-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .45rem;
+  min-width: 0;
+}
+
+.toggle-row > * {
+  min-width: 0;
+  width: 100%;
+}
+
+input[type="range"] {
+  display: block;
+  inline-size: 100%;
+}
+
+.analysis-block {
+  display: grid;
+  gap: .35rem;
+  color: var(--muted);
+  font-size: .82rem;
+  font-weight: 720;
+}
+
+.analysis-block p {
+  margin: 0;
+}
+
+.analysis-block strong {
+  color: var(--primary);
+}
+
+.csv-action {
+  width: 100%;
+  min-width: 0;
+}
+
+.danger-action {
+  margin-top: .45rem;
+  border-color: rgba(166, 61, 61, .36);
+  color: var(--danger);
+}
+
+.graph-block {
+  display: grid;
+  gap: .8rem;
+}
+
+.graph-card {
+  display: grid;
+  gap: .45rem;
+}
+
+.graph-head {
+  display: flex;
+  justify-content: space-between;
+  gap: .7rem;
+  color: var(--muted);
+  font-size: .82rem;
+  font-weight: 850;
+}
+
+.stacked-bar {
+  display: flex;
+  min-height: 30px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #edf3f0;
+}
+
+.bar-segment {
+  min-width: 2px;
+}
+
+.bar-new {
+  background: #b9c9c2;
+}
+
+.bar-learning {
+  background: #c98247;
+}
+
+.bar-review {
+  background: #2f6f5f;
+}
+
+.bar-again {
+  background: #a64242;
+}
+
+.bar-hard {
+  background: #b88735;
+}
+
+.bar-good {
+  background: #24724f;
+}
+
+.bar-easy {
+  background: #1f6651;
+}
+
+.legend-grid {
+  display: grid;
+  gap: .35rem;
+}
+
+.legend-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: .42rem;
+  align-items: center;
+  color: var(--muted);
+  font-size: .82rem;
+  font-weight: 780;
+}
+
+.legend-swatch {
+  inline-size: 14px;
+  block-size: 14px;
+  border-radius: 999px;
+}
+
+.search {
+  width: 100%;
+  margin-bottom: .55rem;
+}
+
+.browse-list {
+  display: grid;
+  gap: .42rem;
+  max-height: 420px;
+  overflow: auto;
+}
+
+.browse-item {
+  width: 100%;
+  min-height: auto;
+  padding: .58rem .62rem;
+  text-align: left;
+}
+
+.browse-title {
+  display: block;
+  font-weight: 900;
+  overflow-wrap: anywhere;
+}
+
+.browse-meta {
+  display: block;
+  margin-top: .12rem;
+  color: var(--muted);
+  font-size: .74rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.engine-ok {
+  color: var(--ok);
+  font-weight: 850;
+}
+
+.engine-bad {
+  color: var(--danger);
+  font-weight: 850;
+}
+
+.empty {
+  padding: 1rem 0;
+}
+
+.empty h2 {
+  margin: 0 0 .35rem;
+  color: var(--primary);
+  font-size: 1.25rem;
+}
+
+.empty p {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 720;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .app {
+    padding-inline: .65rem;
+  }
+
+  .topbar {
+    margin-inline: -.65rem;
+    padding-inline: .65rem;
+  }
+
+  .top-grid {
+    grid-template-columns: 1fr auto;
+  }
+
+  .top-actions {
+    display: flex;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  }
+
+  .card-body {
+    min-height: 330px;
+    padding: .9rem;
+  }
+
+  .grade-row {
+    gap: .3rem;
+  }
+
+  .grade-row button {
+    padding-inline: .5rem;
+    font-size: .82rem;
+  }
+}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="topbar" id="studyTopbar">
+    <section class="stats" aria-label="V37 study counts">
+      <div class="stat"><strong id="newCount">0</strong><span>New</span></div>
+      <div class="stat"><strong id="dueCount">0</strong><span>Review</span></div>
+      <div class="stat"><strong id="learningCount">0</strong><span>Learning</span></div>
+      <button type="button" class="gear" id="toggleSettingsBtn" aria-controls="settingsList" aria-expanded="false" aria-label="Settings">⚙</button>
+      <div class="stat answered-stat" hidden><strong id="answeredCount">0</strong><span>Answered</span></div>
+    </section>
+  </header>
+
+  <section class="study-view" id="studyView">
+    <section class="engine-alert" id="engineAlert" role="alert" hidden>
+      <strong>FSRS engine unavailable.</strong>
+      <p id="engineAlertText">Study controls are disabled until the FSRS/V2 adapter loads successfully.</p>
+    </section>
+
+    <div class="layout">
+      <section>
+      <article class="study-card" aria-live="polite">
+        <div class="card-head">
+          <span class="pill" id="cardPosition">Card 0/0</span>
+          <span class="pill" id="cardState">Loading</span>
+        </div>
+        <div class="card-body">
+          <section id="frontFace"></section>
+          <section class="answer" id="backFace" hidden></section>
+        </div>
+      </article>
+
+      <nav class="actions" aria-label="Study actions">
+        <button type="button" class="primary-action" id="showAnswerBtn" disabled>Show answer</button>
+        <div class="grade-row" id="gradeRow" hidden>
+          <button type="button" class="again" id="againBtn">Again</button>
+          <button type="button" class="hard" id="hardBtn">Hard</button>
+          <button type="button" class="good" id="goodBtn">Good</button>
+          <button type="button" class="easy" id="easyBtn">Easy</button>
+        </div>
+        <p class="status-line" id="statusLine" role="status"></p>
+      </nav>
+      </section>
+    </div>
+  </section>
+
+  <section class="settings-view" id="settingsView" hidden>
+    <header class="view-head">
+      <button type="button" class="back-button" id="backToStudyBtn">Back</button>
+      <h1>設定</h1>
+    </header>
+
+    <div class="settings-list" id="settingsList">
+      <section class="settings-section">
+        <h2>Display</h2>
+        <div class="control-grid">
+          <div class="toggle-row">
+            <button type="button" id="furiganaToggle">Furigana On</button>
+            <button type="button" id="romajiToggle">Romaji Off</button>
+          </div>
+          <div class="toggle-row">
+            <button type="button" id="indonesianToggle">Indonesian On</button>
+            <button type="button" id="englishToggle">English On</button>
+          </div>
+          <div class="control-row">
+            <label for="fontSizeSelect">Text size</label>
+            <select id="fontSizeSelect">
+              <option value="regular">Regular</option>
+              <option value="large">Large</option>
+              <option value="small">Small</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h2>Wallpaper</h2>
+        <div class="control-grid">
+          <button type="button" id="wallpaperEnabledToggle">Wallpaper On</button>
+          <div class="control-row">
+            <label for="wallpaperSelect">Wallpaper type</label>
+            <select id="wallpaperSelect">
+              <option value="daily">Daily life</option>
+              <option value="soft">Soft traditional</option>
+              <option value="clean">Clean</option>
+            </select>
+          </div>
+          <div class="control-row">
+            <label for="wallpaperOpacityInput">Wallpaper strength</label>
+            <input id="wallpaperOpacityInput" type="range" min="0" max="70" step="5">
+          </div>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h2>Study Settings</h2>
+        <div class="control-grid">
+          <div class="analysis-block" id="learningSettingsSummary"></div>
+          <div class="control-row">
+            <label for="modeFilter">Mode</label>
+            <select id="modeFilter"></select>
+          </div>
+          <div class="control-row">
+            <label for="sectionFilter">Section</label>
+            <select id="sectionFilter"></select>
+          </div>
+          <div class="control-row">
+            <label for="newLimitInput">New cards/session</label>
+            <input id="newLimitInput" type="number" min="1" max="100" inputmode="numeric">
+          </div>
+          <button type="button" id="reviewPriorityToggle">Review priority On</button>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h2>Analysis</h2>
+        <button type="button" class="csv-action" id="openAnalysisBtn">Open analysis</button>
+      </section>
+
+      <section class="settings-section">
+        <h2>Data Management</h2>
+        <input id="importFileInput" type="file" accept="application/json,.json" hidden>
+        <button type="button" class="csv-action" id="csvExportBtn">Export JSON</button>
+        <button type="button" class="csv-action" id="importBtn">Import JSON</button>
+        <button type="button" class="csv-action danger-action" id="resetBtn">Reset progress</button>
+      </section>
+
+      <section class="settings-section">
+        <h2>Engine</h2>
+        <p id="engineStatus" class="muted">Checking FSRS/V2 adapter...</p>
+        <p class="muted">Using createCard / reviewCard / isDue from the V37 adapter.</p>
+      </section>
+
+      <section class="settings-section">
+        <h2>Card List</h2>
+        <input class="search" id="searchInput" type="search" placeholder="Search cards" aria-label="Search cards">
+        <div class="browse-list" id="browseList"></div>
+      </section>
+    </div>
+  </section>
+
+  <section class="analysis-view" id="analysisView" hidden>
+    <header class="view-head">
+      <button type="button" class="back-button" id="backToSettingsBtn">Back</button>
+      <h1>Analysis</h1>
+    </header>
+
+    <section class="settings-section">
+      <h2>Study Stats</h2>
+      <div class="analysis-block" id="studyStats"></div>
+    </section>
+
+    <section class="settings-section">
+      <h2>State Graph</h2>
+      <div class="graph-block" id="stateGraph"></div>
+    </section>
+
+    <section class="settings-section">
+      <h2>Rating Graph</h2>
+      <div class="graph-block" id="ratingGraph"></div>
+    </section>
+
+    <section class="settings-section">
+      <h2>Mode Stats</h2>
+      <div class="analysis-block" id="modeStats"></div>
+    </section>
+
+    <section class="settings-section">
+      <h2>Content Stats</h2>
+      <div class="analysis-block" id="contentStats"></div>
+    </section>
+
+    <section class="settings-section">
+      <h2>FSRS Memory</h2>
+      <div class="analysis-block" id="fsrsMemory"></div>
+    </section>
+
+    <section class="settings-section">
+      <h2>Difficult Cards</h2>
+      <div class="analysis-block" id="creatorAnalysis"></div>
+    </section>
+  </section>
+</main>
+
+<script type="module">
+const MANIFEST_URL = "data/deck_manifest.json";
+const DEFAULT_PACK = "stage1b_id_validation";
+const STORAGE_KEY = "jft-ssw-v37-fsrs-progress";
+const UI_KEY = "jft-ssw-v37-fsrs-ui-settings";
+const REVIEW_LOG_KEY = "jft-ssw-v37-fsrs-review-log";
+const SETTINGS_KEY = "jft-ssw-v37-fsrs-settings";
+// No automatic migration from earlier progress stores.
+const DEFAULT_MODE = "recognition";
+const DEFAULT_SECTION = "script_vocabulary";
+const DEFAULT_WALLPAPER = "daily";
+
+const MODE_LABELS = {
+  recognition: "Recognition",
+  production: "Production",
+  kanji_sign_reading: "Kanji / Sign",
+  listening_ready: "Listening",
+  information_search_mini: "Information Search",
+};
+
+const SECTION_LABELS = {
+  script_vocabulary: "Script & Vocabulary",
+  conversation_expression: "Conversation",
+  listening_comprehension: "Listening",
+  reading_comprehension: "Reading",
+  ssw_workplace_overlay: "SSW Workplace",
+};
+
+const WALLPAPER_LABELS = {
+  daily: "Daily life",
+  soft: "Soft traditional",
+  clean: "Clean",
+};
+
+const TASK_LABELS = {
+  recognition: "Meaning",
+  production: "Say it in Japanese",
+  kanji_sign_reading: "Read the sign",
+  listening_ready: "Audio-ready sentence",
+  information_search_mini: "Find the information",
+};
+
+const REVIEW_RATINGS = {
+  again: "again",
+  hard: "hard",
+  good: "good",
+  easy: "easy",
+};
+
+const els = {
+  toggleSettingsBtn: document.getElementById("toggleSettingsBtn"),
+  backToStudyBtn: document.getElementById("backToStudyBtn"),
+  backToSettingsBtn: document.getElementById("backToSettingsBtn"),
+  openAnalysisBtn: document.getElementById("openAnalysisBtn"),
+  resetBtn: document.getElementById("resetBtn"),
+  studyTopbar: document.getElementById("studyTopbar"),
+  studyView: document.getElementById("studyView"),
+  settingsView: document.getElementById("settingsView"),
+  analysisView: document.getElementById("analysisView"),
+  settingsList: document.getElementById("settingsList"),
+  engineAlert: document.getElementById("engineAlert"),
+  engineAlertText: document.getElementById("engineAlertText"),
+  newCount: document.getElementById("newCount"),
+  dueCount: document.getElementById("dueCount"),
+  learningCount: document.getElementById("learningCount"),
+  answeredCount: document.getElementById("answeredCount"),
+  cardPosition: document.getElementById("cardPosition"),
+  cardState: document.getElementById("cardState"),
+  frontFace: document.getElementById("frontFace"),
+  backFace: document.getElementById("backFace"),
+  showAnswerBtn: document.getElementById("showAnswerBtn"),
+  gradeRow: document.getElementById("gradeRow"),
+  againBtn: document.getElementById("againBtn"),
+  hardBtn: document.getElementById("hardBtn"),
+  goodBtn: document.getElementById("goodBtn"),
+  easyBtn: document.getElementById("easyBtn"),
+  statusLine: document.getElementById("statusLine"),
+  modeFilter: document.getElementById("modeFilter"),
+  sectionFilter: document.getElementById("sectionFilter"),
+  wallpaperSelect: document.getElementById("wallpaperSelect"),
+  wallpaperEnabledToggle: document.getElementById("wallpaperEnabledToggle"),
+  wallpaperOpacityInput: document.getElementById("wallpaperOpacityInput"),
+  newLimitInput: document.getElementById("newLimitInput"),
+  furiganaToggle: document.getElementById("furiganaToggle"),
+  romajiToggle: document.getElementById("romajiToggle"),
+  indonesianToggle: document.getElementById("indonesianToggle"),
+  englishToggle: document.getElementById("englishToggle"),
+  fontSizeSelect: document.getElementById("fontSizeSelect"),
+  reviewPriorityToggle: document.getElementById("reviewPriorityToggle"),
+  engineStatus: document.getElementById("engineStatus"),
+  learningSettingsSummary: document.getElementById("learningSettingsSummary"),
+  studyStats: document.getElementById("studyStats"),
+  modeStats: document.getElementById("modeStats"),
+  contentStats: document.getElementById("contentStats"),
+  fsrsMemory: document.getElementById("fsrsMemory"),
+  creatorAnalysis: document.getElementById("creatorAnalysis"),
+  stateGraph: document.getElementById("stateGraph"),
+  ratingGraph: document.getElementById("ratingGraph"),
+  csvExportBtn: document.getElementById("csvExportBtn"),
+  importBtn: document.getElementById("importBtn"),
+  importFileInput: document.getElementById("importFileInput"),
+  searchInput: document.getElementById("searchInput"),
+  browseList: document.getElementById("browseList"),
+};
+
+let cards = [];
+let showBack = false;
+let engine = {
+  api: null,
+  ready: false,
+  error: "",
+};
+
+let appState = {
+  currentId: null,
+  progress: {},
+};
+
+let ui = {
+  view: "study",
+  showFurigana: true,
+  showRomaji: false,
+  showIndonesian: true,
+  showEnglish: true,
+  fontSize: "regular",
+  mode: DEFAULT_MODE,
+  section: DEFAULT_SECTION,
+  wallpaper: DEFAULT_WALLPAPER,
+  wallpaperEnabled: true,
+  wallpaperOpacity: 38,
+  reviewFirst: true,
+  maxNew: 20,
+};
+
+const escapeHtml = (value) => String(value ?? "").replace(/[&<>"]/g, (char) => ({
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  "\"": "&quot;",
+}[char]));
+
+const field = (value) => value == null ? "" : String(value);
+const lang = (object, key) => field(object && object[key]);
+const meaning = (card, key) => lang(card.meaning, key);
+const promptText = (card, key) => lang(card.prompt, key);
+const expected = (card, key) => lang(card.expected_answer, key);
+const example = (card, key) => lang(card.example, key);
+const humanize = (value) => field(value).replace(/_/g, " ");
+const firstText = (...values) => values.map(field).find(Boolean) || "";
+
+function frontKana(card) {
+  return firstText(card.front_kana, card.kana, promptText(card, "kana"), promptText(card, "reading"), card.reading);
+}
+
+function answerKana(card) {
+  return firstText(card.answer_kana, expected(card, "kana"), expected(card, "reading"), card.reading);
+}
+
+function exampleKana(card) {
+  return firstText(card.example_kana, example(card, "kana"), example(card, "reading"));
+}
+
+function normalizeUi() {
+  ui.mode = ui.mode && ui.mode !== "all" ? ui.mode : DEFAULT_MODE;
+  ui.section = ui.section && ui.section !== "all" ? ui.section : DEFAULT_SECTION;
+  ui.wallpaper = WALLPAPER_LABELS[ui.wallpaper] ? ui.wallpaper : DEFAULT_WALLPAPER;
+  ui.view = ["study", "settings", "analysis"].includes(ui.view) ? ui.view : "study";
+  ui.fontSize = ["small", "regular", "large"].includes(ui.fontSize) ? ui.fontSize : "regular";
+  ui.maxNew = Math.min(100, Math.max(1, Number.parseInt(ui.maxNew, 10) || 20));
+  ui.showFurigana = ui.showFurigana !== false;
+  ui.showRomaji = ui.showRomaji === true;
+  ui.showIndonesian = ui.showIndonesian !== false;
+  ui.showEnglish = ui.showEnglish !== false;
+  ui.wallpaperEnabled = ui.wallpaperEnabled !== false;
+  ui.wallpaperOpacity = Math.min(70, Math.max(0, Number.parseInt(ui.wallpaperOpacity, 10) || 0));
+  ui.reviewFirst = ui.reviewFirst !== false;
+}
+
+function loadUi() {
+  try {
+    ui = { ...ui, ...JSON.parse(localStorage.getItem(UI_KEY) || "{}") };
+  } catch {
+    ui = { ...ui };
+  }
+  normalizeUi();
+  ui.view = "study";
+}
+
+function saveUi() {
+  normalizeUi();
+  localStorage.setItem(UI_KEY, JSON.stringify(ui));
+  localStorage.setItem(SETTINGS_KEY, JSON.stringify({
+    showFurigana: ui.showFurigana,
+    showRomaji: ui.showRomaji,
+    showIndonesian: ui.showIndonesian,
+    showEnglish: ui.showEnglish,
+    fontSize: ui.fontSize,
+    wallpaper: ui.wallpaper,
+    wallpaperEnabled: ui.wallpaperEnabled,
+    wallpaperOpacity: ui.wallpaperOpacity,
+    reviewFirst: ui.reviewFirst,
+    maxNew: ui.maxNew,
+  }));
+}
+
+function normalizeRecord(record, cardId) {
+  const source = record && typeof record === "object" ? record : {};
+  return {
+    card_id: source.card_id || cardId,
+    state: source.state || "new",
+    wrong_count: Number.isFinite(source.wrong_count) ? source.wrong_count : 0,
+    right_count: Number.isFinite(source.right_count) ? source.right_count : 0,
+    last_reviewed_at: source.last_reviewed_at || null,
+    next_due_at: source.next_due_at || null,
+    history: Array.isArray(source.history) ? source.history : [],
+    engine: source.engine || null,
+  };
+}
+
+function loadProgress() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+    const progress = saved.progress && typeof saved.progress === "object" ? saved.progress : {};
+    appState = {
+      currentId: saved.currentId || null,
+      progress: Object.fromEntries(Object.entries(progress).map(([id, record]) => [id, normalizeRecord(record, id)])),
+    };
+  } catch {
+    appState = { currentId: null, progress: {} };
+  }
+}
+
+function saveProgress() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify({
+    schema_version: 4,
+    scheduler_generation: "fsrs-v2-clean-break",
+    scheduler_module: "fsrsV2Adapter.js",
+    scheduler_api: ["createCard", "reviewCard", "isDue"],
+    deck_id: "jft_ssw_work_japan",
+    pack_id: DEFAULT_PACK,
+    currentId: appState.currentId,
+    progress: appState.progress,
+    updatedAt: new Date().toISOString(),
+  }));
+}
+
+function appendReviewLog(entry) {
+  let reviewLog = [];
+  try {
+    const saved = JSON.parse(localStorage.getItem(REVIEW_LOG_KEY) || "[]");
+    reviewLog = Array.isArray(saved) ? saved : [];
+  } catch {
+    reviewLog = [];
+  }
+  reviewLog.push(entry);
+  localStorage.setItem(REVIEW_LOG_KEY, JSON.stringify(reviewLog.slice(-1000)));
+}
+
+async function loadEngine() {
+  try {
+    if (location.protocol === "file:") {
+      throw new Error("File-open mode blocks module loading. Open V37 through a local HTTP server or GitHub Pages.");
+    }
+    const mod = await import("./fsrsV2Adapter.js");
+    for (const name of ["createCard", "reviewCard", "isDue"]) {
+      if (typeof mod[name] !== "function") {
+        throw new Error(`Missing export: ${name}`);
+      }
+    }
+    engine = {
+      api: {
+        createCard: mod.createCard,
+        reviewCard: mod.reviewCard,
+        isDue: mod.isDue,
+      },
+      ready: true,
+      error: "",
+    };
+  } catch (error) {
+    engine = {
+      api: null,
+      ready: false,
+      error: error && error.message ? error.message : String(error),
+    };
+  }
+}
+
+function engineErrorMessage() {
+  return `Study controls are disabled because the FSRS/V2 adapter did not load: ${engine.error}`;
+}
+
+function showEngineRuntimeError(error) {
+  engine = {
+    api: null,
+    ready: false,
+    error: error && error.message ? error.message : String(error),
+  };
+  showBack = false;
+  render();
+  setStatus(engineErrorMessage());
+}
+
+function recordFor(id) {
+  return appState.progress[id] || null;
+}
+
+function stateFor(id) {
+  return recordFor(id)?.state || "new";
+}
+
+function isDueRecord(record, now = new Date()) {
+  if (!engine.ready || !engine.api || !record || !record.engine) return false;
+  return engine.api.isDue(record.engine, now);
+}
+
+function baseFilteredCards() {
+  return cards.filter((card) => (
+    card.mode === ui.mode &&
+    card.jft_section === ui.section
+  ));
+}
+
+function dueCards() {
+  const now = new Date();
+  return baseFilteredCards().filter((card) => {
+    const record = recordFor(card.id);
+    return record && record.state !== "new" && isDueRecord(record, now);
+  });
+}
+
+function newCards() {
+  return baseFilteredCards()
+    .filter((card) => stateFor(card.id) === "new")
+    .slice(0, ui.maxNew);
+}
+
+function studyQueue() {
+  return ui.reviewFirst ? [...dueCards(), ...newCards()] : [...newCards(), ...dueCards()];
+}
+
+function currentCard() {
+  const queue = studyQueue();
+  return queue.find((card) => card.id === appState.currentId) || queue[0] || null;
+}
+
+function selectCurrentCard() {
+  const queue = studyQueue();
+  if (!queue.length) {
+    appState.currentId = null;
+    return;
+  }
+  if (!queue.some((card) => card.id === appState.currentId)) {
+    appState.currentId = queue[0].id;
+  }
+}
+
+function serializeEngineCard(engineCard) {
+  return JSON.parse(JSON.stringify(engineCard));
+}
+
+function nextState(rating, engineCard) {
+  if (rating === "again") return "learning";
+  return engineCard.state || "learning";
+}
+
+function populateFilters() {
+  const modes = [...new Set(cards.map((card) => card.mode).filter(Boolean))];
+  if (!modes.includes(ui.mode)) ui.mode = modes.includes(DEFAULT_MODE) ? DEFAULT_MODE : modes[0];
+
+  els.modeFilter.innerHTML = modes.map((mode) => (
+    `<option value="${escapeHtml(mode)}">${escapeHtml(MODE_LABELS[mode] || humanize(mode))}</option>`
+  )).join("");
+
+  populateSectionFilter();
+}
+
+function sectionsForMode(mode) {
+  return [...new Set(cards
+    .filter((card) => card.mode === mode)
+    .map((card) => card.jft_section)
+    .filter(Boolean))];
+}
+
+function populateSectionFilter() {
+  const sections = sectionsForMode(ui.mode);
+  if (!sections.includes(ui.section)) ui.section = sections.includes(DEFAULT_SECTION) ? DEFAULT_SECTION : sections[0];
+
+  els.sectionFilter.innerHTML = sections.map((section) => (
+    `<option value="${escapeHtml(section)}">${escapeHtml(SECTION_LABELS[section] || humanize(section))}</option>`
+  )).join("");
+}
+
+function applyUi() {
+  normalizeUi();
+  document.body.dataset.wallpaper = ui.wallpaper;
+  document.body.dataset.wallpaperEnabled = String(ui.wallpaperEnabled);
+  document.body.dataset.fontSize = ui.fontSize;
+  document.body.style.setProperty("--art-opacity", ui.wallpaperEnabled ? String(ui.wallpaperOpacity / 100) : "0");
+  els.studyView.hidden = ui.view !== "study";
+  els.settingsView.hidden = ui.view !== "settings";
+  els.analysisView.hidden = ui.view !== "analysis";
+  els.studyTopbar.hidden = ui.view !== "study";
+  els.toggleSettingsBtn.setAttribute("aria-expanded", String(ui.view === "settings"));
+  els.modeFilter.value = ui.mode;
+  els.sectionFilter.value = ui.section;
+  els.wallpaperSelect.value = ui.wallpaper;
+  els.wallpaperEnabledToggle.textContent = `Wallpaper ${ui.wallpaperEnabled ? "On" : "Off"}`;
+  els.wallpaperOpacityInput.value = ui.wallpaperOpacity;
+  els.newLimitInput.value = ui.maxNew;
+  els.furiganaToggle.textContent = `Furigana ${ui.showFurigana ? "On" : "Off"}`;
+  els.romajiToggle.textContent = `Romaji ${ui.showRomaji ? "On" : "Off"}`;
+  els.indonesianToggle.textContent = `Indonesian ${ui.showIndonesian ? "On" : "Off"}`;
+  els.englishToggle.textContent = `English ${ui.showEnglish ? "On" : "Off"}`;
+  els.fontSizeSelect.value = ui.fontSize;
+  els.reviewPriorityToggle.textContent = `Review priority ${ui.reviewFirst ? "On" : "Off"}`;
+
+  els.engineAlert.hidden = engine.ready;
+  if (engine.ready) {
+    els.engineStatus.innerHTML = `<span class="engine-ok">Connected.</span> ES module exports loaded.`;
+  } else {
+    els.engineStatus.innerHTML = `<span class="engine-bad">Stopped.</span> ${escapeHtml(engine.error || "Engine not loaded.")}`;
+    els.engineAlertText.textContent = engineErrorMessage();
+  }
+}
+
+function render() {
+  applyUi();
+  selectCurrentCard();
+  renderStats();
+  renderCard();
+  renderAnalysis();
+  renderBrowse();
+}
+
+function renderStats() {
+  const base = baseFilteredCards();
+  const due = dueCards();
+  let learning = 0;
+  let answered = 0;
+  let fresh = 0;
+
+  for (const card of base) {
+    const record = recordFor(card.id);
+    if (!record || record.state === "new") fresh += 1;
+    if (record?.state === "learning") learning += 1;
+    if (record && (record.right_count || record.wrong_count || record.history.length)) answered += 1;
+  }
+
+  els.newCount.textContent = String(fresh);
+  els.dueCount.textContent = String(due.length);
+  els.learningCount.textContent = String(learning);
+  els.answeredCount.textContent = String(answered);
+}
+
+function countBy(items, labelFor) {
+  const counts = new Map();
+  for (const item of items) {
+    const label = labelFor(item) || "Unknown";
+    counts.set(label, (counts.get(label) || 0) + 1);
+  }
+  return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+}
+
+function analysisRows(rows) {
+  return rows.map(([label, value]) => (
+    `<p><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></p>`
+  )).join("");
+}
+
+function ratio(value, total) {
+  return total ? `${Math.round((value / total) * 100)}%` : "0%";
+}
+
+function graphCard(title, rows, total) {
+  const safeTotal = total || rows.reduce((sum, row) => sum + row.value, 0);
+  const segments = rows.map((row) => (
+    row.value > 0
+      ? `<span class="bar-segment ${escapeHtml(row.className)}" style="width:${escapeHtml((row.value / Math.max(1, safeTotal)) * 100)}%"></span>`
+      : ""
+  )).join("");
+  const legend = rows.map((row) => (
+    `<div class="legend-item">
+      <span class="legend-swatch ${escapeHtml(row.className)}"></span>
+      <span>${escapeHtml(row.label)}</span>
+      <strong>${escapeHtml(row.value)} (${escapeHtml(ratio(row.value, safeTotal))})</strong>
+    </div>`
+  )).join("");
+
+  return `<article class="graph-card">
+    <div class="graph-head"><span>${escapeHtml(title)}</span><strong>${escapeHtml(safeTotal)}</strong></div>
+    <div class="stacked-bar">${segments || `<span class="bar-segment bar-new" style="width:100%"></span>`}</div>
+    <div class="legend-grid">${legend}</div>
+  </article>`;
+}
+
+function progressRecords() {
+  return Object.values(appState.progress).map((record) => normalizeRecord(record, record.card_id));
+}
+
+function hasReview(record) {
+  return Boolean(record.last_reviewed_at || record.history.length || record.right_count || record.wrong_count);
+}
+
+function normalizedStateName(record) {
+  const state = record?.state || "new";
+  if (state === "new") return "new";
+  if (state === "review") return "review";
+  return "learning";
+}
+
+function stateDistribution() {
+  const records = new Map(progressRecords().map((record) => [record.card_id, record]));
+  const counts = { new: 0, learning: 0, review: 0 };
+  for (const card of cards) {
+    const state = normalizedStateName(records.get(card.id));
+    counts[state] += 1;
+  }
+  return counts;
+}
+
+function ratingDistribution() {
+  const counts = { again: 0, hard: 0, good: 0, easy: 0 };
+  for (const record of progressRecords()) {
+    for (const item of record.history) {
+      if (counts[item.grade] != null) counts[item.grade] += 1;
+    }
+  }
+  return counts;
+}
+
+function difficultCards(limit = 6) {
+  return progressRecords()
+    .filter((record) => record.wrong_count > 0 || record.history.some((item) => item.grade === "again" || item.grade === "hard"))
+    .sort((a, b) => (
+      (b.wrong_count - a.wrong_count) ||
+      ((b.history?.length || 0) - (a.history?.length || 0)) ||
+      a.card_id.localeCompare(b.card_id)
+    ))
+    .slice(0, limit);
+}
+
+function renderAnalysis() {
+  const base = baseFilteredCards();
+  const records = progressRecords();
+  const reviewedRecords = records.filter(hasReview);
+  const scheduledRecords = records.filter((record) => record.engine);
+  const stateCounts = countBy(base, (card) => stateFor(card.id));
+  const modeCounts = countBy(cards, (card) => MODE_LABELS[card.mode] || humanize(card.mode));
+  const sectionCounts = countBy(cards, (card) => SECTION_LABELS[card.jft_section] || humanize(card.jft_section));
+  const scenarioCount = new Set(cards.map((card) => card.scenario).filter(Boolean)).size;
+  const states = stateDistribution();
+  const ratings = ratingDistribution();
+  const ratedTotal = ratings.again + ratings.hard + ratings.good + ratings.easy;
+  const difficult = difficultCards();
+
+  els.learningSettingsSummary.innerHTML = analysisRows([
+    ["New", els.newCount.textContent || 0],
+    ["Review", els.dueCount.textContent || 0],
+    ["Learning", els.learningCount.textContent || 0],
+  ]);
+
+  els.studyStats.innerHTML = analysisRows([
+    ["Total cards", cards.length],
+    ["Studied cards", reviewedRecords.length],
+    ["Not studied", Math.max(0, cards.length - reviewedRecords.length)],
+    ["Selected cards", base.length],
+    ["Answered in selected mode", Number(els.answeredCount.textContent) || 0],
+  ]);
+
+  els.stateGraph.innerHTML = graphCard("Card state distribution", [
+    { label: "New", value: states.new, className: "bar-new" },
+    { label: "Learning", value: states.learning, className: "bar-learning" },
+    { label: "Review", value: states.review, className: "bar-review" },
+  ], cards.length);
+
+  els.ratingGraph.innerHTML = graphCard("Rating distribution", [
+    { label: "Again", value: ratings.again, className: "bar-again" },
+    { label: "Hard", value: ratings.hard, className: "bar-hard" },
+    { label: "Good", value: ratings.good, className: "bar-good" },
+    { label: "Easy", value: ratings.easy, className: "bar-easy" },
+  ], ratedTotal);
+
+  els.modeStats.innerHTML = analysisRows(modeCounts);
+  els.contentStats.innerHTML = analysisRows(sectionCounts);
+  els.fsrsMemory.innerHTML = analysisRows([
+    ["Engine", engine.ready ? "Connected" : "Stopped"],
+    ["Scheduled records", scheduledRecords.length],
+    ["Due now", dueCards().length],
+    ["Current card", appState.currentId || "None"],
+  ]);
+  els.creatorAnalysis.innerHTML = analysisRows([
+    ["Card groups", modeCounts.length],
+    ["Content groups", sectionCounts.length],
+    ["Scenario count", scenarioCount],
+    ["Selected states", stateCounts.map(([label, count]) => `${label}: ${count}`).join(", ") || "None"],
+    ["Difficult card guide", difficult.length ? difficult.map((record) => `${record.card_id}: ${record.wrong_count}`).join(", ") : "None yet"],
+  ]);
+}
+
+function renderCard() {
+  const queue = studyQueue();
+  const card = currentCard();
+
+  if (!card) {
+    els.cardPosition.textContent = "Card 0/0";
+    els.cardState.textContent = "Done";
+    els.frontFace.innerHTML = `<div class="empty"><h2>No cards due now.</h2><p>Change filters or raise the new-card limit to continue.</p></div>`;
+    els.backFace.hidden = true;
+    els.backFace.innerHTML = "";
+    setStudyButtons(false, false);
+    return;
+  }
+
+  const index = Math.max(0, queue.findIndex((item) => item.id === card.id)) + 1;
+  els.cardPosition.textContent = `Card ${index}/${queue.length}`;
+  els.cardState.textContent = cardStatus(card);
+  els.frontFace.innerHTML = showBack ? renderFrontReference(card) : renderFront(card);
+  els.backFace.innerHTML = renderBack(card);
+  els.backFace.hidden = !showBack;
+  setStudyButtons(true, showBack);
+}
+
+function setStudyButtons(hasCard, answerShown) {
+  const canStudy = hasCard && engine.ready;
+  els.showAnswerBtn.hidden = !hasCard || answerShown;
+  els.showAnswerBtn.disabled = !canStudy || answerShown;
+  els.gradeRow.hidden = !hasCard || !answerShown;
+  for (const button of [els.againBtn, els.hardBtn, els.goodBtn, els.easyBtn]) {
+    button.disabled = !canStudy || !answerShown;
+  }
+}
+
+function cardStatus(card) {
+  const record = recordFor(card.id);
+  if (!record || record.state === "new") return "New";
+  if (isDueRecord(record)) return "Due";
+  return (record.state || "learning").replace(/^./, (char) => char.toUpperCase());
+}
+
+function taskLabel(card) {
+  return `<p class="task-label">${escapeHtml(TASK_LABELS[card.mode] || "Card")}</p>`;
+}
+
+function furiganaLine(value) {
+  return ui.showFurigana && value ? `<p class="reading">${escapeHtml(value)}</p>` : "";
+}
+
+function romajiLine(card) {
+  return ui.showRomaji && card.romaji ? `<p class="romaji">${escapeHtml(card.romaji)}</p>` : "";
+}
+
+function indonesianLine(value) {
+  return ui.showIndonesian && value ? `<p class="muted">${escapeHtml(value)}</p>` : "";
+}
+
+function englishLine(value) {
+  return ui.showEnglish && value ? `<p class="muted">${escapeHtml(value)}</p>` : "";
+}
+
+function tags(card) {
+  return "";
+}
+
+function renderFront(card) {
+  if (card.mode === "production") {
+    const promptId = promptText(card, "id") || meaning(card, "id");
+    const promptEn = promptText(card, "en") || meaning(card, "en");
+    const fallbackPrompt = promptId || promptEn || card.target;
+    return `${taskLabel(card)}<p class="prompt">${escapeHtml(ui.showIndonesian ? fallbackPrompt : (promptEn || fallbackPrompt))}</p>${englishLine(promptEn)}${tags(card)}`;
+  }
+
+  if (card.mode === "information_search_mini") {
+    return `${taskLabel(card)}<div class="target-wrap"><h2 class="target compact">${escapeHtml(card.target)}</h2>${furiganaLine(frontKana(card))}</div><div class="example"><p class="example-ja">${escapeHtml(promptText(card, "id"))}</p>${englishLine(promptText(card, "en"))}</div>${tags(card)}`;
+  }
+
+  return `${taskLabel(card)}<div class="target-wrap"><h2 class="target">${escapeHtml(card.target)}</h2>${furiganaLine(frontKana(card))}${romajiLine(card)}</div>${tags(card)}`;
+}
+
+function renderFrontReference(card) {
+  if (card.mode === "production") {
+    const promptId = promptText(card, "id") || meaning(card, "id");
+    const promptEn = promptText(card, "en") || meaning(card, "en");
+    const fallbackPrompt = promptId || promptEn || card.target;
+    return `${taskLabel(card)}<p class="prompt">${escapeHtml(ui.showIndonesian ? fallbackPrompt : (promptEn || fallbackPrompt))}</p>${englishLine(promptEn)}`;
+  }
+
+  if (card.mode === "information_search_mini") {
+    return `${taskLabel(card)}<div class="target-wrap"><h2 class="target compact">${escapeHtml(card.target)}</h2>${furiganaLine(frontKana(card))}</div>`;
+  }
+
+  return `${taskLabel(card)}<div class="target-wrap"><h2 class="target compact">${escapeHtml(card.target)}</h2>${furiganaLine(frontKana(card))}${romajiLine(card)}</div>`;
+}
+
+function renderBack(card) {
+  const answerJa = expected(card, "ja") || card.target;
+  const answerReading = answerKana(card);
+  const answerId = expected(card, "id") || meaning(card, "id");
+  const answerEn = expected(card, "en") || meaning(card, "en");
+  const exampleJa = example(card, "ja");
+  const exampleKanaText = exampleKana(card);
+  const exampleId = example(card, "id");
+  const exampleEn = example(card, "en");
+  const note = field(card.usage_note && (card.usage_note.id || card.usage_note.en || card.usage_note.ja));
+
+  const top = card.mode === "recognition"
+    ? `<div class="target-wrap"><h2 class="target compact">${escapeHtml(card.target)}</h2>${furiganaLine(answerReading)}</div>${indonesianLine(answerId)}${englishLine(answerEn)}`
+    : `<div class="target-wrap"><h2 class="target compact">${escapeHtml(answerJa)}</h2>${furiganaLine(answerReading)}${romajiLine(card)}</div>${indonesianLine(answerId)}${englishLine(answerEn)}`;
+
+  const exampleBlock = exampleJa || exampleKanaText || exampleId || exampleEn
+    ? `<div class="example">${exampleJa ? `<div class="example-line"><p class="example-ja">${escapeHtml(exampleJa)}</p>${furiganaLine(exampleKanaText)}</div>` : ""}${ui.showIndonesian && exampleId ? `<p class="example-id">${escapeHtml(exampleId)}</p>` : ""}${ui.showEnglish && exampleEn ? `<p class="example-id">${escapeHtml(exampleEn)}</p>` : ""}</div>`
+    : "";
+
+  return `${top}${exampleBlock}${note ? `<p class="note">${escapeHtml(note)}</p>` : ""}`;
+}
+
+function renderBrowse() {
+  const query = els.searchInput.value.trim().toLowerCase();
+  const visible = baseFilteredCards().filter((card) => {
+    if (!query) return true;
+    return JSON.stringify([
+      card.id,
+      card.target,
+      card.reading,
+      card.romaji,
+      card.meaning,
+      card.prompt,
+      card.expected_answer,
+      card.example,
+      card.scenario,
+      card.jft_section,
+      card.mode,
+    ]).toLowerCase().includes(query);
+  });
+
+  els.browseList.innerHTML = visible.map((card) => (
+    `<button type="button" class="browse-item" data-card-id="${escapeHtml(card.id)}">
+      <span class="browse-title">${escapeHtml(card.target)}</span>
+      <span class="browse-meta">${escapeHtml(card.id)} · ${escapeHtml(MODE_LABELS[card.mode] || humanize(card.mode))} · ${escapeHtml(SECTION_LABELS[card.jft_section] || humanize(card.jft_section))}</span>
+    </button>`
+  )).join("") || `<p class="muted">No matching cards.</p>`;
+}
+
+function exportCsv() {
+  let reviewLog = [];
+  try {
+    const saved = JSON.parse(localStorage.getItem(REVIEW_LOG_KEY) || "[]");
+    reviewLog = Array.isArray(saved) ? saved : [];
+  } catch {
+    reviewLog = [];
+  }
+  const payload = {
+    schema_version: 4,
+    app_version: "V37",
+    storage_key: STORAGE_KEY,
+    review_log_key: REVIEW_LOG_KEY,
+    currentId: appState.currentId,
+    progress: appState.progress,
+    reviewLog,
+    exportedAt: new Date().toISOString(),
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "v37-fsrs-progress.json";
+  document.body.append(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function setStatus(message) {
+  els.statusLine.textContent = message;
+}
+
+function formatDue(value) {
+  const due = new Date(value);
+  const now = new Date();
+  const diffMs = due.getTime() - now.getTime();
+  if (!Number.isFinite(diffMs)) return "unknown";
+  if (diffMs <= 0) return "now";
+  if (diffMs < 60 * 60 * 1000) return "soon";
+  if (diffMs < 24 * 60 * 60 * 1000) return "later today";
+  return due.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+}
+
+function reviewCurrent(grade) {
+  if (!engine.ready || !engine.api) {
+    setStatus(engineErrorMessage());
+    return;
+  }
+
+  const card = currentCard();
+  if (!card) return;
+
+  const rating = REVIEW_RATINGS[grade];
+  const before = studyQueue();
+  const beforeIndex = Math.max(0, before.findIndex((item) => item.id === card.id));
+  const existing = normalizeRecord(recordFor(card.id), card.id);
+  const reviewedAt = new Date();
+
+  try {
+    const startingEngineCard = existing.engine || engine.api.createCard(card.id, reviewedAt);
+    const reviewedEngineCard = engine.api.reviewCard(startingEngineCard, rating, reviewedAt);
+    const serializedEngineCard = serializeEngineCard(reviewedEngineCard);
+    const nextDueAt = serializedEngineCard.due ? new Date(serializedEngineCard.due).toISOString() : null;
+
+    appState.progress[card.id] = {
+      ...existing,
+      card_id: card.id,
+      state: nextState(rating, reviewedEngineCard),
+      wrong_count: existing.wrong_count + (grade === "again" ? 1 : 0),
+      right_count: existing.right_count + (grade === "again" ? 0 : 1),
+      last_reviewed_at: reviewedAt.toISOString(),
+      next_due_at: nextDueAt,
+      history: [
+        ...existing.history,
+        {
+          at: reviewedAt.toISOString(),
+          grade,
+          rating,
+          due: nextDueAt,
+        },
+      ],
+      engine: serializedEngineCard,
+    };
+    appendReviewLog({
+      card_id: card.id,
+      grade,
+      rating,
+      reviewed_at: reviewedAt.toISOString(),
+      next_due_at: nextDueAt,
+    });
+  } catch (error) {
+    showEngineRuntimeError(error);
+    return;
+  }
+
+  saveProgress();
+  moveAfterReview(beforeIndex);
+  setStatus(`${card.id} saved as ${grade}. Next due: ${formatDue(appState.progress[card.id].next_due_at)}.`);
+}
+
+function moveAfterReview(previousIndex) {
+  const nextQueue = studyQueue();
+  if (!nextQueue.length) {
+    appState.currentId = null;
+  } else {
+    appState.currentId = nextQueue[Math.min(previousIndex, nextQueue.length - 1)].id;
+  }
+  showBack = false;
+  saveProgress();
+  render();
+}
+
+async function loadCards() {
+  try {
+    if (location.protocol === "file:") {
+      throw new Error("File-open mode blocks card JSON loading. Open V37 through a local HTTP server or GitHub Pages.");
+    }
+    const manifest = await fetch(MANIFEST_URL, { cache: "no-store" }).then((response) => {
+      if (!response.ok) throw new Error(`manifest ${response.status}`);
+      return response.json();
+    });
+    const packs = manifest.decks.flatMap((deck) => deck.packs || []);
+    const pack = packs.find((item) => item.pack_id === DEFAULT_PACK);
+    const cardFile = pack?.card_file || "data/cards.stage1b.id.sample.json";
+    const data = await fetch(cardFile, { cache: "no-store" }).then((response) => {
+      if (!response.ok) throw new Error(`cards ${response.status}`);
+      return response.json();
+    });
+    cards = Array.isArray(data) ? data : data.cards || [];
+    populateFilters();
+    render();
+    setStatus(`Loaded ${cards.length} cards.`);
+  } catch (error) {
+    cards = [];
+    render();
+    setStatus(`Could not load cards: ${error && error.message ? error.message : String(error)}`);
+  }
+}
+
+function resetProgress() {
+  if (!confirm("Reset local progress for V37 in this browser?")) return;
+  appState = { currentId: null, progress: {} };
+  showBack = false;
+  saveProgress();
+  render();
+  setStatus("Progress reset.");
+}
+
+els.toggleSettingsBtn.addEventListener("click", () => {
+  ui.view = "settings";
+  saveUi();
+  render();
+});
+
+els.backToStudyBtn.addEventListener("click", () => {
+  ui.view = "study";
+  saveUi();
+  render();
+});
+
+els.openAnalysisBtn.addEventListener("click", () => {
+  ui.view = "analysis";
+  saveUi();
+  render();
+});
+
+els.backToSettingsBtn.addEventListener("click", () => {
+  ui.view = "settings";
+  saveUi();
+  render();
+});
+
+els.resetBtn.addEventListener("click", resetProgress);
+
+els.showAnswerBtn.addEventListener("click", () => {
+  if (!engine.ready) {
+    setStatus(engineErrorMessage());
+    return;
+  }
+  showBack = true;
+  render();
+});
+
+els.againBtn.addEventListener("click", () => reviewCurrent("again"));
+els.hardBtn.addEventListener("click", () => reviewCurrent("hard"));
+els.goodBtn.addEventListener("click", () => reviewCurrent("good"));
+els.easyBtn.addEventListener("click", () => reviewCurrent("easy"));
+
+els.modeFilter.addEventListener("change", (event) => {
+  ui.mode = event.target.value;
+  populateSectionFilter();
+  appState.currentId = null;
+  showBack = false;
+  saveUi();
+  render();
+});
+
+els.sectionFilter.addEventListener("change", (event) => {
+  ui.section = event.target.value;
+  appState.currentId = null;
+  showBack = false;
+  saveUi();
+  render();
+});
+
+els.newLimitInput.addEventListener("change", (event) => {
+  ui.maxNew = event.target.value;
+  appState.currentId = null;
+  showBack = false;
+  saveUi();
+  render();
+});
+
+els.wallpaperSelect.addEventListener("change", (event) => {
+  ui.wallpaper = event.target.value;
+  saveUi();
+  render();
+});
+
+els.wallpaperEnabledToggle.addEventListener("click", () => {
+  ui.wallpaperEnabled = !ui.wallpaperEnabled;
+  saveUi();
+  render();
+});
+
+els.wallpaperOpacityInput.addEventListener("input", (event) => {
+  ui.wallpaperOpacity = event.target.value;
+  saveUi();
+  render();
+});
+
+els.furiganaToggle.addEventListener("click", () => {
+  ui.showFurigana = !ui.showFurigana;
+  saveUi();
+  render();
+});
+
+els.romajiToggle.addEventListener("click", () => {
+  ui.showRomaji = !ui.showRomaji;
+  saveUi();
+  render();
+});
+
+els.indonesianToggle.addEventListener("click", () => {
+  ui.showIndonesian = !ui.showIndonesian;
+  saveUi();
+  render();
+});
+
+els.englishToggle.addEventListener("click", () => {
+  ui.showEnglish = !ui.showEnglish;
+  saveUi();
+  render();
+});
+
+els.fontSizeSelect.addEventListener("change", (event) => {
+  ui.fontSize = event.target.value;
+  saveUi();
+  render();
+});
+
+els.reviewPriorityToggle.addEventListener("click", () => {
+  ui.reviewFirst = !ui.reviewFirst;
+  appState.currentId = null;
+  showBack = false;
+  saveUi();
+  render();
+});
+
+els.searchInput.addEventListener("input", renderBrowse);
+
+els.csvExportBtn.addEventListener("click", exportCsv);
+
+els.importBtn.addEventListener("click", () => els.importFileInput.click());
+
+els.importFileInput.addEventListener("change", async (event) => {
+  const [file] = event.target.files || [];
+  if (!file) return;
+  try {
+    const parsed = JSON.parse(await file.text());
+    const progress = parsed.progress && typeof parsed.progress === "object" ? parsed.progress : {};
+    appState = {
+      currentId: parsed.currentId || null,
+      progress: Object.fromEntries(Object.entries(progress).map(([id, record]) => [id, normalizeRecord(record, id)])),
+    };
+    if (Array.isArray(parsed.reviewLog)) {
+      localStorage.setItem(REVIEW_LOG_KEY, JSON.stringify(parsed.reviewLog.slice(-1000)));
+    }
+    showBack = false;
+    saveProgress();
+    render();
+    setStatus("Imported V37 progress.");
+  } catch (error) {
+    setStatus(`Import failed: ${error && error.message ? error.message : String(error)}`);
+  } finally {
+    event.target.value = "";
+  }
+});
+
+els.browseList.addEventListener("click", (event) => {
+  const row = event.target.closest("[data-card-id]");
+  if (!row) return;
+  appState.currentId = row.dataset.cardId;
+  showBack = false;
+  saveProgress();
+  render();
+});
+
+window.__APP_V37_FSRS_CLEAN__ = {
+  storageKey: STORAGE_KEY,
+  uiKey: UI_KEY,
+  get engineReady() {
+    return engine.ready;
+  },
+  get engineError() {
+    return engine.error;
+  },
+  get cardCount() {
+    return cards.length;
+  },
+  get currentId() {
+    return appState.currentId;
+  },
+  get progress() {
+    return JSON.parse(JSON.stringify(appState.progress));
+  },
+  dueCount() {
+    return dueCards().length;
+  },
+  get view() {
+    return ui.view;
+  },
+};
+
+loadUi();
+saveUi();
+loadProgress();
+await loadEngine();
+render();
+await loadCards();
+</script>
+</body>
+</html>
