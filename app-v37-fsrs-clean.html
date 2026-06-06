@@ -74,13 +74,13 @@ body::before {
   background-position: center bottom;
 }
 
-body[data-wallpaper="daily"] {
+body[data-backdrop="daily"] {
   --bg: #eaf4ef;
   --bg2: #fff1dd;
   --art-opacity: .38;
 }
 
-body[data-wallpaper="soft"] {
+body[data-backdrop="soft"] {
   --bg: #f5efe8;
   --bg2: #e9f3ef;
   --art-opacity: .28;
@@ -91,7 +91,7 @@ body[data-wallpaper="soft"] {
     repeating-linear-gradient(90deg, transparent 0 72px, rgba(84, 105, 94, .07) 73px 75px, transparent 76px 150px);
 }
 
-body[data-wallpaper="clean"] {
+body[data-backdrop="clean"] {
   --bg: #f6f9f7;
   --bg2: #eef4f2;
   --art-opacity: .18;
@@ -101,7 +101,7 @@ body[data-wallpaper="clean"] {
     radial-gradient(circle at 80% 74%, rgba(196, 130, 77, .10), transparent 28%);
 }
 
-body[data-wallpaper-enabled="false"]::before {
+body[data-backdrop-enabled="false"]::before {
   opacity: 0;
 }
 
@@ -200,7 +200,7 @@ select {
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  grid-template-columns: auto minmax(88px, 1fr) repeat(3, minmax(0, .82fr)) auto;
   gap: .42rem;
   align-items: stretch;
   margin-top: 0;
@@ -248,6 +248,30 @@ select {
   font-size: 1.16rem;
 }
 
+.study-return {
+  min-height: 50px;
+  padding-inline: .72rem;
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+  white-space: nowrap;
+}
+
+.genre-chip {
+  display: grid;
+  align-content: center;
+  min-height: 50px;
+  padding: .45rem .64rem;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: rgba(255, 255, 255, .78);
+  color: var(--primary);
+  font-size: .86rem;
+  font-weight: 950;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(19, 50, 42, .07);
+}
+
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -255,6 +279,92 @@ select {
   align-items: start;
 }
 
+.genre-list {
+  display: grid;
+  gap: .74rem;
+}
+
+.genre-card {
+  display: grid;
+  gap: .65rem;
+  padding: .88rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .95);
+  box-shadow: var(--shadow);
+}
+
+.genre-card h2 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.16rem;
+}
+
+.genre-card p {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 720;
+}
+
+.genre-counts,
+.done-counts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .42rem;
+}
+
+.done-counts {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: .7rem;
+}
+
+.mini-stat {
+  padding: .45rem .35rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface-soft);
+  text-align: center;
+}
+
+.mini-stat strong {
+  display: block;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.mini-stat span {
+  display: block;
+  margin-top: .18rem;
+  color: var(--muted);
+  font-size: .66rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.genre-actions,
+.done-actions {
+  display: grid;
+  gap: .48rem;
+}
+
+.done-screen {
+  display: grid;
+  gap: .65rem;
+}
+
+.done-screen h2 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.42rem;
+}
+
+.done-screen p {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 720;
+}
+
+.genre-view,
 .study-view,
 .settings-view,
 .analysis-view {
@@ -397,7 +507,7 @@ select {
   font-size: clamp(1.42rem, 6.2vw, 2.2rem);
 }
 
-body[data-font-size="small"] .target {
+body[data-font-size="compact"] .target {
   font-size: clamp(1.62rem, 9.2vw, 2.85rem);
 }
 
@@ -405,8 +515,8 @@ body[data-font-size="large"] .target {
   font-size: clamp(2.22rem, 12.5vw, 3.85rem);
 }
 
-body[data-font-size="small"] .target.compact,
-body[data-font-size="small"] .prompt {
+body[data-font-size="compact"] .target.compact,
+body[data-font-size="compact"] .prompt {
   font-size: clamp(1.18rem, 5.4vw, 1.75rem);
 }
 
@@ -849,6 +959,19 @@ input[type="range"] {
     grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
   }
 
+  .study-return {
+    grid-column: 1 / 3;
+  }
+
+  .genre-chip {
+    grid-column: 3 / 4;
+  }
+
+  .gear {
+    grid-column: 4;
+    grid-row: 1;
+  }
+
   .card-body {
     min-height: 330px;
     padding: .9rem;
@@ -867,8 +990,22 @@ input[type="range"] {
 </head>
 <body>
 <main class="app">
+  <section class="genre-view" id="genreView">
+    <header class="view-head">
+      <h1>何を練習しますか？</h1>
+      <div class="top-actions">
+        <button type="button" id="genreSettingsBtn">設定</button>
+        <button type="button" id="genreAnalysisBtn">分析</button>
+      </div>
+    </header>
+    <div class="genre-list" id="genreList"></div>
+    <p class="status-line" id="genreStatusLine" role="status"></p>
+  </section>
+
   <header class="topbar" id="studyTopbar">
     <section class="stats" aria-label="V37 study counts">
+      <button type="button" class="study-return" id="backToGenreBtn">← ジャンル選択</button>
+      <div class="genre-chip" id="selectedGenreLabel">Recognition</div>
       <div class="stat"><strong id="newCount">0</strong><span>New</span></div>
       <div class="stat"><strong id="dueCount">0</strong><span>Review</span></div>
       <div class="stat"><strong id="learningCount">0</strong><span>Learning</span></div>
@@ -887,7 +1024,7 @@ input[type="range"] {
       <section>
       <article class="study-card" aria-live="polite">
         <div class="card-head">
-          <span class="pill" id="cardPosition">Card 0/0</span>
+          <span class="pill" id="cardPosition">Ready</span>
           <span class="pill" id="cardState">Loading</span>
         </div>
         <div class="card-body">
@@ -933,27 +1070,27 @@ input[type="range"] {
             <select id="fontSizeSelect">
               <option value="regular">Regular</option>
               <option value="large">Large</option>
-              <option value="small">Small</option>
+              <option value="compact">Compact</option>
             </select>
           </div>
         </div>
       </section>
 
       <section class="settings-section">
-        <h2>Wallpaper</h2>
+        <h2>背景</h2>
         <div class="control-grid">
-          <button type="button" id="wallpaperEnabledToggle">Wallpaper On</button>
+          <button type="button" id="backdropEnabledToggle">背景 On</button>
           <div class="control-row">
-            <label for="wallpaperSelect">Wallpaper type</label>
-            <select id="wallpaperSelect">
+            <label for="backdropSelect">背景 type</label>
+            <select id="backdropSelect">
               <option value="daily">Daily life</option>
               <option value="soft">Soft traditional</option>
               <option value="clean">Clean</option>
             </select>
           </div>
           <div class="control-row">
-            <label for="wallpaperOpacityInput">Wallpaper strength</label>
-            <input id="wallpaperOpacityInput" type="range" min="0" max="70" step="5">
+            <label for="backdropOpacityInput">背景 strength</label>
+            <input id="backdropOpacityInput" type="range" min="0" max="70" step="5">
           </div>
         </div>
       </section>
@@ -965,10 +1102,6 @@ input[type="range"] {
           <div class="control-row">
             <label for="modeFilter">Mode</label>
             <select id="modeFilter"></select>
-          </div>
-          <div class="control-row">
-            <label for="sectionFilter">Section</label>
-            <select id="sectionFilter"></select>
           </div>
           <div class="control-row">
             <label for="newLimitInput">New cards/session</label>
@@ -1055,10 +1188,11 @@ const STORAGE_KEY = "jft-ssw-v37-fsrs-progress";
 const UI_KEY = "jft-ssw-v37-fsrs-ui-settings";
 const REVIEW_LOG_KEY = "jft-ssw-v37-fsrs-review-log";
 const SETTINGS_KEY = "jft-ssw-v37-fsrs-settings";
+const EXTRA_NEW_KEY = "jft-ssw-v37-fsrs-extra-new-today";
 // No automatic migration from earlier progress stores.
 const DEFAULT_MODE = "recognition";
 const DEFAULT_SECTION = "script_vocabulary";
-const DEFAULT_WALLPAPER = "daily";
+const DEFAULT_BACKDROP = "daily";
 
 const MODE_LABELS = {
   recognition: "Recognition",
@@ -1076,11 +1210,14 @@ const SECTION_LABELS = {
   ssw_workplace_overlay: "SSW Workplace",
 };
 
-const WALLPAPER_LABELS = {
+const BACKDROP_LABELS = {
   daily: "Daily life",
   soft: "Soft traditional",
   clean: "Clean",
 };
+
+const VALID_MODES = new Set(Object.keys(MODE_LABELS));
+const VALID_SECTIONS = new Set(Object.keys(SECTION_LABELS));
 
 const TASK_LABELS = {
   recognition: "Meaning",
@@ -1098,6 +1235,13 @@ const REVIEW_RATINGS = {
 };
 
 const els = {
+  genreView: document.getElementById("genreView"),
+  genreList: document.getElementById("genreList"),
+  genreStatusLine: document.getElementById("genreStatusLine"),
+  genreSettingsBtn: document.getElementById("genreSettingsBtn"),
+  genreAnalysisBtn: document.getElementById("genreAnalysisBtn"),
+  backToGenreBtn: document.getElementById("backToGenreBtn"),
+  selectedGenreLabel: document.getElementById("selectedGenreLabel"),
   toggleSettingsBtn: document.getElementById("toggleSettingsBtn"),
   backToStudyBtn: document.getElementById("backToStudyBtn"),
   backToSettingsBtn: document.getElementById("backToSettingsBtn"),
@@ -1126,10 +1270,9 @@ const els = {
   easyBtn: document.getElementById("easyBtn"),
   statusLine: document.getElementById("statusLine"),
   modeFilter: document.getElementById("modeFilter"),
-  sectionFilter: document.getElementById("sectionFilter"),
-  wallpaperSelect: document.getElementById("wallpaperSelect"),
-  wallpaperEnabledToggle: document.getElementById("wallpaperEnabledToggle"),
-  wallpaperOpacityInput: document.getElementById("wallpaperOpacityInput"),
+  backdropSelect: document.getElementById("backdropSelect"),
+  backdropEnabledToggle: document.getElementById("backdropEnabledToggle"),
+  backdropOpacityInput: document.getElementById("backdropOpacityInput"),
   newLimitInput: document.getElementById("newLimitInput"),
   furiganaToggle: document.getElementById("furiganaToggle"),
   romajiToggle: document.getElementById("romajiToggle"),
@@ -1167,7 +1310,7 @@ let appState = {
 };
 
 let ui = {
-  view: "study",
+  view: "genre",
   showFurigana: true,
   showRomaji: false,
   showIndonesian: true,
@@ -1175,12 +1318,20 @@ let ui = {
   fontSize: "regular",
   mode: DEFAULT_MODE,
   section: DEFAULT_SECTION,
-  wallpaper: DEFAULT_WALLPAPER,
-  wallpaperEnabled: true,
-  wallpaperOpacity: 38,
+  backdrop: DEFAULT_BACKDROP,
+  backdropEnabled: true,
+  backdropOpacity: 38,
   reviewFirst: true,
   maxNew: 20,
 };
+
+let extraNewToday = {
+  date: "",
+  byGenre: {},
+};
+
+let settingsReturnView = "genre";
+let analysisReturnView = "genre";
 
 const escapeHtml = (value) => String(value ?? "").replace(/[&<>"]/g, (char) => ({
   "&": "&amp;",
@@ -1211,18 +1362,18 @@ function exampleKana(card) {
 }
 
 function normalizeUi() {
-  ui.mode = ui.mode && ui.mode !== "all" ? ui.mode : DEFAULT_MODE;
-  ui.section = ui.section && ui.section !== "all" ? ui.section : DEFAULT_SECTION;
-  ui.wallpaper = WALLPAPER_LABELS[ui.wallpaper] ? ui.wallpaper : DEFAULT_WALLPAPER;
-  ui.view = ["study", "settings", "analysis"].includes(ui.view) ? ui.view : "study";
-  ui.fontSize = ["small", "regular", "large"].includes(ui.fontSize) ? ui.fontSize : "regular";
+  ui.mode = VALID_MODES.has(ui.mode) ? ui.mode : DEFAULT_MODE;
+  ui.section = VALID_SECTIONS.has(ui.section) ? ui.section : DEFAULT_SECTION;
+  ui.backdrop = BACKDROP_LABELS[ui.backdrop] ? ui.backdrop : DEFAULT_BACKDROP;
+  ui.view = ["genre", "study", "settings", "analysis"].includes(ui.view) ? ui.view : "genre";
+  ui.fontSize = ["compact", "regular", "large"].includes(ui.fontSize) ? ui.fontSize : "regular";
   ui.maxNew = Math.min(100, Math.max(1, Number.parseInt(ui.maxNew, 10) || 20));
   ui.showFurigana = ui.showFurigana !== false;
   ui.showRomaji = ui.showRomaji === true;
   ui.showIndonesian = ui.showIndonesian !== false;
   ui.showEnglish = ui.showEnglish !== false;
-  ui.wallpaperEnabled = ui.wallpaperEnabled !== false;
-  ui.wallpaperOpacity = Math.min(70, Math.max(0, Number.parseInt(ui.wallpaperOpacity, 10) || 0));
+  ui.backdropEnabled = ui.backdropEnabled !== false;
+  ui.backdropOpacity = Math.min(70, Math.max(0, Number.parseInt(ui.backdropOpacity, 10) || 0));
   ui.reviewFirst = ui.reviewFirst !== false;
 }
 
@@ -1233,7 +1384,7 @@ function loadUi() {
     ui = { ...ui };
   }
   normalizeUi();
-  ui.view = "study";
+  ui.view = "genre";
 }
 
 function saveUi() {
@@ -1245,9 +1396,9 @@ function saveUi() {
     showIndonesian: ui.showIndonesian,
     showEnglish: ui.showEnglish,
     fontSize: ui.fontSize,
-    wallpaper: ui.wallpaper,
-    wallpaperEnabled: ui.wallpaperEnabled,
-    wallpaperOpacity: ui.wallpaperOpacity,
+    backdrop: ui.backdrop,
+    backdropEnabled: ui.backdropEnabled,
+    backdropOpacity: ui.backdropOpacity,
     reviewFirst: ui.reviewFirst,
     maxNew: ui.maxNew,
   }));
@@ -1304,6 +1455,43 @@ function appendReviewLog(entry) {
   }
   reviewLog.push(entry);
   localStorage.setItem(REVIEW_LOG_KEY, JSON.stringify(reviewLog.slice(-1000)));
+}
+
+function todayKey() {
+  return new Date().toLocaleDateString("en-CA");
+}
+
+function loadExtraNew() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(EXTRA_NEW_KEY) || "{}");
+    extraNewToday = saved && saved.date === todayKey() && saved.byGenre
+      ? { date: saved.date, byGenre: saved.byGenre }
+      : { date: todayKey(), byGenre: {} };
+  } catch {
+    extraNewToday = { date: todayKey(), byGenre: {} };
+  }
+}
+
+function saveExtraNew() {
+  extraNewToday.date = todayKey();
+  localStorage.setItem(EXTRA_NEW_KEY, JSON.stringify(extraNewToday));
+}
+
+function extraNewForMode(mode = ui.mode) {
+  if (extraNewToday.date !== todayKey()) {
+    extraNewToday = { date: todayKey(), byGenre: {} };
+  }
+  return Math.max(0, Number.parseInt(extraNewToday.byGenre[mode], 10) || 0);
+}
+
+function addExtraNew(amount) {
+  const current = extraNewForMode(ui.mode);
+  extraNewToday.byGenre[ui.mode] = current + amount;
+  appState.currentId = null;
+  showBack = false;
+  saveExtraNew();
+  render();
+  setStatus(`Today +${amount} new cards for ${MODE_LABELS[ui.mode]}.`);
 }
 
 async function loadEngine() {
@@ -1363,30 +1551,46 @@ function isDueRecord(record, now = new Date()) {
   return engine.api.isDue(record.engine, now);
 }
 
-function baseFilteredCards() {
-  return cards.filter((card) => (
-    card.mode === ui.mode &&
-    card.jft_section === ui.section
-  ));
+function modeCards(mode = ui.mode) {
+  return cards.filter((card) => card.mode === mode);
 }
 
-function dueCards() {
+function baseFilteredCards() {
+  return modeCards(ui.mode);
+}
+
+function dueCards(mode = ui.mode) {
   const now = new Date();
-  return baseFilteredCards().filter((card) => {
+  return modeCards(mode).filter((card) => {
     const record = recordFor(card.id);
     return record && record.state !== "new" && isDueRecord(record, now);
   });
 }
 
-function newCards() {
-  return baseFilteredCards()
-    .filter((card) => stateFor(card.id) === "new")
-    .slice(0, ui.maxNew);
+function newLimitForMode(mode = ui.mode) {
+  return ui.maxNew + extraNewForMode(mode);
 }
 
-function waitingLearningCards() {
+function newStartedToday(mode = ui.mode) {
+  const key = todayKey();
+  let count = 0;
+  for (const card of modeCards(mode)) {
+    const first = recordFor(card.id)?.history?.[0]?.at || "";
+    if (first.startsWith(key)) count += 1;
+  }
+  return count;
+}
+
+function newCards(mode = ui.mode) {
+  const openCount = Math.max(0, newLimitForMode(mode) - newStartedToday(mode));
+  return modeCards(mode)
+    .filter((card) => stateFor(card.id) === "new")
+    .slice(0, openCount);
+}
+
+function waitingLearningCards(mode = ui.mode) {
   const now = new Date();
-  return baseFilteredCards().filter((card) => {
+  return modeCards(mode).filter((card) => {
     const record = recordFor(card.id);
     if (!record) return false;
     if (record.state !== "learning" && record.state !== "relearning") return false;
@@ -1394,11 +1598,11 @@ function waitingLearningCards() {
   });
 }
 
-function studyQueue() {
-  const due = dueCards();
-  const fresh = newCards();
+function studyQueue(mode = ui.mode) {
+  const due = dueCards(mode);
+  const fresh = newCards(mode);
   const queue = ui.reviewFirst ? [...due, ...fresh] : [...fresh, ...due];
-  return queue.length ? queue : waitingLearningCards();
+  return queue;
 }
 
 function currentCard() {
@@ -1433,42 +1637,25 @@ function populateFilters() {
   els.modeFilter.innerHTML = modes.map((mode) => (
     `<option value="${escapeHtml(mode)}">${escapeHtml(MODE_LABELS[mode] || humanize(mode))}</option>`
   )).join("");
-
-  populateSectionFilter();
-}
-
-function sectionsForMode(mode) {
-  return [...new Set(cards
-    .filter((card) => card.mode === mode)
-    .map((card) => card.jft_section)
-    .filter(Boolean))];
-}
-
-function populateSectionFilter() {
-  const sections = sectionsForMode(ui.mode);
-  if (!sections.includes(ui.section)) ui.section = sections.includes(DEFAULT_SECTION) ? DEFAULT_SECTION : sections[0];
-
-  els.sectionFilter.innerHTML = sections.map((section) => (
-    `<option value="${escapeHtml(section)}">${escapeHtml(SECTION_LABELS[section] || humanize(section))}</option>`
-  )).join("");
 }
 
 function applyUi() {
   normalizeUi();
-  document.body.dataset.wallpaper = ui.wallpaper;
-  document.body.dataset.wallpaperEnabled = String(ui.wallpaperEnabled);
+  document.body.dataset.backdrop = ui.backdrop;
+  document.body.dataset.backdropEnabled = String(ui.backdropEnabled);
   document.body.dataset.fontSize = ui.fontSize;
-  document.body.style.setProperty("--art-opacity", ui.wallpaperEnabled ? String(ui.wallpaperOpacity / 100) : "0");
+  document.body.style.setProperty("--art-opacity", ui.backdropEnabled ? String(ui.backdropOpacity / 100) : "0");
+  els.genreView.hidden = ui.view !== "genre";
   els.studyView.hidden = ui.view !== "study";
   els.settingsView.hidden = ui.view !== "settings";
   els.analysisView.hidden = ui.view !== "analysis";
   els.studyTopbar.hidden = ui.view !== "study";
   els.toggleSettingsBtn.setAttribute("aria-expanded", String(ui.view === "settings"));
   els.modeFilter.value = ui.mode;
-  els.sectionFilter.value = ui.section;
-  els.wallpaperSelect.value = ui.wallpaper;
-  els.wallpaperEnabledToggle.textContent = `Wallpaper ${ui.wallpaperEnabled ? "On" : "Off"}`;
-  els.wallpaperOpacityInput.value = ui.wallpaperOpacity;
+  els.selectedGenreLabel.textContent = MODE_LABELS[ui.mode] || humanize(ui.mode);
+  els.backdropSelect.value = ui.backdrop;
+  els.backdropEnabledToggle.textContent = `背景 ${ui.backdropEnabled ? "On" : "Off"}`;
+  els.backdropOpacityInput.value = ui.backdropOpacity;
   els.newLimitInput.value = ui.maxNew;
   els.furiganaToggle.textContent = `Furigana ${ui.showFurigana ? "On" : "Off"}`;
   els.romajiToggle.textContent = `Romaji ${ui.showRomaji ? "On" : "Off"}`;
@@ -1490,6 +1677,7 @@ function render() {
   applyUi();
   selectCurrentCard();
   renderStats();
+  renderGenres();
   renderCard();
   renderAnalysis();
   renderBrowse();
@@ -1498,21 +1686,55 @@ function render() {
 function renderStats() {
   const base = baseFilteredCards();
   const due = dueCards();
-  let learning = 0;
   let answered = 0;
-  let fresh = 0;
+  let learning = 0;
 
   for (const card of base) {
     const record = recordFor(card.id);
-    if (!record || record.state === "new") fresh += 1;
-    if (record?.state === "learning") learning += 1;
+    if (record?.state === "learning" || record?.state === "relearning") learning += 1;
     if (record && (record.right_count || record.wrong_count || record.history.length)) answered += 1;
   }
 
-  els.newCount.textContent = String(fresh);
+  els.newCount.textContent = String(newCards().length);
   els.dueCount.textContent = String(due.length);
   els.learningCount.textContent = String(learning);
   els.answeredCount.textContent = String(answered);
+}
+
+function countsForMode(mode) {
+  let learning = 0;
+  for (const card of modeCards(mode)) {
+    const record = recordFor(card.id);
+    if (record?.state === "learning" || record?.state === "relearning") learning += 1;
+  }
+  return {
+    fresh: newCards(mode).length,
+    review: dueCards(mode).length,
+    learning,
+    queue: studyQueue(mode).length,
+    waiting: waitingLearningCards(mode).length,
+  };
+}
+
+function renderGenres() {
+  els.genreList.innerHTML = Object.entries(MODE_LABELS).map(([mode, label]) => {
+    const counts = countsForMode(mode);
+    const hasWork = counts.queue > 0;
+    const targetText = hasWork
+      ? "今日の対象カードがあります"
+      : "本日のカードは終了しました";
+    return `<article class="genre-card">
+      <h2>${escapeHtml(label)}</h2>
+      <div class="genre-counts">
+        <div class="mini-stat"><strong>${escapeHtml(counts.fresh)}</strong><span>New</span></div>
+        <div class="mini-stat"><strong>${escapeHtml(counts.review)}</strong><span>Review</span></div>
+        <div class="mini-stat"><strong>${escapeHtml(counts.learning)}</strong><span>Learning</span></div>
+      </div>
+      <p>${escapeHtml(targetText)}</p>
+      <button type="button" data-genre-mode="${escapeHtml(mode)}">このジャンルを学習</button>
+    </article>`;
+  }).join("");
+  els.genreStatusLine.textContent = cards.length ? `Loaded ${cards.length} cards.` : "";
 }
 
 function countBy(items, labelFor) {
@@ -1660,14 +1882,79 @@ function renderAnalysis() {
   ]);
 }
 
+function reviewLogEntries() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(REVIEW_LOG_KEY) || "[]");
+    return Array.isArray(saved) ? saved : [];
+  } catch {
+    return [];
+  }
+}
+
+function cardById(id) {
+  return cards.find((card) => card.id === id) || null;
+}
+
+function todayModeReviewStats(mode = ui.mode) {
+  const key = todayKey();
+  const counts = { again: 0, hard: 0, good: 0, easy: 0 };
+  let studied = 0;
+  for (const item of reviewLogEntries()) {
+    if (!field(item.reviewed_at).startsWith(key)) continue;
+    const card = cardById(item.card_id);
+    if (!card || card.mode !== mode) continue;
+    studied += 1;
+    if (counts[item.grade] != null) counts[item.grade] += 1;
+  }
+  return { studied, counts };
+}
+
+function nextDueText(mode = ui.mode) {
+  const now = Date.now();
+  const dates = modeCards(mode)
+    .map((card) => recordFor(card.id)?.next_due_at)
+    .filter(Boolean)
+    .map((value) => new Date(value))
+    .filter((date) => Number.isFinite(date.getTime()) && date.getTime() > now)
+    .sort((a, b) => a.getTime() - b.getTime());
+  return dates[0] ? formatDue(dates[0].toISOString()) : "未定";
+}
+
+function renderDoneScreen() {
+  const stats = todayModeReviewStats();
+  const waiting = waitingLearningCards().length;
+  const extra = extraNewForMode();
+  return `<div class="done-screen">
+    <h2>本日のカードは終了しました</h2>
+    <p>このジャンルの今日の学習は終わりです。</p>
+    <div class="done-counts">
+      <div class="mini-stat"><strong>${escapeHtml(stats.counts.again)}</strong><span>Again</span></div>
+      <div class="mini-stat"><strong>${escapeHtml(stats.counts.hard)}</strong><span>Hard</span></div>
+      <div class="mini-stat"><strong>${escapeHtml(stats.counts.good)}</strong><span>Good</span></div>
+      <div class="mini-stat"><strong>${escapeHtml(stats.counts.easy)}</strong><span>Easy</span></div>
+    </div>
+    <p>今日学習した枚数: ${escapeHtml(stats.studied)}</p>
+    <p>次の復習予定: ${escapeHtml(nextDueText())}</p>
+    <p>${waiting ? `待機中のLearningカード: ${waiting}枚。FSRSの予定時刻まで待ちます。` : "待機中のLearningカードはありません。"}</p>
+    <p>今日だけ追加済み: ${escapeHtml(extra)}枚</p>
+    <div class="done-actions">
+      <button type="button" data-done-action="genre">ジャンル選択へ戻る</button>
+      <button type="button" data-done-action="analysis">このジャンルの分析を見る</button>
+      <button type="button" data-done-action="settings">設定を見る</button>
+      <button type="button" data-done-action="extra5">今日だけ新規カードを5枚追加</button>
+      <button type="button" data-done-action="extra10">今日だけ新規カードを10枚追加</button>
+    </div>
+  </div>`;
+}
+
 function renderCard() {
   const queue = studyQueue();
   const card = currentCard();
 
   if (!card) {
-    els.cardPosition.textContent = "Card 0/0";
-    els.cardState.textContent = "Done";
-    els.frontFace.innerHTML = `<div class="empty"><h2>No cards due now.</h2><p>Change filters or raise the new-card limit to continue.</p></div>`;
+    els.cardPosition.textContent = "Done";
+    els.cardState.textContent = "Today";
+    els.frontFace.innerHTML = renderDoneScreen();
     els.backFace.hidden = true;
     els.backFace.innerHTML = "";
     setStudyButtons(false, false);
@@ -1728,8 +2015,8 @@ function renderFront(card) {
   if (card.mode === "production") {
     const promptId = promptText(card, "id") || meaning(card, "id");
     const promptEn = promptText(card, "en") || meaning(card, "en");
-    const fallbackPrompt = promptId || promptEn || card.target;
-    return `${taskLabel(card)}<p class="prompt">${escapeHtml(ui.showIndonesian ? fallbackPrompt : (promptEn || fallbackPrompt))}</p>${englishLine(promptEn)}${tags(card)}`;
+    const promptChoice = promptId || promptEn || card.target;
+    return `${taskLabel(card)}<p class="prompt">${escapeHtml(ui.showIndonesian ? promptChoice : (promptEn || promptChoice))}</p>${englishLine(promptEn)}${tags(card)}`;
   }
 
   if (card.mode === "information_search_mini") {
@@ -1743,8 +2030,8 @@ function renderFrontReference(card) {
   if (card.mode === "production") {
     const promptId = promptText(card, "id") || meaning(card, "id");
     const promptEn = promptText(card, "en") || meaning(card, "en");
-    const fallbackPrompt = promptId || promptEn || card.target;
-    return `${taskLabel(card)}<p class="prompt">${escapeHtml(ui.showIndonesian ? fallbackPrompt : (promptEn || fallbackPrompt))}</p>${englishLine(promptEn)}`;
+    const promptChoice = promptId || promptEn || card.target;
+    return `${taskLabel(card)}<p class="prompt">${escapeHtml(ui.showIndonesian ? promptChoice : (promptEn || promptChoice))}</p>${englishLine(promptEn)}`;
   }
 
   if (card.mode === "information_search_mini") {
@@ -1952,26 +2239,63 @@ function resetProgress() {
   setStatus("Progress reset.");
 }
 
-els.toggleSettingsBtn.addEventListener("click", () => {
+function chooseGenre(mode) {
+  ui.mode = VALID_MODES.has(mode) ? mode : DEFAULT_MODE;
+  appState.currentId = null;
+  showBack = false;
+  ui.view = "study";
+  saveUi();
+  render();
+}
+
+function openSettings(fromView) {
+  settingsReturnView = fromView;
   ui.view = "settings";
+  saveUi();
+  render();
+}
+
+function openAnalysis(fromView) {
+  analysisReturnView = fromView;
+  ui.view = "analysis";
+  saveUi();
+  render();
+}
+
+els.genreList.addEventListener("click", (event) => {
+  const row = event.target.closest("[data-genre-mode]");
+  if (!row) return;
+  chooseGenre(row.dataset.genreMode);
+});
+
+els.genreSettingsBtn.addEventListener("click", () => openSettings("genre"));
+
+els.genreAnalysisBtn.addEventListener("click", () => openAnalysis("genre"));
+
+els.backToGenreBtn.addEventListener("click", () => {
+  ui.view = "genre";
+  appState.currentId = null;
+  showBack = false;
   saveUi();
   render();
 });
 
+els.toggleSettingsBtn.addEventListener("click", () => {
+  openSettings("study");
+});
+
 els.backToStudyBtn.addEventListener("click", () => {
-  ui.view = "study";
+  ui.view = settingsReturnView;
   saveUi();
   render();
 });
 
 els.openAnalysisBtn.addEventListener("click", () => {
-  ui.view = "analysis";
-  saveUi();
-  render();
+  openAnalysis("settings");
 });
 
 els.backToSettingsBtn.addEventListener("click", () => {
-  ui.view = "settings";
+  ui.view = analysisReturnView;
   saveUi();
   render();
 });
@@ -1987,6 +2311,22 @@ els.showAnswerBtn.addEventListener("click", () => {
   render();
 });
 
+els.frontFace.addEventListener("click", (event) => {
+  const action = event.target.closest("[data-done-action]")?.dataset.doneAction;
+  if (!action) return;
+  if (action === "genre") {
+    ui.view = "genre";
+    appState.currentId = null;
+    showBack = false;
+    saveUi();
+    render();
+  }
+  if (action === "analysis") openAnalysis("study");
+  if (action === "settings") openSettings("study");
+  if (action === "extra5") addExtraNew(5);
+  if (action === "extra10") addExtraNew(10);
+});
+
 els.againBtn.addEventListener("click", () => reviewCurrent("again"));
 els.hardBtn.addEventListener("click", () => reviewCurrent("hard"));
 els.goodBtn.addEventListener("click", () => reviewCurrent("good"));
@@ -1994,15 +2334,6 @@ els.easyBtn.addEventListener("click", () => reviewCurrent("easy"));
 
 els.modeFilter.addEventListener("change", (event) => {
   ui.mode = event.target.value;
-  populateSectionFilter();
-  appState.currentId = null;
-  showBack = false;
-  saveUi();
-  render();
-});
-
-els.sectionFilter.addEventListener("change", (event) => {
-  ui.section = event.target.value;
   appState.currentId = null;
   showBack = false;
   saveUi();
@@ -2017,20 +2348,20 @@ els.newLimitInput.addEventListener("change", (event) => {
   render();
 });
 
-els.wallpaperSelect.addEventListener("change", (event) => {
-  ui.wallpaper = event.target.value;
+els.backdropSelect.addEventListener("change", (event) => {
+  ui.backdrop = event.target.value;
   saveUi();
   render();
 });
 
-els.wallpaperEnabledToggle.addEventListener("click", () => {
-  ui.wallpaperEnabled = !ui.wallpaperEnabled;
+els.backdropEnabledToggle.addEventListener("click", () => {
+  ui.backdropEnabled = !ui.backdropEnabled;
   saveUi();
   render();
 });
 
-els.wallpaperOpacityInput.addEventListener("input", (event) => {
-  ui.wallpaperOpacity = event.target.value;
+els.backdropOpacityInput.addEventListener("input", (event) => {
+  ui.backdropOpacity = event.target.value;
   saveUi();
   render();
 });
@@ -2098,9 +2429,8 @@ els.importFileInput.addEventListener("change", async (event) => {
     setStatus("Imported V37 progress.");
   } catch (error) {
     setStatus(`Import failed: ${error && error.message ? error.message : String(error)}`);
-  } finally {
-    event.target.value = "";
   }
+  event.target.value = "";
 });
 
 els.browseList.addEventListener("click", (event) => {
@@ -2141,6 +2471,7 @@ window.__APP_V37_FSRS_CLEAN__ = {
 loadUi();
 saveUi();
 loadProgress();
+loadExtraNew();
 await loadEngine();
 render();
 await loadCards();
