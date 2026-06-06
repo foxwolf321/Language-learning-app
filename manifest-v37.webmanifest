@@ -1,0 +1,13 @@
+{
+  "name": "JFT/SSW Work-in-Japan Cards V37",
+  "short_name": "JFT V37",
+  "description": "V37 clean FSRS Japanese study cards for JFT/SSW Work-in-Japan learning.",
+  "start_url": "./app-v37-fsrs-clean.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#eaf4ef",
+  "theme_color": "#233f56",
+  "orientation": "portrait-primary",
+  "categories": ["education", "productivity"],
+  "lang": "en"
+}

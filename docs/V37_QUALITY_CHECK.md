@@ -48,3 +48,21 @@
 ### 残リスク
 - 今日だけ追加学習は、新規カードが残っているジャンルで効く。
 - 新規カードを使い切ったジャンルでは、追加ボタンを押しても出せる新規カードは増えない。
+
+## 2026-06-06 11:25 +09:00
+
+### 変更ファイル
+- app-v37-fsrs-clean.html
+- manifest-v37.webmanifest
+- docs/V37_QUALITY_CHECK.md
+
+### PWA起動先修正
+- V37専用 manifest を追加: `manifest-v37.webmanifest`
+- V37 HTML の manifest 参照を `manifest-v37.webmanifest` に変更。
+- `manifest-v37.webmanifest` の `start_url` は `./app-v37-fsrs-clean.html`。
+- 既存 `manifest.webmanifest` は変更していない。
+- `index.html` / `app-latest.html` / `sw.js` は変更していない。
+- 既存のホーム画面アイコンは古い manifest を保持する可能性があるため、一度削除してから再追加が必要。
+
+### 未確認事項
+- スマホ実機でのホーム画面再追加は未実施。
